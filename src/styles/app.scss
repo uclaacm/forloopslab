@@ -1,0 +1,29 @@
+@import 'global';
+
+#app-container {
+  display: grid;
+  grid-template-columns: 22% auto;
+  height: fit-content;
+  min-height: 100vh;
+}
+
+@media only screen and (max-width: 1000px) {
+  #app-container {
+    display: inherit;
+    height: fit-content;
+    min-height: 100vh;
+  }
+
+  #contents {
+    padding-bottom: 60px;
+  }
+}
+
+#root {
+  overflow: hidden;
+  position: relative;
+}
+
+#contents {
+  position: relative;
+}

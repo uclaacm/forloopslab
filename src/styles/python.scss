@@ -1,0 +1,28 @@
+@import 'global';
+
+.white {
+  color: white;
+}
+
+.orange {
+  color: $main-orange;
+}
+
+.blue {
+  color: $main-blue;
+}
+
+.green {
+  color: $main-green;
+}
+
+#problem {
+  margin-top: 3vw;
+}
+
+#python {
+  box-sizing: border-box;
+  padding: max(30px, 5vw);
+  width: 100%;
+}
+

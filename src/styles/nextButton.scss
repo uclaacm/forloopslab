@@ -1,0 +1,31 @@
+@import 'global';
+
+.nextButton {
+  background-color: $main-orange;
+  border: 0;
+  border-radius: 20px;
+  bottom: 20px;
+  color: black;
+  cursor: default;
+  font-family: $main-font;
+  font-size: 24px;
+  line-height: 24px;
+  opacity: 50%;
+  padding: 5px 20px 10px;
+  position: absolute;
+  right: 20px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+@media only screen and (max-width: 1000px) {
+  .nextButton {
+    bottom: 45px;
+    right: calc(50% - 45px);
+  }
+}
+
+.enabled {
+  cursor: pointer;
+  opacity: 100%;
+}
