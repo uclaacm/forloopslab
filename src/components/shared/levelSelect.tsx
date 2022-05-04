@@ -73,7 +73,7 @@ function LevelSelect(props:LevelSelectProps): JSX.Element | null {
           options={createDropDownItems()}
           baseClassName="dropdown"
           onChange={(option) => onLevelChange(pageOptions.indexOf(option.value))}
-          value={{label: <span key={reloadTime} >Level {pageOptions.indexOf(currentPage) + 1} of 9</span>,
+          value={{label: <span key={reloadTime} >Level {pageOptions.indexOf(currentPage) + 1} of 6</span>,
             value: pageOptions[index]}}
           arrowClosed={<BsFillCaretUpFill size={10} />}
           arrowOpen={<BsFillCaretDownFill size={10} />}

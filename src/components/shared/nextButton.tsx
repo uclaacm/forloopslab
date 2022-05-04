@@ -6,13 +6,14 @@ interface NextButtonProps {
   onClick: () => void;
 }
 
+
 function NextButton(props:NextButtonProps): JSX.Element {
   let end = false;
-  const pages = ['/','/variable','/equal','/comparison','/boolean','/advanced','/output','/python','/experiment'];
-  let nextPage = '/variable';
+  const pages = ['/','/pseudofill','/pseudochoice','/pythonfill','/pythontype','/bonus'];
+  let nextPage = '/pseudofill';
   const location = useLocation();
   const current = location.pathname;
-  if (current === '/experiment') {
+  if (current === '/bonus') {
     end = true;
   } else {
     nextPage = pages[pages.indexOf(current)+1];

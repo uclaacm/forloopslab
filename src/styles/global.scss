@@ -10,34 +10,6 @@
     url('../assets/RobotoMono-Regular.ttf') format('truetype');
 }
 
-@font-face {
-  font-family: 'Darker Grotesque';
-  font-weight: bold;
-  src: local('DarkerGrotesque'),
-    url('../assets/DarkerGrotesque-Bold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Darker Grotesque';
-  font-weight: medium;
-  src: local('DarkerGrotesque'),
-    url('../assets/DarkerGrotesque-Medium.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Darker Grotesque';
-  font-weight: regular;
-  src: local('DarkerGrotesque'),
-    url('../assets/DarkerGrotesque-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Darker Grotesque';
-  font-weight: semiBold;
-  src: local('DarkerGrotesque'),
-    url('../assets/DarkerGrotesque-SemiBold.ttf') format('truetype');
-}
-
 body {
   margin: 0;
 }
