@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import '../../styles/app.scss';
 
 // interface RepetitiveProps {
 //   onCorrect: () => void;
@@ -45,7 +46,13 @@ function Repetitive(): JSX.Element {
 
   return (
     <div className="frame">
-      <div id="Repetitive">
+      <div id="sidebar">
+        <div id="logo">Logo</div>
+        <div id="level-title">Level Title</div>
+        <div id="instructions-title">Instructions</div>
+        <div id="instructions">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</div>
+        <div id="content">
+          <div id="Repetitive">
         <div>
           {renderCounts}
         </div>
@@ -62,6 +69,13 @@ function Repetitive(): JSX.Element {
             ()=>{handleClick('Turn Right');}
           }>Turn Right</button>
         </div>
+        </div>
+        <button id="run">Run</button>
+        <button id="reset">Reset</button>
+        <button id="continue">Continue</button>
+      </div>
+      <div id="main">
+      INSERT MAIN CONTENT HERE
       </div>
     </div>
   );
