@@ -53,29 +53,30 @@ function Repetitive(): JSX.Element {
         <div id="instructions">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</div>
         <div id="content">
           <div id="Repetitive">
-        <div>
-          {renderCounts}
+            <div>
+              {renderCounts}
+            </div>
+            <div>
+              <button onClick = {
+                ()=>{handleClick('Move Forward');}
+              }>Move Forward</button>
+            </div>
+            <div>
+              <button onClick = {
+                ()=>{handleClick('Turn Left');}
+              }>Turn Left</button>
+              <button onClick = {
+                ()=>{handleClick('Turn Right');}
+              }>Turn Right</button>
+            </div>
+          </div>
+          <button id="run">Run</button>
+          <button id="reset">Reset</button>
+          <button id="continue">Continue</button>
         </div>
-        <div>
-          <button onClick = {
-            ()=>{handleClick('Move Forward');}
-          }>Move Forward</button>
-        </div>
-        <div>
-          <button onClick = {
-            ()=>{handleClick('Turn Left');}
-          }>Turn Left</button>
-          <button onClick = {
-            ()=>{handleClick('Turn Right');}
-          }>Turn Right</button>
-        </div>
-        </div>
-        <button id="run">Run</button>
-        <button id="reset">Reset</button>
-        <button id="continue">Continue</button>
-      </div>
-      <div id="main">
+        <div id="main">
       INSERT MAIN CONTENT HERE
+        </div>
       </div>
     </div>
   );
