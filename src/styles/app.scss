@@ -1,5 +1,15 @@
 @import 'global';
 
-#app-container {
+.frame {
+  display: grid;
+  grid-template-columns: 30% auto;
   min-height: 100vh;
+}
+
+#sidebar {
+  background-color: orange;
+}
+
+#main {
+  background-color: gray;
 }
