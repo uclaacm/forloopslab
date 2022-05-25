@@ -1,48 +1,34 @@
-import React, {useState} from 'react';
+import React from 'react';
 import '../../styles/app.scss';
 
 // interface RepetitiveProps {
 //   onCorrect: () => void;
 // }
 
-class Instruction {
-  constructor(type:any, count:any){
-    this.type = type; //type of instruction: Move or Turn
-    this.count = count; //keeps track of the the number of instructions to execute
-  }
-}
-//component for display of all isntructions
-function DisplayCount(props:any){
-  return (
-    <div className = "displayCount">
-      <p>{props.name}</p>
-    </div>
-  );
-}
-
 function Repetitive(): JSX.Element {
-  const [, setNumClicks] = useState(0); //keep track of number of instructions
-  const[counts, setCounts]= useState([]); //array of classes instructions
+  const[instructions, setInstructions] = React.useState([])
 
-  const handleClick = (arg:any) => {
-    //increment the instruction counter if button is clicked
-    let count:any;
-    setNumClicks((prev)=>{
-      count = prev+1;
-      return count;
-    });
-    //add new count to the array if button is clicked
-    setCounts((prev) => {
-      const newArr = prev.slice();
-      const item = new Instruction(arg,count);
-      newArr.push(item);
-      return newArr;
-    });
+  const handleClick = (type:string) => {
+    const newInstruction = {
+      id: new Date().getTime(), //unique id that differentiates each instruction
+      text: type,
+    }
+
+    setInstructions([...instructions].concat(newInstruction))
   };
 
-  const renderCounts = counts.map((counter)=>{
-    return <DisplayCount key = {counter.count} name = {counter.type}/>;
+  const deleteInstruction = (id:number) =>{
+    const updatedInstructions = [...instructions].filter((instruction) => instruction.id !== id) //filters out the the element that has the passed in id
+    setInstructions(updatedInstructions)
+  };
+
+  const renderInstructions = instructions.map((instruction)=> {
+    return<div key = {instruction.id}>
+      {instruction.text}
+      <button onClick = {()=> deleteInstruction(instruction.id)}>x</button>
+    </div>
   });
+
 
   return (
     <div className="frame">
@@ -54,20 +40,14 @@ function Repetitive(): JSX.Element {
         <div id="content">
           <div id="Repetitive">
             <div>
-              {renderCounts}
+              {renderInstructions}
             </div>
             <div>
-              <button onClick = {
-                ()=>{handleClick('Move Forward');}
-              }>Move Forward</button>
+              <button onClick = {()=>{handleClick('Move Forward');}}>Move Forward</button>
             </div>
             <div>
-              <button onClick = {
-                ()=>{handleClick('Turn Left');}
-              }>Turn Left</button>
-              <button onClick = {
-                ()=>{handleClick('Turn Right');}
-              }>Turn Right</button>
+              <button onClick = {()=>{handleClick('Turn Left');}}>Turn Left</button>
+              <button onClick = {()=>{handleClick('Turn Right');}}>Turn Right</button>
             </div>
           </div>
           <button id="run">Run</button>
@@ -75,7 +55,7 @@ function Repetitive(): JSX.Element {
           <button id="continue">Continue</button>
         </div>
         <div id="main">
-      INSERT MAIN CONTENT HERE
+      {/* INSERT MAIN CONTENT HERE */}
         </div>
       </div>
     </div>
@@ -83,4 +63,8 @@ function Repetitive(): JSX.Element {
 }
 
 export default Repetitive;
+
+function removeInstruction(index: any): void {
+  throw new Error('Function not implemented.');
+}
 
