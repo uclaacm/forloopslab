@@ -6,27 +6,28 @@ import '../../styles/app.scss';
 // }
 
 function Repetitive(): JSX.Element {
-  const[instructions, setInstructions] = React.useState([])
+  const[instructions, setInstructions] = React.useState([]);
 
   const handleClick = (type:string) => {
     const newInstruction = {
       id: new Date().getTime(), //unique id that differentiates each instruction
       text: type,
-    }
+    };
 
-    setInstructions([...instructions].concat(newInstruction))
+    setInstructions([...instructions].concat(newInstruction));
   };
 
   const deleteInstruction = (id:number) =>{
-    const updatedInstructions = [...instructions].filter((instruction) => instruction.id !== id) //filters out the the element that has the passed in id
-    setInstructions(updatedInstructions)
+    const updatedInstructions = [...instructions].filter(
+      (instruction) => instruction.id !== id); //filters out the the element that has the passed in id
+    setInstructions(updatedInstructions);
   };
 
   const renderInstructions = instructions.map((instruction)=> {
     return<div key = {instruction.id}>
       {instruction.text}
       <button onClick = {()=> deleteInstruction(instruction.id)}>x</button>
-    </div>
+    </div>;
   });
 
 
@@ -55,7 +56,6 @@ function Repetitive(): JSX.Element {
           <button id="continue">Continue</button>
         </div>
         <div id="main">
-      {/* INSERT MAIN CONTENT HERE */}
         </div>
       </div>
     </div>
@@ -63,8 +63,3 @@ function Repetitive(): JSX.Element {
 }
 
 export default Repetitive;
-
-function removeInstruction(index: any): void {
-  throw new Error('Function not implemented.');
-}
-
