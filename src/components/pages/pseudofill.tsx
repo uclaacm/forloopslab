@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import '../../styles/pseudofill.scss';
 import { GeneralDropdown } from '../shared/generalDropdown';
 
 // interface PseudoFillProps {
-   // onCorrect: () => void;
+// onCorrect: () => void;
 // }
 
 function PseudoFill(): JSX.Element {
@@ -17,15 +17,15 @@ function PseudoFill(): JSX.Element {
   const [dropValue3, setDropValue3] = useState('');
   const [dropValue4, setDropValue4] = useState('');
 
-  const fillOnChange1 = (value:string) => { setFillValue1(value); }
-  const fillOnChange2 = (value:string) => { setFillValue2(value); }
-  const fillOnChange3 = (value:string) => { setFillValue3(value); }
-  const fillOnChange4 = (value:string) => { setFillValue4(value); }
+  const fillOnChange1 = (value:string) => { setFillValue1(value); };
+  const fillOnChange2 = (value:string) => { setFillValue2(value); };
+  const fillOnChange3 = (value:string) => { setFillValue3(value); };
+  const fillOnChange4 = (value:string) => { setFillValue4(value); };
 
-  const dropOnChange1 = (value:string) => { setDropValue1(value); }
-  const dropOnChange2 = (value:string) => { setDropValue2(value); }
-  const dropOnChange3 = (value:string) => { setDropValue3(value); }
-  const dropOnChange4 = (value:string) => { setDropValue4(value); }
+  const dropOnChange1 = (value:string) => { setDropValue1(value); };
+  const dropOnChange2 = (value:string) => { setDropValue2(value); };
+  const dropOnChange3 = (value:string) => { setDropValue3(value); };
+  const dropOnChange4 = (value:string) => { setDropValue4(value); };
 
   return (
     <div className="frame">
@@ -36,7 +36,7 @@ function PseudoFill(): JSX.Element {
         <div id="instructions">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</div>
         <div id="content">
           <div className='line'>
-            <div>Move forward</div> 
+            <div>Move forward</div>
             <input placeholder="3" onChange={(val) => fillOnChange1(val.target.value)}></input>
             <div>steps</div>
           </div>
@@ -47,7 +47,7 @@ function PseudoFill(): JSX.Element {
             </div>
           </div>
           <div className='line'>
-            <div>Move forward</div> 
+            <div>Move forward</div>
             <input placeholder="3" onChange={(val) => fillOnChange2(val.target.value)}></input>
             <div>steps</div>
           </div>
@@ -58,7 +58,7 @@ function PseudoFill(): JSX.Element {
             </div>
           </div>
           <div className='line'>
-            <div>Move forward</div> 
+            <div>Move forward</div>
             <input placeholder="3" onChange={(val) => fillOnChange3(val.target.value)}></input>
             <div>steps</div>
           </div>
@@ -69,7 +69,7 @@ function PseudoFill(): JSX.Element {
             </div>
           </div>
           <div className='line'>
-            <div>Move forward</div> 
+            <div>Move forward</div>
             <input placeholder="3" onChange={(val) => fillOnChange4(val.target.value)}></input>
             <div>steps</div>
           </div>
