@@ -6,42 +6,42 @@ import React from 'react';
 
 function MoveTurnComponent(input){
   return(
-  <><div>
+    <><div>
       <p>Move forward {input.number} times</p>
     </div>
     <div>
-        <p>Turn {input.direction}</p>
+      <p>Turn {input.direction}</p>
     </div></>
-  )
-};
+  );
+}
 
 function AllChoices(input){
   return(
     <div>
       <button>
-          <MoveTurnComponent
-            number= {input.number1}
-            direction= {input.direction1}
-          />
-          <MoveTurnComponent
-            number= {input.number2}
-            direction= {input.direction2}
-          />
-          <MoveTurnComponent
-            number= {input.number3}
-            direction= {input.direction3}
-          />
-          <MoveTurnComponent
-            number= {input.number4}
-            direction= {input.direction4}
-          />
-          <MoveTurnComponent
-            number= {input.number5}
-            direction= {input.direction5}
-          />
+        <MoveTurnComponent
+          number= {input.number1}
+          direction= {input.direction1}
+        />
+        <MoveTurnComponent
+          number= {input.number2}
+          direction= {input.direction2}
+        />
+        <MoveTurnComponent
+          number= {input.number3}
+          direction= {input.direction3}
+        />
+        <MoveTurnComponent
+          number= {input.number4}
+          direction= {input.direction4}
+        />
+        <MoveTurnComponent
+          number= {input.number5}
+          direction= {input.direction5}
+        />
       </button>
     </div>
-  )
+  );
 }
 
 function PseudoChoice(): JSX.Element {
