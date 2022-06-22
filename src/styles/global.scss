@@ -2,3 +2,42 @@
   margin: 0;
   padding: 0;
 }
+
+@font-face {
+  font-family: 'Westwood Sans';
+  src: local('Westwood Sans'),
+    url('../assets/WestwoodSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: local('Roboto Mono'),
+    url('../assets/RobotoMono-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-weight: bold;
+  src: local('DarkerGrotesque'),
+    url('../assets/DarkerGrotesque-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-weight: lighter;
+  src: local('DarkerGrotesque'),
+    url('../assets/DarkerGrotesque-SemiBold.ttf') format('truetype');
+}
+
+// Variables
+$main-background: #212531;
+$main-orange: #ff8a00;
+
+$subtitle-font-size: calc(20px + 0.75vw);
+$title-font-size: calc(15px + 2vw);
+$main-font-size: calc(8px + 1vw);
+$small-font-size: calc(10px + 0.7vw);
+
+$main-font: 'Darker Grotesque', sans-serif;
+$footer-font: 'Westwood Sans', sans-serif;
+$code-font: 'Roboto Mono', monospace;

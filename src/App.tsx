@@ -3,8 +3,8 @@ import './styles/app.scss';
 // import { useState } from 'react';
 import {
   BrowserRouter as Router,
-  Route,
-  Switch,
+  // Route,
+  // Routes,
 } from 'react-router-dom';
 //Remember to import tsx files for pages!
 //Import components that are inside pages in page tsx files themselves
@@ -28,17 +28,17 @@ function App(): JSX.Element {
   //   setEnabled(true);
   // };
 
+  // const pages = ['/',  '/pseudofill', '/pseudochoice', '/pythonfill', '/pythontype', '/bonus']
+
   return (
     <Router>
       <div id="app-container">
-        <Switch>
-          <Route exact path="/"> <Repetitive/> </Route>
-          <Route path="/pseudofill"> <PseudoFill/> </Route>
-          <Route path="/pseudochoice"> <PseudoChoice/> </Route>
-          <Route path="/pythonfill"> <PythonFill/> </Route>
-          <Route path="/pythontype"> <PythonType/> </Route>
-          <Route path="/bonus"> <Bonus/> </Route>
-        </Switch>
+        <Repetitive/>
+        <PseudoFill/>
+        <PseudoChoice/>
+        <PythonFill/>
+        <PythonType/>
+        <Bonus/>
         {/* <NextButton isEnabled={enabled} onClick={() => setEnabled(false)}/> */}
         {/* <Footer/> */}
       </div>

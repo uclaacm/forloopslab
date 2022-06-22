@@ -1,15 +1,68 @@
 @import 'global';
 
 .frame {
+  background-color: $main-background;
   display: grid;
-  grid-template-columns: 30% auto;
+  grid-template-columns: 35% auto;
   min-height: 100vh;
 }
 
 #sidebar {
-  background-color: orange;
+  background-color: $main-orange;
+  border-radius: 0.5vw;
+  font-family: $main-font;
+  font-size: $main-font-size;
+  line-height: 115%;
+  margin: 1.5vw;
+  padding: 1.5vw;
+  
 }
 
 #main {
-  background-color: gray;
+  color: white;
+  display: grid;
+  font-family: $main-font;
+  grid-template-rows: auto 80% auto;
+  padding: 1.5vw;
+}
+
+.main-section {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+// Text Styling
+#level-title {
+  font-size: $subtitle-font-size;
+  font-weight: bold;
+  margin-bottom: 0.5vw;
+}
+
+#title {
+  font-size: $title-font-size;
+  font-weight: bold;
+}
+
+#footer {
+  font-family: $footer-font;
+  font-size: $small-font-size;
+  font-weight: lighter;
+}
+
+// Button Styles
+#run {
+  color: #36b37e;
+  margin-right: 10px;
+}
+
+#reset {
+  color: #ff5630;
+}
+
+.control-btn {
+  background: none;
+  border: 0;
+  font-size: calc(30px + 0.5vw);
 }
