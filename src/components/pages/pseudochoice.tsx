@@ -1,28 +1,52 @@
-import React from 'react';
+import { faRotateLeft, faPlay} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link, useLocation } from 'react-router-dom';
 
-// interface PseudoChoiceProps {
-//   onCorrect: () => void;
-// }
+import '../../styles/app.scss';
+import '../../styles/levelSelect.scss';
 
-function PseudoChoice(): JSX.Element {
+
+function Repetitive(props: {
+  pages: string[]
+}): JSX.Element {
+
+  const location = useLocation();
+  const current = location.pathname;
+  const currPage = props.pages.indexOf(current);
+
   return (
     <div className="frame">
       <div id="sidebar">
-        <div id="logo">Logo</div>
-        <div id="level-title">Level Title</div>
-        <div id="instructions-title">Instructions</div>
-        <div id="instructions">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</div>
-        <div id="content">INSERT SIDEBAR CONTENT HERE</div>
-        <button id="run">Run</button>
-        <button id="reset">Reset</button>
-        <button id="continue">Continue</button>
+        <div id="level-title">Psuedo Choice</div>
+        <div id="instructions">Give the robot instructions to navigate the maze. Make sure you don&apos;t run into any obstacles!</div>
       </div>
       <div id="main">
-      INSERT MAIN CONTENT HERE
+        <div className="main-section">
+          <div id="title">LoopBots</div>
+          <div className="level-select">
+            {currPage != 0 && <Link to={props.pages[currPage-1]} className="level-select-button left">&#9664;</Link>}
+            Level 1 of 6
+            {currPage != props.pages.length - 1 && <Link to={props.pages[currPage+1]} className="level-select-button right">&#9654;</Link>}
+          </div>
+        </div>
+        <div id="content">
+        INSERT MAIN CONTENT HERE
+        </div>
+        <div className="main-section">
+          <div id="footer">made with ♥ by acm.teachla</div>
+          <div id="buttons">
+            <button id="run" className='control-btn'>
+              <FontAwesomeIcon icon={faPlay} />
+            </button>
+            <button id="reset" className='control-btn'>
+              <FontAwesomeIcon icon={faRotateLeft} />
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
 
-export default PseudoChoice;
+export default Repetitive;
 
