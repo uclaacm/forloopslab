@@ -4,45 +4,37 @@ import React from 'react';
 //   onCorrect: () => void;
 // }
 
-function MoveTurnComponent(input){
+function MoveForward(props){
   return(
-    <><div>
-      <p>Move forward {input.number} times</p>
-    </div>
     <div>
-      <p>Turn {input.direction}</p>
-    </div></>
-  );
-}
+      <p>Move forward {props.steps} times</p>
+    </div>
+  )
+};
 
-function AllChoices(input){
+function Turn(props){
+  return(
+    <div>
+      <p>Turn {props.direction}</p>
+    </div>
+  )
+}
+function MultipleChoice({arr}){
   return(
     <div>
       <button>
-        <MoveTurnComponent
-          number= {input.number1}
-          direction= {input.direction1}
-        />
-        <MoveTurnComponent
-          number= {input.number2}
-          direction= {input.direction2}
-        />
-        <MoveTurnComponent
-          number= {input.number3}
-          direction= {input.direction3}
-        />
-        <MoveTurnComponent
-          number= {input.number4}
-          direction= {input.direction4}
-        />
-        <MoveTurnComponent
-          number= {input.number5}
-          direction= {input.direction5}
-        />
+      {arr.map((element) =>{
+        //turn instructions
+        if(element === 'left' || element === 'right'){
+          return <Turn direction = {element}/>
+        }
+        //move instructions
+        return <MoveForward steps = {element}/>
+      })}
       </button>
     </div>
-  );
-}
+  )
+};
 
 function PseudoChoice(): JSX.Element {
   return (
@@ -53,42 +45,9 @@ function PseudoChoice(): JSX.Element {
         <div id="instructions-title">Instructions</div>
         <div id="instructions">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</div>
         <div id="content">INSERT SIDEBAR CONTENT HERE
-          <AllChoices
-            number1 = "3"
-            direction1 = "right"
-            number2 = "4"
-            direction2 = "left"
-            number3= "3"
-            direction3 = "right"
-            number4 = "2"
-            direction4 = "right"
-            number5 = "0"
-            direction5 = "left"
-          />
-          <AllChoices
-            number1 = "2"
-            direction1 = "right"
-            number2 = "3"
-            direction2 = "right"
-            number3= "5"
-            direction3 = "right"
-            number4 = "1"
-            direction4 = "left"
-            number5 = "6"
-            direction5 = "left"
-          />
-          <AllChoices
-            number1 = "1"
-            direction1 = "left"
-            number2 = "5"
-            direction2 = "left"
-            number3= "3"
-            direction3 = "left"
-            number4 = "4"
-            direction4 = "right"
-            number5 = "1"
-            direction5 = "left"
-          />
+          <MultipleChoice arr = {[3, 'right', 4, 'left', 3, 'right', 2, 'right', 0, 'left']}/>
+          <MultipleChoice arr = {[3, 'right', 4, 'left', 3, 'right', 2, 'right', 0, 'left']}/>
+          <MultipleChoice arr = {[3, 'right', 4, 'left', 3, 'right', 2, 'right', 0, 'left']}/>
         </div>
         <button id="run">Run</button>
         <button id="reset">Reset</button>
