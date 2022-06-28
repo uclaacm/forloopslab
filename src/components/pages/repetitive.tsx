@@ -14,11 +14,11 @@ function Repetitive(): JSX.Element {
       text: type,
     };
 
-    setInstructions([...instructions].concat(newInstruction));
+    setInstructions(instructions.concat(newInstruction));
   };
 
   const deleteInstruction = (id:number) =>{
-    const updatedInstructions = [...instructions].filter(
+    const updatedInstructions = instructions.filter(
       (instruction) => instruction.id !== id); //filters out the the element that has the passed in id
     setInstructions(updatedInstructions);
   };
