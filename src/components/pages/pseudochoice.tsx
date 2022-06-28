@@ -4,37 +4,37 @@ import React from 'react';
 //   onCorrect: () => void;
 // }
 
-function MoveForward(props){
+function MoveForward(props:number){
   return(
     <div>
       <p>Move forward {props.steps} times</p>
     </div>
-  )
-};
+  );
+}
 
-function Turn(props){
+function Turn(props:string){
   return(
     <div>
       <p>Turn {props.direction}</p>
     </div>
-  )
+  );
 }
-function MultipleChoice({arr}){
+function MultipleChoice({arr}:any){
   return(
     <div>
       <button>
-      {arr.map((element) =>{
+        {arr.map((element: any) =>{
         //turn instructions
-        if(element === 'left' || element === 'right'){
-          return <Turn direction = {element}/>
-        }
-        //move instructions
-        return <MoveForward steps = {element}/>
-      })}
+          if(element === 'left' || element === 'right'){
+            return <Turn key = {arr.indexOf(element)} direction = {element}/>;
+          }
+          //move instructions
+          return <MoveForward key = {arr.indexOf(element)} steps = {element}/>;
+        })}
       </button>
     </div>
-  )
-};
+  );
+}
 
 function PseudoChoice(): JSX.Element {
   return (
