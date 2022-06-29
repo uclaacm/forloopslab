@@ -7,7 +7,7 @@ import React from 'react';
 function MoveForward(props:number){
   return(
     <div>
-      <p>Move forward {props.steps} times</p>
+      Move forward {props.steps} times
     </div>
   );
 }
