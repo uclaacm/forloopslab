@@ -53,6 +53,8 @@ function PseudoFill(): JSX.Element {
     setDropValues({...dropValues, [index]: value});
   };
 
+  const indices = [0,1,2,3];
+
   return (
     <div className="frame">
       <div id="sidebar">
@@ -61,20 +63,21 @@ function PseudoFill(): JSX.Element {
         <div id="instructions-title">Instructions</div>
         <div id="instructions">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</div>
         <div id="content">
-          <MoveFill onChange={fillOnChange} index={0}/>
-          <TurnFill onChange={dropOnChange} index={0}/>
-          <MoveFill onChange={fillOnChange} index={1}/>
-          <TurnFill onChange={dropOnChange} index={1}/>
-          <MoveFill onChange={fillOnChange} index={2}/>
-          <TurnFill onChange={dropOnChange} index={2}/>
-          <MoveFill onChange={fillOnChange} index={3}/>
-          <TurnFill onChange={dropOnChange} index={3}/>
+          {indices.map((item) => {
+            return(
+              <div key={item}>
+                <MoveFill onChange={fillOnChange} index={item}/>
+                <TurnFill onChange={dropOnChange} index={item}/>
+              </div>
+            );
+          })}
         </div>
         <button id="run">Run</button>
         <button id="reset">Reset</button>
         <button id="continue">Continue</button>
       </div>
       <div id="main">
+        {/* placeholder values for testing purposes */}
         <div>{fillValues[0]}</div>
         <div>{dropValues[0]}</div>
         <div>{fillValues[1]}</div>
