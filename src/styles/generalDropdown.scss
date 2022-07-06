@@ -3,7 +3,7 @@
 .drop {
   cursor: pointer;
   display: inline-block;
-  font-family: $main-font;
+  // font-family: $main-font;
   font-size: 20px;
   line-height: 22px;
   min-height: 27px;
@@ -43,7 +43,7 @@
 }
 
 .Dropdown-menu {
-  border-top: 1px solid $light-orange;
+  // border-top: 1px solid $light-orange;
   // margin-top: 5px;
 }
 
@@ -88,7 +88,7 @@
 }
 
 .option:hover {
-  background-color: $light-orange;
+  // background-color: $light-orange;
 }
 
 .last {

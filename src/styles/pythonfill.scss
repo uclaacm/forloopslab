@@ -1,6 +1,6 @@
 @import 'global';
 
-#code {
+#sample-code {
   background-color: #323232;
   border-radius: 10px;
   box-sizing: border-box;
@@ -12,4 +12,13 @@
   border-radius: 10px;
   height: 300px;
   width: 350px;
+
+.line {
+  align-items: center;
+  border: solid 3px transparent;
+  display: flex;
+  flex-flow: row wrap;
+  font-size: 10px;
+  padding-top: 1vw 0;
+
 }
