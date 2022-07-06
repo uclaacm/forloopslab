@@ -1,4 +1,4 @@
-import '../../styles/pythonfill.scss';
+import React from 'react';
 
 // interface PythonFillProps {
 //   onCorrect: () => void;
