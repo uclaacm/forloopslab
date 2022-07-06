@@ -1,6 +1,6 @@
-import '../../styles/pythonfill.scss';
 import { useState } from 'react';
 import { GeneralDropdown } from '../shared/generalDropdown';
+
 // interface PythonFillProps {
 //   onCorrect: () => void;
 // }
