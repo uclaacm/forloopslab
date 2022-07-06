@@ -5,7 +5,6 @@ import '../../styles/pythonfill.scss';
 // }
 
 function PythonFill(): JSX.Element {
-  const codeContent = ['for steps in range(3):', ' moveForward()', 'turnLeft()'];
 
   return (
     <div className="frame">
