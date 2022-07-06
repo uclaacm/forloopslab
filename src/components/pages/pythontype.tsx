@@ -17,11 +17,6 @@ function PythonType(): JSX.Element {
         <div id="content">
           <div id="code">
             {codeContent.map((item) => {
-              /*let indents: any = 0;
-              for (let i = 0; i < item.length; i++) {
-                if (item[i] == ' ') indents += 1;
-                else break;
-              }*/
               return (
                 <div key={item}>{item}</div>
               );
