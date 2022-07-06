@@ -1,0 +1,17 @@
+@import 'global';
+
+#sample-code {
+  background-color: #323232;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 2vw 3vw;
+}
+
+.line {
+  align-items: center;
+  border: solid 3px transparent;
+  display: flex;
+  flex-flow: row wrap;
+  font-size: 10px;
+  padding-top: 1vw 0;
+}
