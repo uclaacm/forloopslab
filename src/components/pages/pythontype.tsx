@@ -1,6 +1,7 @@
 import { faRotateLeft, faPlay} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useLocation } from 'react-router-dom';
+import '../../styles/pythontype.scss';
 
 import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
@@ -14,11 +15,29 @@ function Repetitive(props: {
   const current = location.pathname;
   const currPage = props.pages.indexOf(current);
 
+function PythonType(): JSX.Element {
+  const codeContent = ['for steps in range(3):', ' moveForward()', 'turnLeft()'];
+
   return (
     <div className="frame">
       <div id="sidebar">
         <div id="level-title">Python Type</div>
-        <div id="instructions">Give the robot instructions to navigate the maze. Make sure you don&apos;t run into any obstacles!</div>
+        <div id="instructions">Give the robot instructions to navigate the maze. Make sure you don&apos;t run into any obstacles!.</div>
+        <div id="content">
+          <div id="code">
+            {codeContent.map((item) => {
+              return (
+                <div key={item}>{item}</div>
+              );
+            },
+            )}
+          </div>
+          <div>Your code here: </div>
+          <textarea id="code-input"></textarea>
+        </div>
+        <button id="run">Run</button>
+        <button id="reset">Reset</button>
+        <button id="continue">Continue</button>
       </div>
       <div id="main">
         <div className="main-section">
@@ -48,5 +67,5 @@ function Repetitive(props: {
   );
 }
 
-export default Repetitive;
+export default PythonType;
 
