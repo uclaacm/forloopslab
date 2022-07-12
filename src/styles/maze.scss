@@ -1,0 +1,19 @@
+@import 'global';
+
+/*.square {
+    background-color: rgba(190, 190, 190, 0.894);
+}*/
+
+/*.maze-container {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+}*/
+
+.maze-container > div {
+    background-color: rgba(190, 190, 190, 0.894);
+    height: 25vh;
+}
+
+.maze-container > div:nth-child(even) {
+    background-color: rgba(221, 221, 221, 0.894);;
+}
