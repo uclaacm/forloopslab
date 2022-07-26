@@ -1,4 +1,5 @@
 import '../../styles/pythontype.scss';
+import { Maze } from '../shared/maze';
 
 // interface PythonTypeProps {
 //   onCorrect: () => void;
@@ -31,7 +32,7 @@ function PythonType(): JSX.Element {
         <button id="continue">Continue</button>
       </div>
       <div id="main">
-      INSERT MAIN CONTENT HERE
+        <Maze rows={4} cols={5} boxCoords={[[1,1], [0,3], [2,0], [3,2]]} />
       </div>
     </div>
   );
