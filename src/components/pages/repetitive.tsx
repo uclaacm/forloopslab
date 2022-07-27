@@ -7,6 +7,8 @@ import '../../styles/app.scss';
 
 function Repetitive(): JSX.Element {
   const[instructions, setInstructions] = React.useState([]);
+  const initCodes:(string | number)[] = [];
+  const [codedInstructions, setCodes] = React.useState(initCodes);
 
   const handleClick = (type:string) => {
     const newInstruction = {
@@ -30,6 +32,29 @@ function Repetitive(): JSX.Element {
     </div>;
   });
 
+  const handleRunClick = () => {
+    setCodes(initCodes);
+    for (let i = 0; i < instructions.length; i++) {
+      if(instructions[i].text == 'Move Forward') {
+        let numSteps = 1;
+        while (i+1 < instructions.length && instructions[i+1].text == 'Move Forward') {
+          numSteps++;
+          i++;
+        }
+        setCodes(codes => codes.concat(numSteps));
+      }
+      if (instructions[i].text == 'Turn Left') {
+        setCodes(codes => codes.concat('left'));
+      }
+      else if (instructions[i].text == 'Turn Right') {
+        setCodes(codes => codes.concat('right'));
+      }
+    }
+  };
+
+  // testing purposes
+  // React.useEffect(() => { console.log(codedInstructions); }, [codedInstructions]);
+
 
   return (
     <div className="frame">
@@ -51,12 +76,17 @@ function Repetitive(): JSX.Element {
               <button onClick = {()=>{handleClick('Turn Right');}}>Turn Right</button>
             </div>
           </div>
-          <button id="run">Run</button>
+          <button id="run" onClick={handleRunClick}>Run</button>
           <button id="reset">Reset</button>
           <button id="continue">Continue</button>
         </div>
-        <div id="main">
-        </div>
+      </div>
+      <div id="main">
+        {codedInstructions.map((item,idx) => {
+          return (
+            <div key={idx}>{item}</div>
+          );
+        })}
       </div>
     </div>
   );
