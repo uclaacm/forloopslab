@@ -7,7 +7,7 @@ import '../../styles/app.scss';
 
 function Repetitive(): JSX.Element {
   const[instructions, setInstructions] = React.useState([]);
-  const initCodes:string[] = [];
+  const initCodes:(string | number)[] = [];
   const [codedInstructions, setCodes] = React.useState(initCodes);
 
   const handleClick = (type:string) => {
@@ -41,7 +41,7 @@ function Repetitive(): JSX.Element {
           numSteps++;
           i++;
         }
-        setCodes(codes => codes.concat(numSteps.toString()));
+        setCodes(codes => codes.concat(numSteps));
       }
       if (instructions[i].text == 'Turn Left') {
         setCodes(codes => codes.concat('left'));
@@ -53,7 +53,7 @@ function Repetitive(): JSX.Element {
   };
 
   // testing purposes
-  // React.useEffect(() => { console.log(codedInstructions); }, [codedInstructions]);
+  React.useEffect(() => { console.log(codedInstructions); }, [codedInstructions]);
 
 
   return (
