@@ -2,3 +2,23 @@
   margin: 0;
   padding: 0;
 }
+
+$main-background: #fff;
+$main-orange: #ff8a00;
+$light-orange: #ffddb5;
+$main-green: #36b37e;
+$code-background: #322727;
+$main-blue: #00b8d9;
+$hover-color: #ffffffec;
+$main-font: 'Times New Roman', sans-serif;
+$code-font: 'Roboto Mono', monospace;
+
+$code-font-size: calc(12px + 0.5vw);
+$output-font-size: calc(17px + 0.5vw);
+$sidebar-font-size: max(18px, calc(12px + 0.5vw));
+$subtitle-font-size: calc(20px + 1.5vw);
+$title-font-size: calc(20px + 1.5vw);
+
+$subtitle-line-height: 100%;
+$rectangle-corner-radius: 8px;
+$sidebar-width: 275px;

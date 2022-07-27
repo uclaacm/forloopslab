@@ -19,7 +19,7 @@ function Repetitive(): JSX.Element {
 
   const deleteInstruction = (id:number) =>{
     const updatedInstructions = instructions.filter(
-      (instruction) => instruction.id !== id);
+      (instruction) => instruction.id !== id); //filters out the the element that has the passed in id
     setInstructions(updatedInstructions);
   };
 
