@@ -53,7 +53,7 @@ function Repetitive(): JSX.Element {
   };
 
   // testing purposes
-  React.useEffect(() => { console.log(codedInstructions); }, [codedInstructions]);
+  // React.useEffect(() => { console.log(codedInstructions); }, [codedInstructions]);
 
 
   return (
