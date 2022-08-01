@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../../styles/pseudofill.scss';
 import { GeneralDropdown } from '../shared/generalDropdown';
 
@@ -64,7 +64,7 @@ function PseudoFill(): JSX.Element {
     }
   };
 
-  // useEffect(() => { console.log(codedInstructions); }, [codedInstructions]);
+  useEffect(() => { console.log(codedInstructions); }, [codedInstructions]);
 
   const indices = [0,1,2,3];
 
