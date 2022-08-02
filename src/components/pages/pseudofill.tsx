@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import '../../styles/pseudofill.scss';
 import { GeneralDropdown } from '../shared/generalDropdown';
+import { Maze } from '../shared/maze';
 
 // interface PseudoFillProps {
 // onCorrect: () => void;
@@ -77,7 +78,7 @@ function PseudoFill(): JSX.Element {
         <button id="continue">Continue</button>
       </div>
       <div id="main">
-        {/* placeholder values for testing purposes */}
+        {/* placeholder values for testing purposes
         <div>{fillValues[0]}</div>
         <div>{dropValues[0]}</div>
         <div>{fillValues[1]}</div>
@@ -85,7 +86,8 @@ function PseudoFill(): JSX.Element {
         <div>{fillValues[2]}</div>
         <div>{dropValues[2]}</div>
         <div>{fillValues[3]}</div>
-        <div>{dropValues[3]}</div>
+        <div>{dropValues[3]}</div> */}
+        <Maze rows={3} cols={4}/>
       </div>
     </div>
 

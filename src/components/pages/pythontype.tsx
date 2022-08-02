@@ -32,7 +32,7 @@ function PythonType(): JSX.Element {
         <button id="continue">Continue</button>
       </div>
       <div id="main">
-        <Maze rows={4} cols={5} boxCoords={[[1,1], [0,3], [2,0], [3,2]]} />
+        <Maze rows={4} cols={5} />
       </div>
     </div>
   );

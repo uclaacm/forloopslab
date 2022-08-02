@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../styles/app.scss';
+import { Maze } from '../shared/maze';
 
 // interface RepetitiveProps {
 //   onCorrect: () => void;
@@ -87,6 +88,7 @@ function Repetitive(): JSX.Element {
             <div key={idx}>{item}</div>
           );
         })}
+        <Maze rows={4} cols={5} />
       </div>
     </div>
   );

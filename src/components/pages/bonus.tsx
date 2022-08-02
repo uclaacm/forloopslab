@@ -1,4 +1,5 @@
 import React from 'react';
+import { Maze } from '../shared/maze';
 
 // interface BonusProps {
 //   onCorrect: () => void;
@@ -18,7 +19,7 @@ function Bonus(): JSX.Element {
         <button id="continue">Continue</button>
       </div>
       <div id="main">
-      INSERT MAIN CONTENT HERE
+        <Maze rows={4} cols={5}/>
       </div>
     </div>
   );

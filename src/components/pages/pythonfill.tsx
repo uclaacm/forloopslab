@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { GeneralDropdown } from '../shared/generalDropdown';
+import { Maze } from '../shared/maze';
 
 // interface PythonFillProps {
 //   onCorrect: () => void;
@@ -102,13 +103,13 @@ function PythonFill(): JSX.Element {
         <button id="continue">Continue</button>
       </div>
       <div id="main">
-        INSERT MAIN CONTENT HERE
-        {/* placeholder values for testing purposes */}
+        <Maze rows={4} cols = {5}/>
+        {/* placeholder values for testing purposes
         <div>{fillValues[0]}</div>
         <div>{fillValues[1]}</div>
         <div>{fillValues[2]}</div>
         <div>{fillValues[3]}</div>
-        <div>{fillValues[4]}</div>
+        <div>{fillValues[4]}</div> */}
       </div>
     </div>
   );
