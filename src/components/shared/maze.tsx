@@ -42,7 +42,6 @@ export function Maze(props:MazeProps):JSX.Element {
     if (arr[x][y]=='S'|| arr[x][y]=='E' || arr[x][y] =='B'){
       return RandomPosition(arr,rows,columns);
     }
-    console.log(x,y)
     boxCoords.push([x,y]);
     return arr[x][y] = 'B';
   }
@@ -57,7 +56,6 @@ export function Maze(props:MazeProps):JSX.Element {
 
     PathExists(arr, rows, columns, 0, 0);
     if (solved=='t'){
-      console.log(arr)
       return arr;
     }
     else{
