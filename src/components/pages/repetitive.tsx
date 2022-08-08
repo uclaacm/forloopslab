@@ -55,7 +55,7 @@ function Repetitive(): JSX.Element {
   };
 
   // testing purposes
-  // React.useEffect(() => { console.log(codedInstructions); }, [codedInstructions]);
+  React.useEffect(() => { console.log(codedInstructions); }, [codedInstructions]);
   return (
     <div className="frame">
       <div id="sidebar">

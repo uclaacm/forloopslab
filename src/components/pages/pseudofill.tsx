@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../../styles/pseudofill.scss';
 import {Boxes} from '../shared/Boxes';
 import { GeneralDropdown } from '../shared/generalDropdown';
@@ -41,10 +41,13 @@ function TurnFill(props:TurnFillProps): JSX.Element {
 function PseudoFill(): JSX.Element {
 
   const initialFillValues = ['','','',''];
-  const initialDropValues = ['','','',''];
+  const initialDropValues = ['down','down','down','down'];
 
   const [fillValues, setFillValues] = useState(initialFillValues);
   const [dropValues, setDropValues] = useState(initialDropValues);
+
+  const initCodes:(string | number)[] = [];
+  const [codedInstructions, setCodes] = useState(initCodes);
 
   const fillOnChange = (value:string, index:number) => {
     setFillValues({...fillValues, [index]: value});
@@ -53,6 +56,16 @@ function PseudoFill(): JSX.Element {
   const dropOnChange = (value:string, index:number) => {
     setDropValues({...dropValues, [index]: value});
   };
+
+  const handleRunClick = () => {
+    setCodes(initCodes);
+    for (let i = 0; i < 4; i++) {
+      setCodes(codes => codes.concat(parseInt(fillValues[i])));
+      setCodes(codes => codes.concat(dropValues[i]));
+    }
+  };
+
+  useEffect(() => { console.log(codedInstructions); }, [codedInstructions]);
 
   const indices = [0,1,2,3];
 
@@ -73,21 +86,17 @@ function PseudoFill(): JSX.Element {
             );
           })}
         </div>
-        <button id="run">Run</button>
+        <button id="run" onClick={handleRunClick}>Run</button>
         <button id="reset">Reset</button>
         <button id="continue">Continue</button>
       </div>
       <div id="main">
-        {/* placeholder values for testing purposes
-        <div>{fillValues[0]}</div>
-        <div>{dropValues[0]}</div>
-        <div>{fillValues[1]}</div>
-        <div>{dropValues[1]}</div>
-        <div>{fillValues[2]}</div>
-        <div>{dropValues[2]}</div>
-        <div>{fillValues[3]}</div>
-        <div>{dropValues[3]}</div> */}
         <Maze rows={4} cols={5} boxCoords={boxes}/>
+        {codedInstructions.map((item,idx) => {
+          return (
+            <div key={idx}>{item}</div>
+          );
+        })}
       </div>
     </div>
 
