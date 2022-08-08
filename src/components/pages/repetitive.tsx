@@ -1,11 +1,12 @@
 import React from 'react';
 import '../../styles/app.scss';
+import {Boxes} from '../shared/Boxes';
 import { Maze } from '../shared/maze';
 
 // interface RepetitiveProps {
 //   onCorrect: () => void;
 // }
-
+const boxes = Boxes(4,5);
 function Repetitive(): JSX.Element {
   const[instructions, setInstructions] = React.useState([]);
   const initCodes:(string | number)[] = [];
@@ -55,8 +56,6 @@ function Repetitive(): JSX.Element {
 
   // testing purposes
   // React.useEffect(() => { console.log(codedInstructions); }, [codedInstructions]);
-
-
   return (
     <div className="frame">
       <div id="sidebar">
@@ -88,7 +87,7 @@ function Repetitive(): JSX.Element {
             <div key={idx}>{item}</div>
           );
         })}
-        <Maze rows={4} cols={5} />
+        <Maze rows={4} cols={5} boxCoords={boxes}/>
       </div>
     </div>
   );

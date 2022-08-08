@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import '../../styles/pseudofill.scss';
+import {Boxes} from '../shared/Boxes';
 import { GeneralDropdown } from '../shared/generalDropdown';
 import { Maze } from '../shared/maze';
-
 // interface PseudoFillProps {
 // onCorrect: () => void;
 // }
-
+const boxes = Boxes(4,5);
 interface MoveFillProps {
   onChange: (value:string, index:number) => void;
   index: number;
@@ -87,7 +87,7 @@ function PseudoFill(): JSX.Element {
         <div>{dropValues[2]}</div>
         <div>{fillValues[3]}</div>
         <div>{dropValues[3]}</div> */}
-        <Maze rows={3} cols={4}/>
+        <Maze rows={4} cols={5} boxCoords={boxes}/>
       </div>
     </div>
 

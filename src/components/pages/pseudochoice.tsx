@@ -1,10 +1,11 @@
 import React from 'react';
+import {Boxes} from '../shared/Boxes';
 import { Maze } from '../shared/maze';
 
 // interface PseudoChoiceProps {
 //   onCorrect: () => void;
 // }
-
+const boxes = Boxes(4,5);
 function MoveForward(props:number){
   return(
     <div>
@@ -55,7 +56,7 @@ function PseudoChoice(): JSX.Element {
         <button id="continue">Continue</button>
       </div>
       <div id="main">
-        <Maze rows={4} cols={5}/>
+        <Maze rows={4} cols={5} boxCoords={boxes}/>
       </div>
     </div>
   );
