@@ -70,10 +70,10 @@ export function Maze(props:MazeProps):JSX.Element {
   for (let i = 0; i < props.rows; i++) {
     for (let j = 0; j < props.cols; j++) {
       if (!squares[i]) {
-        squares[i] = [<div key={i}>{i},{j}</div>];
+        squares[i] = [<div key={`${i}-${j}`}>{i},{j}</div>];
       }
       else {
-        squares[i].push(<div key={i}>{i},{j}</div>);
+        squares[i].push(<div key={`${i}-${j}`}>{i},{j}</div>);
       }
     }
   }
