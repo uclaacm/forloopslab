@@ -1,10 +1,11 @@
 import '../../styles/pythontype.scss';
+import {Boxes} from '../shared/Boxes';
 import { Maze } from '../shared/maze';
 
 // interface PythonTypeProps {
 //   onCorrect: () => void;
 // }
-
+const boxes = Boxes(4,5);
 function PythonType(): JSX.Element {
   const codeContent = ['for steps in range(3):', ' moveForward()', 'turnLeft()'];
 
@@ -32,7 +33,7 @@ function PythonType(): JSX.Element {
         <button id="continue">Continue</button>
       </div>
       <div id="main">
-        <Maze rows={4} cols={5} boxCoords={[[1,1], [0,3], [2,0], [3,2]]} />
+        <Maze rows={4} cols={5} boxCoords={boxes}/>
       </div>
     </div>
   );

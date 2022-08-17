@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import '../../styles/pseudofill.scss';
+import {Boxes} from '../shared/Boxes';
 import { GeneralDropdown } from '../shared/generalDropdown';
-
+import { Maze } from '../shared/maze';
 // interface PseudoFillProps {
 // onCorrect: () => void;
 // }
-
+const boxes = Boxes(4,5);
 interface MoveFillProps {
   onChange: (value:string, index:number) => void;
   index: number;
@@ -90,6 +91,7 @@ function PseudoFill(): JSX.Element {
         <button id="continue">Continue</button>
       </div>
       <div id="main">
+        <Maze rows={4} cols={5} boxCoords={boxes}/>
         {codedInstructions.map((item,idx) => {
           return (
             <div key={idx}>{item}</div>
