@@ -1,6 +1,5 @@
-import React from 'react';
-import {Boxes} from '../shared/Boxes';
 import { useState, useEffect } from 'react';
+import {Boxes} from '../shared/Boxes';
 import { Maze } from '../shared/maze';
 
 // interface PseudoChoiceProps {
