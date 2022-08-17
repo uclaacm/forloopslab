@@ -1,11 +1,20 @@
 import React from 'react';
 import {Boxes} from '../shared/Boxes';
+import { useState, useEffect } from 'react';
 import { Maze } from '../shared/maze';
 
 // interface PseudoChoiceProps {
 //   onCorrect: () => void;
 // }
+
 const boxes = Boxes(4,5);
+
+interface MultipleChoiceProps {
+  choiceNum: number;
+  arr: (string|number)[];
+  onChoice: (array:(string|number)[]) => void;
+}
+
 function MoveForward(props:number){
   return(
     <div>
@@ -21,17 +30,17 @@ function Turn(props:string){
     </div>
   );
 }
-function MultipleChoice({arr}:any){
+function MultipleChoice(props:MultipleChoiceProps):JSX.Element{
   return(
     <div>
-      <button>
-        {arr.map((element: any) =>{
+      <button onClick = {() => props.onChoice(props.arr)}>
+        {props.arr.map((element:(string|number), idx) =>{
         //turn instructions
           if(element === 'left' || element === 'right'){
-            return <Turn key = {arr.indexOf(element)} direction = {element}/>;
+            return <Turn key = {`${props.choiceNum}_${idx}`} direction = {element}/>;
           }
           //move instructions
-          return <MoveForward key = {arr.indexOf(element)} steps = {element}/>;
+          return <MoveForward key = {`${props.choiceNum}_${idx}`} steps = {element}/>;
         })}
       </button>
     </div>
@@ -39,6 +48,15 @@ function MultipleChoice({arr}:any){
 }
 
 function PseudoChoice(): JSX.Element {
+  const init:(string|number)[] = [];
+  const [instructions, setInstructions] = useState(init);
+
+  const handleChoiceClick = (arr:(string|number)[]) => {
+    setInstructions(arr);
+  };
+
+  useEffect(() => { console.log(instructions); }, [instructions]);
+
   return (
     <div className="frame">
       <div id="sidebar">
@@ -47,9 +65,9 @@ function PseudoChoice(): JSX.Element {
         <div id="instructions-title">Instructions</div>
         <div id="instructions">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</div>
         <div id="content">INSERT SIDEBAR CONTENT HERE
-          <MultipleChoice arr = {[3, 'right', 4, 'left', 3, 'right', 2, 'right', 0, 'left']}/>
-          <MultipleChoice arr = {[3, 'right', 4, 'left', 3, 'right', 2, 'right', 0, 'left']}/>
-          <MultipleChoice arr = {[3, 'right', 4, 'left', 3, 'right', 2, 'right', 0, 'left']}/>
+          <MultipleChoice choiceNum = {1} arr = {[3, 'right', 4, 'left', 3, 'right', 2, 'right', 0, 'left']} onChoice = {handleChoiceClick}/>
+          <MultipleChoice choiceNum = {2} arr = {[3, 'right', 4, 'left', 3, 'right', 2, 'right', 0, 'left']} onChoice = {handleChoiceClick}/>
+          <MultipleChoice choiceNum = {3} arr = {[3, 'right', 4, 'left', 3, 'right', 2, 'right', 0, 'left']} onChoice = {handleChoiceClick}/>
         </div>
         <button id="run">Run</button>
         <button id="reset">Reset</button>
