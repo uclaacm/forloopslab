@@ -7,7 +7,7 @@ import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
 
 
-function Repetitive(props: {
+function PythonType(props: {
   pages: string[]
 }): JSX.Element {
 
@@ -15,7 +15,6 @@ function Repetitive(props: {
   const current = location.pathname;
   const currPage = props.pages.indexOf(current);
 
-function PythonType(): JSX.Element {
   const codeContent = ['for steps in range(3):', ' moveForward()', 'turnLeft()'];
 
   return (
@@ -33,18 +32,15 @@ function PythonType(): JSX.Element {
             )}
           </div>
           <div>Your code here: </div>
-          <textarea id="code-input"></textarea>
+          <textarea id="code-input" spellCheck="false" ></textarea>
         </div>
-        <button id="run">Run</button>
-        <button id="reset">Reset</button>
-        <button id="continue">Continue</button>
       </div>
       <div id="main">
         <div className="main-section">
           <div id="title">LoopBots</div>
           <div className="level-select">
             {currPage != 0 && <Link to={props.pages[currPage-1]} className="level-select-button left">&#9664;</Link>}
-            Level 1 of 6
+            Level {currPage+1} of 6
             {currPage != props.pages.length - 1 && <Link to={props.pages[currPage+1]} className="level-select-button right">&#9654;</Link>}
           </div>
         </div>

@@ -32,11 +32,12 @@
 // Variables
 $main-background: #212531;
 $main-orange: #ff8a00;
+$light-orange: #ffdfbb;
 
-$subtitle-font-size: calc(20px + 0.75vw);
-$title-font-size: calc(15px + 2vw);
-$main-font-size: calc(8px + 1vw);
-$small-font-size: calc(10px + 0.7vw);
+$subtitle-font-size: calc(15px + 0.75vw);
+// $title-font-size: calc(1px + 2vw);
+$main-font-size: calc(8px + 0.8vw);
+$code-font-size: calc(8px + 0.5vw);
 
 $main-font: 'Darker Grotesque', sans-serif;
 $footer-font: 'Westwood Sans', sans-serif;

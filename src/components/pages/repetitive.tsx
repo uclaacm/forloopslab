@@ -1,9 +1,11 @@
-import { faRotateLeft, faPlay} from '@fortawesome/free-solid-svg-icons';
+import { faRotateLeft, faPlay, faXmark} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
+import '../../styles/repetitive.scss';
 
 function Repetitive(props: {
   pages: string[],
@@ -12,11 +14,11 @@ function Repetitive(props: {
   const location = useLocation();
   const current = location.pathname;
   const currPage = props.pages.indexOf(current);
-  
-  const[instructions, setInstructions] = React.useState([]);
+
+  const[instructions, setInstructions] = useState<{id: number, text: string}[]>([]);
 
   const handleClick = (type:string) => {
-    const newInstruction = {
+    const newInstruction : {id: number, text: string} = {
       id: new Date().getTime(), //unique id that differentiates each instruction
       text: type,
     };
@@ -26,14 +28,15 @@ function Repetitive(props: {
 
   const deleteInstruction = (id:number) =>{
     const updatedInstructions = instructions.filter(
-      (instruction) => instruction.id !== id); //filters out the the element that has the passed in id
+      //filters out the the element that has the passed in id
+      (instruction: {id: number, text: string}) => instruction.id !== id);
     setInstructions(updatedInstructions);
   };
 
-  const renderInstructions = instructions.map((instruction)=> {
-    return<div key = {instruction.id}>
+  const renderInstructions = instructions.map((instruction: {id: number, text: string})=> {
+    return<div className='code-instruction' key = {instruction.id}>
       {instruction.text}
-      <button onClick = {()=> deleteInstruction(instruction.id)}>x</button>
+      <button className="close-btn" onClick = {()=> deleteInstruction(instruction.id)}><FontAwesomeIcon icon={faXmark} /></button>
     </div>;
   });
 
@@ -42,32 +45,32 @@ function Repetitive(props: {
       <div id="sidebar">
         <div id="level-title">Repetitive</div>
         <div id="instructions">Give the robot instructions to navigate the maze. Make sure you don&apos;t run into any obstacles!</div>
+        <div id="content">
+          <div id="Repetitive">
+            <div id="code-instructions">
+              {renderInstructions}
+            </div>
+            <div>
+              <button className='repetitive-btn wide' onClick = {()=>{handleClick('Move Forward');}}>Move Forward</button>
+            </div>
+            <div className='repetitive-btn-group'>
+              <button className='repetitive-btn' style={{marginRight: '0.5vw'}} onClick = {()=>{handleClick('Turn Left');}}>Turn Left</button>
+              <button className='repetitive-btn' onClick = {()=>{handleClick('Turn Right');}}>Turn Right</button>
+            </div>
+          </div>
+        </div>
       </div>
       <div id="main">
         <div className="main-section">
           <div id="title">LoopBots</div>
           <div className="level-select">
             {currPage != 0 && <Link to={props.pages[currPage-1]} className="level-select-button left">&#9664;</Link>}
-            Level 1 of 6
+            Level {currPage+1} of 6
             {currPage != props.pages.length - 1 && <Link to={props.pages[currPage+1]} className="level-select-button right">&#9654;</Link>}
           </div>
         </div>
-        <div id="content">
-          <div id="Repetitive">
-            <div>
-              {renderInstructions}
-            </div>
-            <div>
-              <button onClick = {()=>{handleClick('Move Forward');}}>Move Forward</button>
-            </div>
-            <div>
-              <button onClick = {()=>{handleClick('Turn Left');}}>Turn Left</button>
-              <button onClick = {()=>{handleClick('Turn Right');}}>Turn Right</button>
-            </div>
-          </div>
-          <button id="run">Run</button>
-          <button id="reset">Reset</button>
-          <button id="continue">Continue</button>
+        <div className="main-section">
+          INSERT CONTENT HERE
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>

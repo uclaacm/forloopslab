@@ -7,6 +7,10 @@
   min-height: 100vh;
 }
 
+.frame.wideSplit {
+  grid-template-columns: 55% auto;
+}
+
 @media only screen and (max-width: 600px) {
   .frame {
     display: block;
@@ -50,13 +54,13 @@
 }
 
 #title {
-  font-size: $title-font-size;
+  font-size: calc(15px + 1vw);
   font-weight: bold;
 }
 
 #footer {
   font-family: $footer-font;
-  font-size: $small-font-size;
+  font-size: $main-font-size;
   font-weight: lighter;
 }
 
@@ -74,4 +78,31 @@
   background: none;
   border: 0;
   font-size: calc(30px + 0.5vw);
+}
+
+// code formatting
+#sample-code {
+  background-color: #21312d;
+}
+
+// scrollbar
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  margin: 10px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #dadde3;
+  border-radius: 50px;
+
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #c8ccd3; 
 }
