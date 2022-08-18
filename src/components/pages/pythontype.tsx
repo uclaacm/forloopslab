@@ -2,6 +2,8 @@ import { faRotateLeft, faPlay} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useLocation } from 'react-router-dom';
 import '../../styles/pythontype.scss';
+import {Boxes} from '../shared/Boxes';
+import { Maze } from '../shared/maze';
 
 import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
@@ -15,6 +17,8 @@ function PythonType(props: {
   const current = location.pathname;
   const currPage = props.pages.indexOf(current);
 
+
+  const boxes = Boxes(4,5);
   const codeContent = ['for steps in range(3):', ' moveForward()', 'turnLeft()'];
 
   return (
@@ -45,7 +49,7 @@ function PythonType(props: {
           </div>
         </div>
         <div id="content">
-        INSERT MAIN CONTENT HERE
+          <Maze rows={4} cols={5} boxCoords={boxes}/>
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>
@@ -58,6 +62,7 @@ function PythonType(props: {
             </button>
           </div>
         </div>
+
       </div>
     </div>
   );

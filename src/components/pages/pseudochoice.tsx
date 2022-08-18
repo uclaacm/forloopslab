@@ -1,8 +1,19 @@
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import {Boxes} from '../shared/Boxes';
+import { Maze } from '../shared/maze';
 
 import '../../styles/app.scss';
 import '../../styles/pseudochoice.scss';
 import '../../styles/levelSelect.scss';
+
+const boxes = Boxes(4,5);
+
+interface MultipleChoiceProps {
+  choiceNum: number;
+  arr: (string|number)[];
+  onChoice: (array:(string|number)[]) => void;
+}
 
 function MoveForward(props: {steps:string | number}){
   return(
@@ -19,18 +30,20 @@ function Turn(props: {direction:string}){
     </div>
   );
 }
-function MultipleChoice({arr}:{arr: (number|string)[]}): JSX.Element{
+function MultipleChoice(props:MultipleChoiceProps):JSX.Element{
   return(
-    <button className="selectBtn">
-      {arr.map((element: string | number) =>{
+    <div>
+      <button onClick = {() => props.onChoice(props.arr)} className="selectBtn">
+        {props.arr.map((element:(string|number), idx) =>{
         //turn instructions
-        if(element === 'left' || element === 'right'){
-          return <Turn key = {arr.indexOf(element)} direction = {element}/>;
-        }
-        //move instructions
-        return <MoveForward key = {arr.indexOf(element)} steps = {element}/>;
-      })}
-    </button>
+          if(element === 'left' || element === 'right'){
+            return <Turn key = {`${props.choiceNum}_${idx}`} direction = {element}/>;
+          }
+          //move instructions
+          return <MoveForward key = {`${props.choiceNum}_${idx}`} steps = {element}/>;
+        })}
+      </button>
+    </div>
   );
 }
 
@@ -42,18 +55,30 @@ function PseudoChoice(props: {
   const current = location.pathname;
   const currPage = props.pages.indexOf(current);
 
+
+  const init:(string|number)[] = [];
+  const [instructions, setInstructions] = useState(init);
+
+  const handleChoiceClick = (arr:(string|number)[]) => {
+    setInstructions(arr);
+  };
+
+  useEffect(() => { console.log(instructions); }, [instructions]);
+
   return (
     <div className="frame wideSplit">
       <div id="sidebar">
         <div id="level-title">Pseudo Choice</div>
         <div id="instructions">Give the robot instructions to navigate the maze. Make sure you don&apos;t run into any obstacles!</div>
         <div id="contentPC">
-          <MultipleChoice arr = {[3, 'right', 4, 'left', 3, 'right', 2, 'right', 0, 'left']}/>
-          <MultipleChoice arr = {[3, 'right', 4, 'left', 3, 'right', 2, 'right', 0, 'left']}/>
-          <MultipleChoice arr = {[3, 'right', 4, 'left', 3, 'right', 2, 'right', 0, 'left']}/>
+          <MultipleChoice choiceNum = {1} arr = {[3, 'right', 4, 'left', 3, 'right', 2, 'right', 0, 'left']} onChoice = {handleChoiceClick}/>
+          <MultipleChoice choiceNum = {2} arr = {[3, 'right', 4, 'left', 3, 'right', 2, 'right', 0, 'left']} onChoice = {handleChoiceClick}/>
+          <MultipleChoice choiceNum = {3} arr = {[3, 'right', 4, 'left', 3, 'right', 2, 'right', 0, 'left']} onChoice = {handleChoiceClick}/>
+
         </div>
       </div>
       <div id="main">
+
         <div className="main-section">
           <div id="title">LoopBots</div>
           <div className="level-select">
@@ -63,7 +88,7 @@ function PseudoChoice(props: {
           </div>
         </div>
         <div id="content">
-        INSERT MAIN CONTENT HERE
+          <Maze rows={4} cols={5} boxCoords={boxes}/>
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>

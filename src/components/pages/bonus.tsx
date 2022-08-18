@@ -1,6 +1,9 @@
+
 import { faRotateLeft, faPlay} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useLocation } from 'react-router-dom';
+import {Boxes} from '../shared/Boxes';
+import { Maze } from '../shared/maze';
 
 import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
@@ -13,6 +16,8 @@ function Repetitive(props: {
   const location = useLocation();
   const current = location.pathname;
   const currPage = props.pages.indexOf(current);
+
+  const boxes = Boxes(4,5);
 
   return (
     <div className="frame">
@@ -30,7 +35,7 @@ function Repetitive(props: {
           </div>
         </div>
         <div id="content">
-        INSERT MAIN CONTENT HERE
+          <Maze rows={4} cols={5} boxCoords={boxes}/>
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>

@@ -1,18 +1,20 @@
 import { faRotateLeft, faPlay} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
-// import { GeneralDropdown } from '../shared/generalDropdown';
 
 import Dropdown from 'react-dropdown';
 import { Link, useLocation } from 'react-router-dom';
 import 'react-dropdown/style.css';
 import '../../styles/generalDropdown.scss';
 
-
 import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
 import '../../styles/pythonfill.scss';
 
+import {Boxes} from '../shared/Boxes';
+import { Maze } from '../shared/maze';
+
+const boxes = Boxes(4,5);
 //sample code portion
 function ForLoopSyntax(props: {steps:JSX.Element | string}){
   return(
@@ -128,13 +130,13 @@ function PythonFill(props: {
           </div>
         </div>
         <div id="content">
-        INSERT MAIN CONTENT HERE
-          {/* placeholder values for testing purposes */}
+          <Maze rows={4} cols = {5} boxCoords={boxes}/>
+          {/* placeholder values for testing purposes
           <div>{fillValues[0]}</div>
           <div>{fillValues[1]}</div>
           <div>{fillValues[2]}</div>
           <div>{fillValues[3]}</div>
-          <div>{fillValues[4]}</div>
+          <div>{fillValues[4]}</div> */}
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>

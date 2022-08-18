@@ -3,6 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
+import {Boxes} from '../shared/Boxes';
+import { Maze } from '../shared/maze';
+
 import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
 import '../../styles/repetitive.scss';
@@ -16,6 +19,11 @@ function Repetitive(props: {
   const currPage = props.pages.indexOf(current);
 
   const[instructions, setInstructions] = useState<{id: number, text: string}[]>([]);
+
+  const boxes = Boxes(4,5);
+  // const[instructions, setInstructions] = React.useState([]);
+  const initCodes:(string | number)[] = [];
+  const [codedInstructions, setCodes] = useState(initCodes);
 
   const handleClick = (type:string) => {
     const newInstruction : {id: number, text: string} = {
@@ -40,6 +48,29 @@ function Repetitive(props: {
     </div>;
   });
 
+
+  const handleRunClick = () => {
+    setCodes(initCodes);
+    for (let i = 0; i < instructions.length; i++) {
+      if(instructions[i].text == 'Move Forward') {
+        let numSteps = 1;
+        while (i+1 < instructions.length && instructions[i+1].text == 'Move Forward') {
+          numSteps++;
+          i++;
+        }
+        setCodes(codes => codes.concat(numSteps));
+      }
+      if (instructions[i].text == 'Turn Left') {
+        setCodes(codes => codes.concat('left'));
+      }
+      else if (instructions[i].text == 'Turn Right') {
+        setCodes(codes => codes.concat('right'));
+      }
+    }
+  };
+
+  // testing purposes
+  // React.useEffect(() => { console.log(codedInstructions); }, [codedInstructions]);
   return (
     <div className="frame">
       <div id="sidebar">
@@ -70,12 +101,17 @@ function Repetitive(props: {
           </div>
         </div>
         <div className="main-section">
-          INSERT CONTENT HERE
+          {codedInstructions.map((item,idx) => {
+            return (
+              <div key={idx}>{item}</div>
+            );
+          })}
+          <Maze rows={4} cols={5} boxCoords={boxes}/>
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>
           <div id="buttons">
-            <button id="run" className='control-btn'>
+            <button id="run" className='control-btn' onClick={handleRunClick}>
               <FontAwesomeIcon icon={faPlay} />
             </button>
             <button id="reset" className='control-btn'>

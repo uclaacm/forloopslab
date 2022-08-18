@@ -1,10 +1,11 @@
 import { faRotateLeft, faPlay} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../../styles/pseudofill.scss';
-
 import Dropdown from 'react-dropdown';
+import {Boxes} from '../shared/Boxes';
+import { Maze } from '../shared/maze';
+
 import 'react-dropdown/style.css';
 import '../../styles/generalDropdown.scss';
 
@@ -14,6 +15,7 @@ import { Link, useLocation } from 'react-router-dom';
 import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
 
+const boxes = Boxes(4,5);
 interface MoveFillProps {
   onChange: (value:string, index:number) => void;
   index: number;
@@ -28,7 +30,7 @@ function MoveFill(props:MoveFillProps): JSX.Element {
   return (
     <div className='line'>
       <div>Move forward</div>
-      <input className="forwardInput" placeholder="3" onChange={(val) => props.onChange(val.target.value, props.index)}></input>
+      <input className="forwardInput" onChange={(val) => props.onChange(val.target.value, props.index)}></input>
       <div>steps</div>
     </div>
   );
@@ -73,6 +75,21 @@ function PseudoFill(props: {
     setDropValues({...dropValues, [index]: value});
   };
 
+
+  const initCodes:(string | number)[] = [];
+  const [codedInstructions, setCodes] = useState(initCodes);
+
+
+  const handleRunClick = () => {
+    setCodes(initCodes);
+    for (let i = 0; i < 4; i++) {
+      setCodes(codes => codes.concat(parseInt(fillValues[i])));
+      setCodes(codes => codes.concat(dropValues[i]));
+    }
+  };
+
+  useEffect(() => { console.log(codedInstructions); }, [codedInstructions]);
+
   const indices = [0,1,2,3];
 
   return (
@@ -101,12 +118,17 @@ function PseudoFill(props: {
           </div>
         </div>
         <div id="content">
-        INSERT MAIN CONTENT HERE
+          <Maze rows={4} cols={5} boxCoords={boxes}/>
+          {codedInstructions.map((item,idx) => {
+            return (
+              <div key={idx}>{item}</div>
+            );
+          })}
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>
           <div id="buttons">
-            <button id="run" className='control-btn'>
+            <button id="run" className='control-btn' onClick={handleRunClick}>
               <FontAwesomeIcon icon={faPlay} />
             </button>
             <button id="reset" className='control-btn'>
@@ -114,6 +136,7 @@ function PseudoFill(props: {
             </button>
           </div>
         </div>
+
       </div>
     </div>
   );
