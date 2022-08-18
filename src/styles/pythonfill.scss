@@ -4,7 +4,8 @@
   background-color: #323232;
   border-radius: 10px;
   box-sizing: border-box;
-  padding: 2vw 3vw;
+  margin: 1vw 0;
+  padding: 1vw;
 }
 
 #code-input {
@@ -14,12 +15,47 @@
   width: 350px;
 }
 
+.plain {
+  line-height: 110%;
+
+}
+
 .line {
   align-items: center;
   border: solid 3px transparent;
   display: flex;
   flex-flow: row wrap;
-  font-size: 10px;
-  padding-top: 1vw 0;
-
+  font-family: $code-font;
+  font-size: $code-font-size;
 }
+
+#bottom-content {
+  align-items: stretch;
+  display: grid;
+  gap: 1vw;
+  grid-template-columns: 40% auto;
+  height: 50vh;
+  margin-top: 1vw;
+}
+
+.codeCard {
+  background-color: white;
+  border-radius: 10px;
+  padding: 1vw;
+}
+
+#codeFill {
+  font-size: $main-font-size;
+}
+
+.forwardInput {
+  border: solid 1px #ccc;
+  border-radius: 2px;
+  color: #323232;
+  font-family: $code-font;
+  font-size: 16px;
+  margin: 0.25vw;
+  padding: 0.25vw;
+  width: 30px;
+}
+

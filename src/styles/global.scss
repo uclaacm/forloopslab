@@ -3,22 +3,43 @@
   padding: 0;
 }
 
-$main-background: #fff;
+@font-face {
+  font-family: 'Westwood Sans';
+  src: local('Westwood Sans'),
+    url('../assets/WestwoodSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: local('Roboto Mono'),
+    url('../assets/RobotoMono-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-weight: bold;
+  src: local('DarkerGrotesque'),
+    url('../assets/DarkerGrotesque-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Darker Grotesque';
+  font-weight: lighter;
+  src: local('DarkerGrotesque'),
+    url('../assets/DarkerGrotesque-SemiBold.ttf') format('truetype');
+}
+
+// Variables
+$main-background: #212531;
 $main-orange: #ff8a00;
-$light-orange: #ffddb5;
-$main-green: #36b37e;
-$code-background: #322727;
-$main-blue: #00b8d9;
-$hover-color: #ffffffec;
-$main-font: 'Times New Roman', sans-serif;
+$light-orange: #ffdfbb;
+
+$subtitle-font-size: calc(15px + 0.75vw);
+// $title-font-size: calc(1px + 2vw);
+$main-font-size: calc(8px + 0.8vw);
+$code-font-size: calc(8px + 0.5vw);
+
+$main-font: 'Darker Grotesque', sans-serif;
+$footer-font: 'Westwood Sans', sans-serif;
 $code-font: 'Roboto Mono', monospace;
 
-$code-font-size: calc(12px + 0.5vw);
-$output-font-size: calc(17px + 0.5vw);
-$sidebar-font-size: max(18px, calc(12px + 0.5vw));
-$subtitle-font-size: calc(20px + 1.5vw);
-$title-font-size: calc(20px + 1.5vw);
-
-$subtitle-line-height: 100%;
-$rectangle-corner-radius: 8px;
-$sidebar-width: 275px;

@@ -1,6 +1,6 @@
 import Dropdown from 'react-dropdown';
 import '../../styles/generalDropdown.scss';
-import '../../styles/operatorDropdown.scss';
+// import '../../styles/operatorDropdown.scss';
 
 interface GeneralDropdownProps {
   onChange: (option: string) => void;

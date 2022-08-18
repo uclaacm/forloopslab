@@ -1,19 +1,32 @@
-import React from 'react';
-import '../../styles/app.scss';
+import { faRotateLeft, faPlay, faXmark} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+
 import {Boxes} from '../shared/Boxes';
 import { Maze } from '../shared/maze';
 
-// interface RepetitiveProps {
-//   onCorrect: () => void;
-// }
-const boxes = Boxes(4,5);
-function Repetitive(): JSX.Element {
-  const[instructions, setInstructions] = React.useState([]);
+import '../../styles/app.scss';
+import '../../styles/levelSelect.scss';
+import '../../styles/repetitive.scss';
+
+function Repetitive(props: {
+  pages: string[],
+}): JSX.Element {
+
+  const location = useLocation();
+  const current = location.pathname;
+  const currPage = props.pages.indexOf(current);
+
+  const[instructions, setInstructions] = useState<{id: number, text: string}[]>([]);
+
+  const boxes = Boxes(4,5);
+  // const[instructions, setInstructions] = React.useState([]);
   const initCodes:(string | number)[] = [];
-  const [codedInstructions, setCodes] = React.useState(initCodes);
+  const [codedInstructions, setCodes] = useState(initCodes);
 
   const handleClick = (type:string) => {
-    const newInstruction = {
+    const newInstruction : {id: number, text: string} = {
       id: new Date().getTime(), //unique id that differentiates each instruction
       text: type,
     };
@@ -23,16 +36,18 @@ function Repetitive(): JSX.Element {
 
   const deleteInstruction = (id:number) =>{
     const updatedInstructions = instructions.filter(
-      (instruction) => instruction.id !== id); //filters out the the element that has the passed in id
+      //filters out the the element that has the passed in id
+      (instruction: {id: number, text: string}) => instruction.id !== id);
     setInstructions(updatedInstructions);
   };
 
-  const renderInstructions = instructions.map((instruction)=> {
-    return<div key = {instruction.id}>
+  const renderInstructions = instructions.map((instruction: {id: number, text: string})=> {
+    return<div className='code-instruction' key = {instruction.id}>
       {instruction.text}
-      <button onClick = {()=> deleteInstruction(instruction.id)}>x</button>
+      <button className="close-btn" onClick = {()=> deleteInstruction(instruction.id)}><FontAwesomeIcon icon={faXmark} /></button>
     </div>;
   });
+
 
   const handleRunClick = () => {
     setCodes(initCodes);
@@ -55,39 +70,55 @@ function Repetitive(): JSX.Element {
   };
 
   // testing purposes
-  React.useEffect(() => { console.log(codedInstructions); }, [codedInstructions]);
+  // React.useEffect(() => { console.log(codedInstructions); }, [codedInstructions]);
   return (
     <div className="frame">
       <div id="sidebar">
-        <div id="logo">Logo</div>
-        <div id="level-title">Level Title</div>
-        <div id="instructions-title">Instructions</div>
-        <div id="instructions">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</div>
+        <div id="level-title">Repetitive</div>
+        <div id="instructions">Give the robot instructions to navigate the maze. Make sure you don&apos;t run into any obstacles!</div>
         <div id="content">
           <div id="Repetitive">
-            <div>
+            <div id="code-instructions">
               {renderInstructions}
             </div>
             <div>
-              <button onClick = {()=>{handleClick('Move Forward');}}>Move Forward</button>
+              <button className='repetitive-btn wide' onClick = {()=>{handleClick('Move Forward');}}>Move Forward</button>
             </div>
-            <div>
-              <button onClick = {()=>{handleClick('Turn Left');}}>Turn Left</button>
-              <button onClick = {()=>{handleClick('Turn Right');}}>Turn Right</button>
+            <div className='repetitive-btn-group'>
+              <button className='repetitive-btn' style={{marginRight: '0.5vw'}} onClick = {()=>{handleClick('Turn Left');}}>Turn Left</button>
+              <button className='repetitive-btn' onClick = {()=>{handleClick('Turn Right');}}>Turn Right</button>
             </div>
           </div>
-          <button id="run" onClick={handleRunClick}>Run</button>
-          <button id="reset">Reset</button>
-          <button id="continue">Continue</button>
         </div>
       </div>
       <div id="main">
-        {codedInstructions.map((item,idx) => {
-          return (
-            <div key={idx}>{item}</div>
-          );
-        })}
-        <Maze rows={4} cols={5} boxCoords={boxes}/>
+        <div className="main-section">
+          <div id="title">LoopBots</div>
+          <div className="level-select">
+            {currPage != 0 && <Link to={props.pages[currPage-1]} className="level-select-button left">&#9664;</Link>}
+            Level {currPage+1} of 6
+            {currPage != props.pages.length - 1 && <Link to={props.pages[currPage+1]} className="level-select-button right">&#9654;</Link>}
+          </div>
+        </div>
+        <div className="main-section">
+          {codedInstructions.map((item,idx) => {
+            return (
+              <div key={idx}>{item}</div>
+            );
+          })}
+          <Maze rows={4} cols={5} boxCoords={boxes}/>
+        </div>
+        <div className="main-section">
+          <div id="footer">made with ♥ by acm.teachla</div>
+          <div id="buttons">
+            <button id="run" className='control-btn' onClick={handleRunClick}>
+              <FontAwesomeIcon icon={faPlay} />
+            </button>
+            <button id="reset" className='control-btn'>
+              <FontAwesomeIcon icon={faRotateLeft} />
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

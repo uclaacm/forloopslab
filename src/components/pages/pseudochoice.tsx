@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import {Boxes} from '../shared/Boxes';
 import { Maze } from '../shared/maze';
 
-// interface PseudoChoiceProps {
-//   onCorrect: () => void;
-// }
+import '../../styles/app.scss';
+import '../../styles/pseudochoice.scss';
+import '../../styles/levelSelect.scss';
 
 const boxes = Boxes(4,5);
 
@@ -14,25 +15,25 @@ interface MultipleChoiceProps {
   onChoice: (array:(string|number)[]) => void;
 }
 
-function MoveForward(props:number){
+function MoveForward(props: {steps:string | number}){
   return(
-    <div>
-      Move forward {props.steps} times
+    <div className='instruction'>
+      Move forward <span className='code'>{props.steps}</span> times
     </div>
   );
 }
 
-function Turn(props:string){
+function Turn(props: {direction:string}){
   return(
-    <div>
-      <p>Turn {props.direction}</p>
+    <div className='instruction'>
+      Turn <span className='code'>{props.direction}</span>
     </div>
   );
 }
 function MultipleChoice(props:MultipleChoiceProps):JSX.Element{
   return(
     <div>
-      <button onClick = {() => props.onChoice(props.arr)}>
+      <button onClick = {() => props.onChoice(props.arr)} className="selectBtn">
         {props.arr.map((element:(string|number), idx) =>{
         //turn instructions
           if(element === 'left' || element === 'right'){
@@ -46,7 +47,15 @@ function MultipleChoice(props:MultipleChoiceProps):JSX.Element{
   );
 }
 
-function PseudoChoice(): JSX.Element {
+function PseudoChoice(props: {
+  pages: string[]
+}): JSX.Element {
+
+  const location = useLocation();
+  const current = location.pathname;
+  const currPage = props.pages.indexOf(current);
+
+
   const init:(string|number)[] = [];
   const [instructions, setInstructions] = useState(init);
 
@@ -57,23 +66,33 @@ function PseudoChoice(): JSX.Element {
   useEffect(() => { console.log(instructions); }, [instructions]);
 
   return (
-    <div className="frame">
+    <div className="frame wideSplit">
       <div id="sidebar">
-        <div id="logo">Logo</div>
-        <div id="level-title">Level Title</div>
-        <div id="instructions-title">Instructions</div>
-        <div id="instructions">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</div>
-        <div id="content">INSERT SIDEBAR CONTENT HERE
+        <div id="level-title">Pseudo Choice</div>
+        <div id="instructions">Give the robot instructions to navigate the maze. Make sure you don&apos;t run into any obstacles!</div>
+        <div id="contentPC">
           <MultipleChoice choiceNum = {1} arr = {[3, 'right', 4, 'left', 3, 'right', 2, 'right', 0, 'left']} onChoice = {handleChoiceClick}/>
           <MultipleChoice choiceNum = {2} arr = {[3, 'right', 4, 'left', 3, 'right', 2, 'right', 0, 'left']} onChoice = {handleChoiceClick}/>
           <MultipleChoice choiceNum = {3} arr = {[3, 'right', 4, 'left', 3, 'right', 2, 'right', 0, 'left']} onChoice = {handleChoiceClick}/>
+
         </div>
-        <button id="run">Run</button>
-        <button id="reset">Reset</button>
-        <button id="continue">Continue</button>
       </div>
       <div id="main">
-        <Maze rows={4} cols={5} boxCoords={boxes}/>
+
+        <div className="main-section">
+          <div id="title">LoopBots</div>
+          <div className="level-select">
+            {currPage != 0 && <Link to={props.pages[currPage-1]} className="level-select-button left">&#9664;</Link>}
+            Level {currPage+1} of 6
+            {currPage != props.pages.length - 1 && <Link to={props.pages[currPage+1]} className="level-select-button right">&#9654;</Link>}
+          </div>
+        </div>
+        <div id="content">
+          <Maze rows={4} cols={5} boxCoords={boxes}/>
+        </div>
+        <div className="main-section">
+          <div id="footer">made with ♥ by acm.teachla</div>
+        </div>
       </div>
     </div>
   );

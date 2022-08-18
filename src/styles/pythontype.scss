@@ -4,12 +4,18 @@
   background-color: #323232;
   border-radius: 10px;
   box-sizing: border-box;
-  padding: 2vw 3vw;
+  margin: 1vw 0;
+  padding: 1vw;
+
 }
 
 #code-input {
   border-color: white;
   border-radius: 10px;
-  height: 300px;
-  width: 350px;
+  box-sizing: border-box;
+  font-size: $main-font-size;
+  height: 40vh;
+  margin-top: 1vw;
+  padding: 1vw;
+  width: 100%;
 }
