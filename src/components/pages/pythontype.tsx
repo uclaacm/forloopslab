@@ -7,7 +7,18 @@ import { Maze } from '../shared/maze';
 
 import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import codeColorDark from '../shared/codeColorDark';
+import codeColorLight from '../shared/codeColorLight';
 
+function ForLoopSyntax(){
+  const code = 'for steps in range(3):' + '\n' + '    moveForward()' + '\n' + 'turnLeft()';
+  return(
+    <div>
+      <SyntaxHighlighter language="Python" style={codeColorDark}>{code}</SyntaxHighlighter>
+    </div>
+  );
+}
 
 function PythonType(props: {
   pages: string[]
@@ -28,12 +39,13 @@ function PythonType(props: {
         <div id="instructions">Give the robot instructions to navigate the maze. Make sure you don&apos;t run into any obstacles!.</div>
         <div id="content">
           <div id="code">
-            {codeContent.map((item) => {
+            {/* {codeContent.map((item) => {
               return (
                 <div key={item}>{item}</div>
               );
             },
-            )}
+            )} */}
+            <ForLoopSyntax/>
           </div>
           <div>Your code here: </div>
           <textarea id="code-input" spellCheck="false" ></textarea>
