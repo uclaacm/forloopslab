@@ -4,16 +4,53 @@
     background-color: rgba(190, 190, 190, 0.894);
 }*/
 
-/*.maze-container {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-}*/
+// .maze-container {
+//     display: grid;
+//     grid-template-columns: repeat(3, auto);
+// }
+.maze {
+  align-content: center;
+  display: grid;
+  gap: 0;
+  justify-content: center;
+  margin: auto;
+}
 
 .maze-container > div {
   background-color: rgba(190, 190, 190, 0.894);
-  height: 25vh;
+  height: 15vw;
+  max-height: 180px;
+  max-width: 180px;
+  width: 15vw;
 }
 
 .maze-container > div:nth-child(even) {
   background-color: rgba(221, 221, 221, 0.894);
+}
+
+.maze-container > div:first-of-type {
+  border-top-left-radius: 15px;
+}
+
+.maze-container > div:last-of-type {
+  border-bottom-right-radius: 15px;
+}
+
+.maze-container > div:nth-child(5) {
+  border-top-right-radius: 15px;
+}
+
+.maze-container > div:nth-child(16) {
+  border-bottom-left-radius: 15px;
+}
+
+.box {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  padding-left: 45px;
+  width: 140%;
 }

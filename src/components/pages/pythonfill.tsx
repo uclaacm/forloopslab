@@ -11,10 +11,10 @@ import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
 import '../../styles/pythonfill.scss';
 import SyntaxHighlighter from 'react-syntax-highlighter';
+import {Boxes} from '../shared/Boxes';
 import codeColorDark from '../shared/codeColorDark';
 import codeColorLight from '../shared/codeColorLight';
 
-import {Boxes} from '../shared/Boxes';
 import { Maze } from '../shared/maze';
 
 const boxes = Boxes(4,5);
@@ -79,9 +79,6 @@ function MoveFill(props:any): JSX.Element {
   // const code2 = '):';
   const code3 = '    moveForward()';
   return (
-    // <div className='line plain'>
-    //   <Syntax steps = {<input className="forwardInput"  onChange={(val) => props.onChange(val.target.value, props.index)}/>}/>
-    // </div>
     <div className = "moveComponent">
       <div id = 'code1'>
         <SyntaxHighlighter language="Python" style={codeColorLight}>{code1}</SyntaxHighlighter>

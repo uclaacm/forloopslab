@@ -2,14 +2,13 @@ import { faRotateLeft, faPlay} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useLocation } from 'react-router-dom';
 import '../../styles/pythontype.scss';
+import SyntaxHighlighter from 'react-syntax-highlighter';
 import {Boxes} from '../shared/Boxes';
+import codeColorDark from '../shared/codeColorDark';
 import { Maze } from '../shared/maze';
 
 import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import codeColorDark from '../shared/codeColorDark';
-import codeColorLight from '../shared/codeColorLight';
 
 function ForLoopSyntax(){
   const code = 'for steps in range(3):' + '\n' + '    moveForward()' + '\n' + 'turnLeft()';
@@ -30,7 +29,7 @@ function PythonType(props: {
 
 
   const boxes = Boxes(4,5);
-  const codeContent = ['for steps in range(3):', ' moveForward()', 'turnLeft()'];
+  // const codeContent = ['for steps in range(3):', ' moveForward()', 'turnLeft()'];
 
   return (
     <div className="frame">
