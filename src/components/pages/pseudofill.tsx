@@ -15,7 +15,7 @@ import { Link, useLocation } from 'react-router-dom';
 import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
 
-const boxes = Boxes(4,5);
+const boxes = Boxes(4,6);
 interface MoveFillProps {
   onChange: (value:string, index:number) => void;
   index: number;
@@ -118,7 +118,7 @@ function PseudoFill(props: {
           </div>
         </div>
         <div id="content">
-          <Maze rows={4} cols={5} boxCoords={boxes}/>
+          <Maze rows={4} cols={6} boxCoords={boxes}/>
           {codedInstructions.map((item,idx) => {
             return (
               <div key={idx}>{item}</div>

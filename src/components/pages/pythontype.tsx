@@ -2,19 +2,21 @@ import { faRotateLeft, faPlay} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useLocation } from 'react-router-dom';
 import '../../styles/pythontype.scss';
-import SyntaxHighlighter from 'react-syntax-highlighter';
 import {Boxes} from '../shared/Boxes';
-import codeColorDark from '../shared/codeColorDark';
 import { Maze } from '../shared/maze';
 
 import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
 
-function ForLoopSyntax(){
-  const code = 'for steps in range(3):' + '\n' + '    moveForward()' + '\n' + 'turnLeft()';
+function SampleSyntax(){
   return(
-    <div>
-      <SyntaxHighlighter language="Python" style={codeColorDark}>{code}</SyntaxHighlighter>
+    <div className='sampleSyntax'>
+      <div><span style = {{color: '#F08000'}}>for </span>steps
+        <span style = {{color: '#F08000'}}> in </span>
+        <span style = {{color: '#EC5800'}}>range</span>(
+        <span style = {{color: '#89CFF0'}}>3</span>):</div>
+      <div style={{marginLeft: 25}}>moveForward()</div>
+      <div>turnForward()</div>
     </div>
   );
 }
@@ -38,13 +40,7 @@ function PythonType(props: {
         <div id="instructions">Give the robot instructions to navigate the maze. Make sure you don&apos;t run into any obstacles!.</div>
         <div id="content">
           <div id="code">
-            {/* {codeContent.map((item) => {
-              return (
-                <div key={item}>{item}</div>
-              );
-            },
-            )} */}
-            <ForLoopSyntax/>
+            <SampleSyntax/>
           </div>
           <div>Your code here: </div>
           <textarea id="code-input" spellCheck="false" ></textarea>
@@ -60,7 +56,7 @@ function PythonType(props: {
           </div>
         </div>
         <div id="content">
-          <Maze rows={4} cols={5} boxCoords={boxes}/>
+          <Maze rows={4} cols={6} boxCoords={boxes}/>
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>

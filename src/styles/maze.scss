@@ -11,9 +11,8 @@
 .maze {
   align-content: center;
   display: grid;
-  gap: 0;
   justify-content: center;
-  margin: auto;
+  margin: -10px auto;
 }
 
 .maze-container > div {
@@ -24,7 +23,21 @@
   width: 15vw;
 }
 
-.maze-container > div:nth-child(even) {
+.maze-container > div:nth-child(2),
+ 
+.maze-container > div:nth-child(4),
+ 
+.maze-container > div:nth-child(6),
+ 
+.maze-container > div:nth-child(7),
+.maze-container > div:nth-child(9),
+.maze-container > div:nth-child(11),
+.maze-container > div:nth-child(14),
+.maze-container > div:nth-child(16),
+.maze-container > div:nth-child(18),
+.maze-container > div:nth-child(19),
+.maze-container > div:nth-child(21),
+.maze-container > div:nth-child(23) {
   background-color: rgba(221, 221, 221, 0.894);
 }
 
@@ -36,11 +49,11 @@
   border-bottom-right-radius: 15px;
 }
 
-.maze-container > div:nth-child(5) {
+.maze-container > div:nth-child(6) {
   border-top-right-radius: 15px;
 }
 
-.maze-container > div:nth-child(16) {
+.maze-container > div:nth-child(19) {
   border-bottom-left-radius: 15px;
 }
 

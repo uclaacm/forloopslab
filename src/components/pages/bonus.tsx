@@ -17,7 +17,7 @@ function Repetitive(props: {
   const current = location.pathname;
   const currPage = props.pages.indexOf(current);
 
-  const boxes = Boxes(4,5);
+  const boxes = Boxes(4,6);
 
   return (
     <div className="frame">
@@ -35,7 +35,7 @@ function Repetitive(props: {
           </div>
         </div>
         <div id="content">
-          <Maze rows={4} cols={5} boxCoords={boxes}/>
+          <Maze rows={4} cols={6} boxCoords={boxes}/>
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>

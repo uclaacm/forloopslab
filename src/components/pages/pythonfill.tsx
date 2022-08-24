@@ -10,20 +10,20 @@ import '../../styles/generalDropdown.scss';
 import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
 import '../../styles/pythonfill.scss';
-import SyntaxHighlighter from 'react-syntax-highlighter';
 import {Boxes} from '../shared/Boxes';
-import codeColorDark from '../shared/codeColorDark';
-import codeColorLight from '../shared/codeColorLight';
 
 import { Maze } from '../shared/maze';
 
-const boxes = Boxes(4,5);
-//sample code portion
-function ForLoopSyntax(){
-  const code = 'for steps in range(3):' + '\n' + '    moveForward()';
+const boxes = Boxes(4,6);
+
+function SampleSyntax(){
   return(
-    <div className = "forLoopSyntax">
-      <SyntaxHighlighter language="Python" style={codeColorDark}>{code}</SyntaxHighlighter>
+    <div className='sampleSyntax'>
+      <div><span style = {{color: '#F08000'}}>for </span>steps
+        <span style = {{color: '#F08000'}}> in </span>
+        <span style = {{color: '#EC5800'}}>range</span>(
+        <span style = {{color: '#89CFF0'}}>3</span>):</div>
+      <div style={{marginLeft: 25}}>moveForward()</div>
     </div>
   );
 }
@@ -74,20 +74,21 @@ function TurnFill(props:MoveTurnFillProps): JSX.Element {
     </div>
   );
 }
+
+function MoveComponentSyntax(props: {steps:JSX.Element | string}){
+  return(
+    <div className='MoveComponentSyntax'>
+      <div><span style = {{color: '#F08000'}}>for </span>steps
+        <span style = {{color: '#F08000'}}> in </span>
+        <span style = {{color: '#EC5800'}}>range</span>({props.steps}):</div>
+      <div style={{marginLeft: 25}}>moveForward()</div>
+    </div>
+  );
+}
 function MoveFill(props:any): JSX.Element {
-  const code1 = 'for steps in range(     )';
-  // const code2 = '):';
-  const code3 = '    moveForward()';
   return (
-    <div className = "moveComponent">
-      <div id = 'code1'>
-        <SyntaxHighlighter language="Python" style={codeColorLight}>{code1}</SyntaxHighlighter>
-        <input className="forwardInput" placeholder="3" onChange={(val) => props.onChange(val.target.value, props.index)}/>
-        {/* <SyntaxHighlighter language="Python" style={codeColorLight}>{code2}</SyntaxHighlighter> */}
-      </div>
-      <div id = "code2">
-        <SyntaxHighlighter language="Python" style={codeColorLight}>{code3}</SyntaxHighlighter>
-      </div>
+    <div className='line plain'>
+      <MoveComponentSyntax steps = {<input className="forwardInput"  onChange={(val) => props.onChange(val.target.value, props.index)}/>}/>
     </div>
   );
 }
@@ -113,7 +114,7 @@ function PythonFill(props: {
         <div id="instructions">A for loop in Python allows you to repeat instructions multiple times. For example, if you want to move forward 3 times, you can write:</div>
         <div id="content">
           <div id = "sample-code">
-            <ForLoopSyntax/>
+            <SampleSyntax/>
           </div>
           <div>Fill in the blanks in the code to match the instructions on the left.</div>
           <div id="bottom-content">
@@ -143,13 +144,7 @@ function PythonFill(props: {
           </div>
         </div>
         <div id="content">
-          <Maze rows={4} cols = {5} boxCoords={boxes}/>
-          {/* placeholder values for testing purposes
-          <div>{fillValues[0]}</div>
-          <div>{fillValues[1]}</div>
-          <div>{fillValues[2]}</div>
-          <div>{fillValues[3]}</div>
-          <div>{fillValues[4]}</div> */}
+          <Maze rows={4} cols = {6} boxCoords={boxes}/>
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>
