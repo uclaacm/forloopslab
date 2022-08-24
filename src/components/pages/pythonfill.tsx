@@ -1,6 +1,6 @@
 import { faRotateLeft, faPlay} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Dropdown from 'react-dropdown';
 import { Link, useLocation } from 'react-router-dom';
@@ -93,6 +93,27 @@ function PythonFill(props: {
   const fillOnChange = (value:string, index:number) => {
     setFillValues({...fillValues, [index]: value});
   };
+
+  const initCodes:(string | number)[] = [];
+  const [codedInstructions, setCodes] = useState(initCodes);
+
+  const handleRunClick = () => {
+    setCodes(initCodes);
+    for (let i = 0; i < 5; i++) {
+      if(fillValues[i] == 'turnLeft()') {
+        setCodes(codes => codes.concat('left'));
+      }
+      else if (fillValues[i] == 'turnRight()'){
+        setCodes(codes => codes.concat('right'));
+      }
+      else {
+        setCodes(codes => codes.concat(parseInt(fillValues[i])));
+      }
+    }
+  };
+
+  useEffect(() => { console.log(codedInstructions); }, [codedInstructions]);
+
   return (
     <div className="frame wideSplit">
       <div id="sidebar">
@@ -131,17 +152,11 @@ function PythonFill(props: {
         </div>
         <div id="content">
           <Maze rows={4} cols = {5} boxCoords={boxes}/>
-          {/* placeholder values for testing purposes
-          <div>{fillValues[0]}</div>
-          <div>{fillValues[1]}</div>
-          <div>{fillValues[2]}</div>
-          <div>{fillValues[3]}</div>
-          <div>{fillValues[4]}</div> */}
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>
           <div id="buttons">
-            <button id="run" className='control-btn'>
+            <button id="run" className='control-btn' onClick={handleRunClick}>
               <FontAwesomeIcon icon={faPlay} />
             </button>
             <button id="reset" className='control-btn'>
