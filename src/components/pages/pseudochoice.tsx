@@ -7,7 +7,7 @@ import '../../styles/app.scss';
 import '../../styles/pseudochoice.scss';
 import '../../styles/levelSelect.scss';
 
-const boxes = Boxes(4,5);
+const boxes = Boxes(4,6);
 
 interface MultipleChoiceProps {
   choiceNum: number;
@@ -88,7 +88,7 @@ function PseudoChoice(props: {
           </div>
         </div>
         <div id="content">
-          <Maze rows={4} cols={5} boxCoords={boxes}/>
+          <Maze rows={4} cols={6} boxCoords={boxes}/>
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>

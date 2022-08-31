@@ -10,6 +10,7 @@ import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
 import '../../styles/repetitive.scss';
 
+const boxes = Boxes(4,6);
 function Repetitive(props: {
   pages: string[],
 }): JSX.Element {
@@ -20,7 +21,6 @@ function Repetitive(props: {
 
   const[instructions, setInstructions] = useState<{id: number, text: string}[]>([]);
 
-  const boxes = Boxes(4,5);
   // const[instructions, setInstructions] = React.useState([]);
   const initCodes:(string | number)[] = [];
   const [codedInstructions, setCodes] = useState(initCodes);
@@ -106,7 +106,7 @@ function Repetitive(props: {
               <div key={idx}>{item}</div>
             );
           })}
-          <Maze rows={4} cols={5} boxCoords={boxes}/>
+          <Maze rows={4} cols={6} boxCoords={boxes}/>
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>

@@ -8,6 +8,18 @@ import { Maze } from '../shared/maze';
 import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
 
+function SampleSyntax(){
+  return(
+    <div className='sampleSyntax'>
+      <div><span style = {{color: '#F08000'}}>for </span>steps
+        <span style = {{color: '#F08000'}}> in </span>
+        <span style = {{color: '#EC5800'}}>range</span>(
+        <span style = {{color: '#89CFF0'}}>3</span>):</div>
+      <div style={{marginLeft: 25}}>moveForward()</div>
+      <div>turnForward()</div>
+    </div>
+  );
+}
 
 function PythonType(props: {
   pages: string[]
@@ -19,7 +31,7 @@ function PythonType(props: {
 
 
   const boxes = Boxes(4,5);
-  const codeContent = ['for steps in range(3):', ' moveForward()', 'turnLeft()'];
+  // const codeContent = ['for steps in range(3):', ' moveForward()', 'turnLeft()'];
 
   return (
     <div className="frame">
@@ -28,12 +40,7 @@ function PythonType(props: {
         <div id="instructions">Give the robot instructions to navigate the maze. Make sure you don&apos;t run into any obstacles!.</div>
         <div id="content">
           <div id="code">
-            {codeContent.map((item) => {
-              return (
-                <div key={item}>{item}</div>
-              );
-            },
-            )}
+            <SampleSyntax/>
           </div>
           <div>Your code here: </div>
           <textarea id="code-input" spellCheck="false" ></textarea>
@@ -49,7 +56,7 @@ function PythonType(props: {
           </div>
         </div>
         <div id="content">
-          <Maze rows={4} cols={5} boxCoords={boxes}/>
+          <Maze rows={4} cols={6} boxCoords={boxes}/>
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>

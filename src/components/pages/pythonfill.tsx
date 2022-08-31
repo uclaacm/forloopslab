@@ -10,16 +10,19 @@ import '../../styles/generalDropdown.scss';
 import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
 import '../../styles/pythonfill.scss';
-
 import {Boxes} from '../shared/Boxes';
+
 import { Maze } from '../shared/maze';
 
-const boxes = Boxes(4,5);
-//sample code portion
-function ForLoopSyntax(props: {steps:JSX.Element | string}){
+const boxes = Boxes(4,6);
+
+function SampleSyntax(){
   return(
-    <div className='forLoopSyntax'>
-      <div>for steps in range({props.steps}):</div>
+    <div className='sampleSyntax'>
+      <div><span style = {{color: '#F08000'}}>for </span>steps
+        <span style = {{color: '#F08000'}}> in </span>
+        <span style = {{color: '#EC5800'}}>range</span>(
+        <span style = {{color: '#89CFF0'}}>3</span>):</div>
       <div style={{marginLeft: 25}}>moveForward()</div>
     </div>
   );
@@ -60,7 +63,7 @@ interface MoveTurnFillProps {
 }
 function TurnFill(props:MoveTurnFillProps): JSX.Element {
   return (
-    <div className='line' style={{marginLeft: 25}}>
+    <div className='line' >
       <Dropdown
         placeholder=""
         options={['turnRight()','turnLeft()']}
@@ -71,10 +74,21 @@ function TurnFill(props:MoveTurnFillProps): JSX.Element {
     </div>
   );
 }
+
+function MoveComponentSyntax(props: {steps:JSX.Element | string}){
+  return(
+    <div className='MoveComponentSyntax'>
+      <div><span style = {{color: '#F08000'}}>for </span>steps
+        <span style = {{color: '#F08000'}}> in </span>
+        <span style = {{color: '#EC5800'}}>range</span>({props.steps}):</div>
+      <div style={{marginLeft: 25}}>moveForward()</div>
+    </div>
+  );
+}
 function MoveFill(props:any): JSX.Element {
   return (
     <div className='line plain'>
-      <ForLoopSyntax steps = {<input className="forwardInput"  onChange={(val) => props.onChange(val.target.value, props.index)}/>}/>
+      <MoveComponentSyntax steps = {<input className="forwardInput"  onChange={(val) => props.onChange(val.target.value, props.index)}/>}/>
     </div>
   );
 }
@@ -121,7 +135,7 @@ function PythonFill(props: {
         <div id="instructions">A for loop in Python allows you to repeat instructions multiple times. For example, if you want to move forward 3 times, you can write:</div>
         <div id="content">
           <div id = "sample-code">
-            <ForLoopSyntax steps = '3'/>
+            <SampleSyntax/>
           </div>
           <div>Fill in the blanks in the code to match the instructions on the left.</div>
           <div id="bottom-content">
@@ -151,7 +165,7 @@ function PythonFill(props: {
           </div>
         </div>
         <div id="content">
-          <Maze rows={4} cols = {5} boxCoords={boxes}/>
+          <Maze rows={4} cols = {6} boxCoords={boxes}/>
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>

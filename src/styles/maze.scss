@@ -4,16 +4,66 @@
     background-color: rgba(190, 190, 190, 0.894);
 }*/
 
-/*.maze-container {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-}*/
+// .maze-container {
+//     display: grid;
+//     grid-template-columns: repeat(3, auto);
+// }
+.maze {
+  align-content: center;
+  display: grid;
+  justify-content: center;
+  margin: -10px auto;
+}
 
 .maze-container > div {
   background-color: rgba(190, 190, 190, 0.894);
-  height: 25vh;
+  height: 15vw;
+  max-height: 180px;
+  max-width: 180px;
+  width: 15vw;
 }
 
-.maze-container > div:nth-child(even) {
+.maze-container > div:nth-child(2),
+ 
+.maze-container > div:nth-child(4),
+ 
+.maze-container > div:nth-child(6),
+ 
+.maze-container > div:nth-child(7),
+.maze-container > div:nth-child(9),
+.maze-container > div:nth-child(11),
+.maze-container > div:nth-child(14),
+.maze-container > div:nth-child(16),
+.maze-container > div:nth-child(18),
+.maze-container > div:nth-child(19),
+.maze-container > div:nth-child(21),
+.maze-container > div:nth-child(23) {
   background-color: rgba(221, 221, 221, 0.894);
+}
+
+.maze-container > div:first-of-type {
+  border-top-left-radius: 15px;
+}
+
+.maze-container > div:last-of-type {
+  border-bottom-right-radius: 15px;
+}
+
+.maze-container > div:nth-child(6) {
+  border-top-right-radius: 15px;
+}
+
+.maze-container > div:nth-child(19) {
+  border-bottom-left-radius: 15px;
+}
+
+.box {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  padding-left: 45px;
+  width: 140%;
 }
