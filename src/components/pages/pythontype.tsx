@@ -1,9 +1,12 @@
 import { faRotateLeft, faPlay} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import '../../styles/pythontype.scss';
 import {Boxes} from '../shared/Boxes';
 import { Maze } from '../shared/maze';
+import CodeMirror from '@uiw/react-codemirror';
+import { python } from '@codemirror/lang-python';
 
 import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
@@ -29,6 +32,36 @@ function PythonType(props: {
   const current = location.pathname;
   const currPage = props.pages.indexOf(current);
 
+  const [code, setCode] = useState('');
+  const initMovement:(string | number)[] = [];
+  const [movement, setMovement] = useState(initMovement);
+
+  const onChange = (value:string) => {
+    setCode(value);
+  };
+
+  const handleRunClick = () => {
+    setMovement(initMovement);
+    const lines = code.split(/\r?\n/);
+    //console.log(lines);
+    for (let i = 0; i < lines.length; i++) {
+      const cur = lines[i];
+      if (cur.substring(0,3) == 'for') {
+        // for steps in range(3)
+        const numSteps = parseInt(cur.substring(19, cur.length - 2));
+        setMovement(moves => moves.concat(numSteps));
+      }
+      else if (cur == 'turnLeft()') {
+        setMovement(moves => moves.concat('left'));
+      }
+      else if (cur == 'turnRight()') {
+        setMovement(moves => moves.concat('right'));
+      }
+    }
+  };
+
+  useEffect(() => { console.log(movement); }, [movement]);
+
 
   const boxes = Boxes(4,5);
   // const codeContent = ['for steps in range(3):', ' moveForward()', 'turnLeft()'];
@@ -43,7 +76,13 @@ function PythonType(props: {
             <SampleSyntax/>
           </div>
           <div>Your code here: </div>
-          <textarea id="code-input" spellCheck="false" ></textarea>
+          <CodeMirror
+            value={code}
+            height="200px"
+            theme="dark"
+            extensions={[python()]}
+            onChange={onChange}
+          />
         </div>
       </div>
       <div id="main">
@@ -61,7 +100,7 @@ function PythonType(props: {
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>
           <div id="buttons">
-            <button id="run" className='control-btn'>
+            <button id="run" className='control-btn' onClick={handleRunClick}>
               <FontAwesomeIcon icon={faPlay} />
             </button>
             <button id="reset" className='control-btn'>
