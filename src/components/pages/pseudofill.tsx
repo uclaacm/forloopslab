@@ -3,13 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState, useEffect } from 'react';
 import '../../styles/pseudofill.scss';
 import Dropdown from 'react-dropdown';
+import { Link, useLocation } from 'react-router-dom';
 import {Boxes} from '../shared/Boxes';
 import { Maze } from '../shared/maze';
+import {Robot} from '../shared/Robot';
 
 import 'react-dropdown/style.css';
 import '../../styles/generalDropdown.scss';
-
-import { Link, useLocation } from 'react-router-dom';
 
 
 import '../../styles/app.scss';
@@ -91,7 +91,7 @@ function PseudoFill(props: {
   useEffect(() => { console.log(codedInstructions); }, [codedInstructions]);
 
   const indices = [0,1,2,3];
-
+  console.log(codedInstructions);
   return (
     <div className="frame">
       <div id="sidebar">
@@ -118,12 +118,16 @@ function PseudoFill(props: {
           </div>
         </div>
         <div id="content">
-          <Maze rows={4} cols={6} boxCoords={boxes}/>
+          <div className='maze'>
+            <Maze rows={4} cols={6} boxCoords={boxes}/>
+            <Robot arr = {codedInstructions}></Robot>
+          </div>
+          {/* <Maze rows={4} cols={6} boxCoords={boxes}/>
           {codedInstructions.map((item,idx) => {
             return (
               <div key={idx}>{item}</div>
             );
-          })}
+          })} */}
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>

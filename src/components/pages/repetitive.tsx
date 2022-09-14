@@ -4,13 +4,16 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import {Boxes} from '../shared/Boxes';
-import { Maze } from '../shared/maze';
+import {Maze} from '../shared/maze';
+import {Robot} from '../shared/Robot';
+// import {Robot,SetMove, SetDirection, SetPosition} from '../shared/Robot';
 
 import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
 import '../../styles/repetitive.scss';
 
 const boxes = Boxes(4,6);
+
 function Repetitive(props: {
   pages: string[],
 }): JSX.Element {
@@ -21,7 +24,6 @@ function Repetitive(props: {
 
   const[instructions, setInstructions] = useState<{id: number, text: string}[]>([]);
 
-  // const[instructions, setInstructions] = React.useState([]);
   const initCodes:(string | number)[] = [];
   const [codedInstructions, setCodes] = useState(initCodes);
 
@@ -48,7 +50,6 @@ function Repetitive(props: {
     </div>;
   });
 
-
   const handleRunClick = () => {
     setCodes(initCodes);
     for (let i = 0; i < instructions.length; i++) {
@@ -68,9 +69,6 @@ function Repetitive(props: {
       }
     }
   };
-
-  // testing purposes
-  // React.useEffect(() => { console.log(codedInstructions); }, [codedInstructions]);
   return (
     <div className="frame">
       <div id="sidebar">
@@ -101,12 +99,11 @@ function Repetitive(props: {
           </div>
         </div>
         <div className="main-section">
-          {codedInstructions.map((item,idx) => {
-            return (
-              <div key={idx}>{item}</div>
-            );
-          })}
-          <Maze rows={4} cols={6} boxCoords={boxes}/>
+          <div className = 'maze'>
+            <Maze rows={4} cols={6} boxCoords={boxes}/>
+            <Robot arr = {codedInstructions}></Robot>
+          </div>
+
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>
