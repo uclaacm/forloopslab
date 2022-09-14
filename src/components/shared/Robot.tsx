@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import React from 'react';
 import robotRight from '../../assets/RobotDemo.svg';
 
 //moves robot to certain position
@@ -51,29 +50,29 @@ export function MoveRobot(item:string|number){
   else{
     if (direction == 'right'){
       robotX = prevX;
-      moveX += (item*100);
+      moveX += (+item*100);
       prevX = moveX;
     }
     else if (direction == 'left'){
       robotX = prevX;
-      moveX -= (item*100);
+      moveX -= (+item*100);
       prevX = moveX;
     }
     else if (direction == 'down'){
       robotY = prevY;
-      moveY += (item*112);
+      moveY += (+item*112);
       prevY = moveY;
     }
     else if (direction == 'up'){
       robotY = prevY;
-      moveY -= (item*112);
+      moveY -= (+item*112);
       prevY = moveY;
     }
   }
 }
 
-export function Robot({arr}:string|number):JSX.Element{
-  {arr.map((item) => {
+export function Robot(props: {arr: (string|number)[]}):JSX.Element{
+  {props.arr.map((item) => {
     MoveRobot(item);
     console.log('robotX:' + robotX);
     console.log('robotY:' + robotY);
@@ -82,8 +81,8 @@ export function Robot({arr}:string|number):JSX.Element{
     console.log('prevX:' + prevX);
     console.log('prevY:' + prevY);
     console.log(direction);
-    console.log(arr);
-    arr.shift();
+    console.log(props.arr);
+    props.arr.shift();
   });}
   return(
     <motion.img
