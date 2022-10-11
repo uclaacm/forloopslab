@@ -40,13 +40,50 @@ function PythonType(props: {
     setCode(value);
   };
 
+
   const handleRunClick = () => {
     setMovement(initMovement);
     const lines = code.split(/\r?\n/);
     //console.log(lines);
+
+    const forRegex = /^\s*for\s+\w+\s+in\s+range\s*\(\s*\d+\s*\)\s*:\s*$/g;
+    const moveForwardRegex = /^\s*moveForward\(\)\s*/g;
+    const numRegex = /\d+/g;
+    const turnLeftRegex = /^\s*turnLeft\(\)\s*/g;
+    const turnRightRegex = /^\s*turnRight\(\)\s*/g;
+
+    let isValid = true;
+
     for (let i = 0; i < lines.length; i++) {
       const cur = lines[i];
-      if (cur.substring(0,3) == 'for') {
+
+      // if line matches with "for" regex expression:
+      if (forRegex.test(cur)) {
+        const arr = cur.match(numRegex);
+        let numSteps = 0;
+        if (arr){
+          numSteps = parseInt(arr[0]);
+        }
+        setMovement(moves => moves.concat(numSteps));
+        if (i+1 < lines.length && moveForwardRegex.test(lines[i+1])) {
+          i++;
+        }
+        else {
+          isValid = false;
+          break;
+        }
+      }
+      else if (turnLeftRegex.test(cur)){
+        setMovement(moves => moves.concat('left'));
+      }
+      else if (turnRightRegex.test(cur)) {
+        setMovement(moves => moves.concat('right'));
+      }
+      else {
+        isValid = false;
+        break;
+      }
+      /*if (cur.substring(0,3) == 'for') {
         // for steps in range(3)
         const numSteps = parseInt(cur.substring(19, cur.length - 2));
         setMovement(moves => moves.concat(numSteps));
@@ -56,8 +93,9 @@ function PythonType(props: {
       }
       else if (cur == 'turnRight()') {
         setMovement(moves => moves.concat('right'));
-      }
+      }*/
     }
+    console.log(isValid);
   };
 
   useEffect(() => { console.log(movement); }, [movement]);
