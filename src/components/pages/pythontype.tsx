@@ -76,4 +76,3 @@ function PythonType(props: {
 }
 
 export default PythonType;
-

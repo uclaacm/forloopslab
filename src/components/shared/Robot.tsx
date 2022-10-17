@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion';
-import React from 'react';
 import robotRight from '../../assets/RobotDemo.svg';
 
-//moves robot to certain position
+//moves robot to new position
 let moveX = 0;
 let moveY = 0;
 //position of the robot before it moves
@@ -12,6 +11,13 @@ let robotY = 0;
 let prevX = 0;
 let prevY = 0;
 let direction = 'right';
+
+//function for resetting the robot in the grid
+export function setPosition(x: number, y: number, dir: string ){
+    moveX = x
+    moveY = y
+    direction = dir
+}
 
 export function MoveRobot(item:string|number){
   if (item == 'right' || item == 'left'){
@@ -72,7 +78,7 @@ export function MoveRobot(item:string|number){
   }
 }
 
-export function Robot({arr}:string|number):JSX.Element{
+export function Robot({arr}):JSX.Element{
   {arr.map((item) => {
     MoveRobot(item);
     console.log('robotX:' + robotX);
@@ -85,6 +91,7 @@ export function Robot({arr}:string|number):JSX.Element{
     console.log(arr);
     arr.shift();
   });}
+    // MoveRobot(value)
   return(
     <motion.img
       initial = {{x: `${robotX}%`, y: `${robotY}%`}}

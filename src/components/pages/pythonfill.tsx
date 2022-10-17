@@ -1,6 +1,6 @@
 import { faRotateLeft, faPlay} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Dropdown from 'react-dropdown';
 import { Link, useLocation } from 'react-router-dom';
@@ -11,7 +11,7 @@ import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
 import '../../styles/pythonfill.scss';
 import {Boxes} from '../shared/Boxes';
-
+import {Robot, MoveRobot, setPosition} from '../shared/Robot';
 import { Maze } from '../shared/maze';
 
 const boxes = Boxes(4,6);
@@ -93,6 +93,7 @@ function MoveFill(props:any): JSX.Element {
   );
 }
 
+
 function PythonFill(props: {
   pages: string[]
 }): JSX.Element {
@@ -107,6 +108,33 @@ function PythonFill(props: {
   const fillOnChange = (value:string, index:number) => {
     setFillValues({...fillValues, [index]: value});
   };
+
+  const initCodes:(string | number)[] = [];
+  const [codedInstructions, setCodes] = useState(initCodes);
+
+  const handleRunClick = () => {
+    setCodes(initCodes);
+    for (let i = 0; i < 5; i++) {
+      if(fillValues[i] == 'turnLeft()') {
+        setCodes(codes => codes.concat('left'));
+      }
+      else if (fillValues[i] == 'turnRight()'){
+        setCodes(codes => codes.concat('right'));
+      }
+      else {
+        setCodes(codes => codes.concat(parseInt(fillValues[i])));
+      }
+    }
+  };
+
+  useEffect(() => { console.log(codedInstructions); }, [codedInstructions]);
+  
+  const ResetBoard = () => {
+    setPosition(0,0, 'right')
+    setCodes(initCodes)
+    setFillValues(InitialFillValues)
+  }
+
   return (
     <div className="frame wideSplit">
       <div id="sidebar">
@@ -144,15 +172,18 @@ function PythonFill(props: {
           </div>
         </div>
         <div id="content">
-          <Maze rows={4} cols = {6} boxCoords={boxes}/>
+          <div className = 'maze'>
+            <Maze rows={4} cols={6} boxCoords={boxes}/>
+            <Robot arr = {codedInstructions}></Robot>
+          </div>
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>
           <div id="buttons">
-            <button id="run" className='control-btn'>
+            <button id="run" className='control-btn' onClick={handleRunClick}>
               <FontAwesomeIcon icon={faPlay} />
             </button>
-            <button id="reset" className='control-btn'>
+            <button id="reset" className='control-btn' onClick={ResetBoard}>
               <FontAwesomeIcon icon={faRotateLeft} />
             </button>
           </div>

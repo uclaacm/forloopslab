@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { faRotateLeft, faPlay, faXmark} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useLocation } from 'react-router-dom';
 import {Boxes} from '../shared/Boxes';
 import { Maze } from '../shared/maze';
@@ -6,6 +8,7 @@ import { Maze } from '../shared/maze';
 import '../../styles/app.scss';
 import '../../styles/pseudochoice.scss';
 import '../../styles/levelSelect.scss';
+import {Robot, MoveRobot, setPosition} from '../shared/Robot';
 
 const boxes = Boxes(4,6);
 
@@ -47,6 +50,7 @@ function MultipleChoice(props:MultipleChoiceProps):JSX.Element{
   );
 }
 
+
 function PseudoChoice(props: {
   pages: string[]
 }): JSX.Element {
@@ -62,6 +66,11 @@ function PseudoChoice(props: {
   const handleChoiceClick = (arr:(string|number)[]) => {
     setInstructions(arr);
   };
+
+  const ResetBoard = () => {
+    setPosition(0,0, 'right')
+    setInstructions(init)
+  }
 
   useEffect(() => { console.log(instructions); }, [instructions]);
 
@@ -88,10 +97,21 @@ function PseudoChoice(props: {
           </div>
         </div>
         <div id="content">
-          <Maze rows={4} cols={6} boxCoords={boxes}/>
+          <div className = 'maze'>
+              <Maze rows={4} cols={6} boxCoords={boxes}/>
+              <Robot arr = {instructions}></Robot>
+            </div>
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>
+          <div id="buttons">
+            <button id="run" className='control-btn' onClick={handleChoiceClick}>
+              <FontAwesomeIcon icon={faPlay} />
+            </button>
+            <button id="reset" className='control-btn' onClick={ResetBoard}>
+              <FontAwesomeIcon icon={faRotateLeft} />
+            </button>
+          </div>
         </div>
       </div>
     </div>

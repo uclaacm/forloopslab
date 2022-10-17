@@ -6,7 +6,7 @@ import Dropdown from 'react-dropdown';
 import { Link, useLocation } from 'react-router-dom';
 import {Boxes} from '../shared/Boxes';
 import { Maze } from '../shared/maze';
-import {Robot} from '../shared/Robot';
+import {Robot, setPosition} from '../shared/Robot';
 
 import 'react-dropdown/style.css';
 import '../../styles/generalDropdown.scss';
@@ -68,7 +68,7 @@ function PseudoFill(props: {
   const [dropValues, setDropValues] = useState(initialDropValues);
 
   const fillOnChange = (value:string, index:number) => {
-    setFillValues({...fillValues, [index]: value});
+      setFillValues({...fillValues, [index]: value});
   };
 
   const dropOnChange = (value:string, index:number) => {
@@ -87,6 +87,13 @@ function PseudoFill(props: {
       setCodes(codes => codes.concat(dropValues[i]));
     }
   };
+
+  const ResetBoard = () => {
+    setPosition(0,0, 'right')
+    setFillValues(initialFillValues)
+    setDropValues(initialDropValues)
+    setCodes(initCodes)
+  }
 
   useEffect(() => { console.log(codedInstructions); }, [codedInstructions]);
 
@@ -122,12 +129,6 @@ function PseudoFill(props: {
             <Maze rows={4} cols={6} boxCoords={boxes}/>
             <Robot arr = {codedInstructions}></Robot>
           </div>
-          {/* <Maze rows={4} cols={6} boxCoords={boxes}/>
-          {codedInstructions.map((item,idx) => {
-            return (
-              <div key={idx}>{item}</div>
-            );
-          })} */}
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>
@@ -135,7 +136,7 @@ function PseudoFill(props: {
             <button id="run" className='control-btn' onClick={handleRunClick}>
               <FontAwesomeIcon icon={faPlay} />
             </button>
-            <button id="reset" className='control-btn'>
+            <button id="reset" className='control-btn' onClick = {ResetBoard}>
               <FontAwesomeIcon icon={faRotateLeft} />
             </button>
           </div>

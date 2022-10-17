@@ -5,8 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 import {Boxes} from '../shared/Boxes';
 import {Maze} from '../shared/maze';
-import {Robot} from '../shared/Robot';
-// import {Robot,SetMove, SetDirection, SetPosition} from '../shared/Robot';
+import {Robot, MoveRobot, setPosition} from '../shared/Robot';
 
 import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
@@ -69,6 +68,13 @@ function Repetitive(props: {
       }
     }
   };
+  const ResetBoard = () => {
+    setPosition(0,0, 'right')
+    setInstructions([])
+    setCodes(initCodes)
+  }
+  console.log(instructions)
+  console.log(codedInstructions)
   return (
     <div className="frame">
       <div id="sidebar">
@@ -102,6 +108,11 @@ function Repetitive(props: {
           <div className = 'maze'>
             <Maze rows={4} cols={6} boxCoords={boxes}/>
             <Robot arr = {codedInstructions}></Robot>
+            {/* {codedInstructions.map((item)=>{
+              return(
+                <Robot value = {item}></Robot>
+              )
+            })} */}
           </div>
 
         </div>
@@ -111,7 +122,7 @@ function Repetitive(props: {
             <button id="run" className='control-btn' onClick={handleRunClick}>
               <FontAwesomeIcon icon={faPlay} />
             </button>
-            <button id="reset" className='control-btn'>
+            <button id="reset" className='control-btn' onClick={ResetBoard}>
               <FontAwesomeIcon icon={faRotateLeft} />
             </button>
           </div>

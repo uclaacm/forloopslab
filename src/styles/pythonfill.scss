@@ -66,3 +66,11 @@
   text-align: center;
   width: 30px;
 }
+
+.maze {
+  align-content: center;
+  display: grid;
+  justify-content: center;
+  margin: -10px auto;
+  position: relative;
+}
