@@ -27,6 +27,7 @@ function Repetitive(props: {
   const initCodes:(string | number)[] = [];
   const [codedInstructions, setCodes] = useState(initCodes);
 
+
   const handleClick = (type:string) => {
     const newInstruction : {id: number, text: string} = {
       id: new Date().getTime(), //unique id that differentiates each instruction
@@ -69,6 +70,68 @@ function Repetitive(props: {
       }
     }
   };
+
+  const calculateKeyframes = (codedInstructionsProps: (string | number)[]) => {
+    const xArr = [0];
+    const yArr = [0];
+    let direction = 'right';
+    codedInstructionsProps.forEach((item) => {
+      if (item == 'right' || item == 'left'){
+        if (direction == 'right'){
+          if (item=='right'){
+            direction = 'down';
+          }
+          else{
+            direction = 'up';
+          }
+        }
+        else if (direction == 'down'){
+          if (item=='right'){
+            direction = 'left';
+          }
+          else{
+            direction = 'right';
+          }
+        }
+        else if (direction == 'left'){
+          if (item=='right'){
+            direction = 'up';
+          }
+          else{
+            direction = 'down';
+          }
+        }
+        else if (direction == 'up'){
+          if (item=='right'){
+            direction = 'right';
+          }
+          else{
+            direction = 'left';
+          }
+        }
+      }
+      else{
+        if (direction == 'right'){
+          xArr.push(xArr[xArr.length - 1] + (+item*100));
+          yArr.push(yArr[yArr.length - 1]);
+        }
+        else if (direction == 'left'){
+          xArr.push(xArr[xArr.length - 1] - (+item*100));
+          yArr.push(yArr[yArr.length - 1]);
+        }
+        else if (direction == 'down'){
+          xArr.push(xArr[xArr.length - 1]);
+          yArr.push(yArr[yArr.length - 1] + (+item*100));
+        }
+        else if (direction == 'up'){
+          xArr.push(xArr[xArr.length - 1]);
+          yArr.push(yArr[yArr.length - 1] - (+item*100));
+        }
+      }
+    });
+    return [xArr, yArr];
+  };
+
   return (
     <div className="frame">
       <div id="sidebar">
@@ -101,7 +164,11 @@ function Repetitive(props: {
         <div className="main-section">
           <div className = 'maze'>
             <Maze rows={4} cols={6} boxCoords={boxes}/>
-            <Robot arr = {codedInstructions}></Robot>
+            {/* {codedInstructions.map((item)=>{
+              return <Robot item={item}></Robot>
+            })} */}
+            <Robot keyframes={calculateKeyframes(codedInstructions)}></Robot>
+
           </div>
 
         </div>

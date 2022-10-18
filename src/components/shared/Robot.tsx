@@ -1,96 +1,133 @@
 import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import robotRight from '../../assets/RobotDemo.svg';
 
-//moves robot to certain position
-let moveX = 0;
-let moveY = 0;
-//position of the robot before it moves
-let robotX = 0;
-let robotY = 0;
-//keeps track of the position so that we can set robotX and robotY properly
-let prevX = 0;
-let prevY = 0;
-let direction = 'right';
+// interface Frame {
+//   x: (string|number)[],
+//   y: (string|number)[]
+// }
 
-export function MoveRobot(item:string|number){
-  if (item == 'right' || item == 'left'){
-    if (direction == 'right'){
-      if (item=='right'){
-        direction = 'down';
-      }
-      else{
-        direction = 'up';
-      }
-    }
-    else if (direction == 'down'){
-      if (item=='right'){
-        direction = 'left';
-      }
-      else{
-        direction = 'right';
-      }
-    }
-    else if (direction == 'left'){
-      if (item=='right'){
-        direction = 'up';
-      }
-      else{
-        direction = 'down';
-      }
-    }
-    else if (direction == 'up'){
-      if (item=='right'){
-        direction = 'right';
-      }
-      else{
-        direction = 'left';
-      }
-    }
-  }
-  else{
-    if (direction == 'right'){
-      robotX = prevX;
-      moveX += (+item*100);
-      prevX = moveX;
-    }
-    else if (direction == 'left'){
-      robotX = prevX;
-      moveX -= (+item*100);
-      prevX = moveX;
-    }
-    else if (direction == 'down'){
-      robotY = prevY;
-      moveY += (+item*112);
-      prevY = moveY;
-    }
-    else if (direction == 'up'){
-      robotY = prevY;
-      moveY -= (+item*112);
-      prevY = moveY;
-    }
-  }
-}
+export function Robot(props: {keyframes: (string|number)[][]}):JSX.Element{
+  // let xArr = [0]
+  // let yArr = [0]
+  // let direction = 'right';
 
-export function Robot(props: {arr: (string|number)[]}):JSX.Element{
-  {props.arr.map((item) => {
-    MoveRobot(item);
-    console.log('robotX:' + robotX);
-    console.log('robotY:' + robotY);
-    console.log('moveX:' + moveX);
-    console.log('moveY:' + moveY);
-    console.log('prevX:' + prevX);
-    console.log('prevY:' + prevY);
-    console.log(direction);
-    console.log(props.arr);
-    props.arr.shift();
-  });}
-  return(
-    <motion.img
-      initial = {{x: `${robotX}%`, y: `${robotY}%`}}
-      animate = {{x: `${moveX}%`, y: `${moveY}%`}}
-      className = "robot"
-      src = {robotRight}
-      alt = "robot">
-    </motion.img>
-  );
+  // function MoveRobot(item:string|number){
+  //   //change direction
+  //   if (item == 'right' || item == 'left'){
+  //     if (direction == 'right'){
+  //       if (item=='right'){
+  //         direction = 'down';
+  //       }
+  //       else{
+  //         direction = 'up';
+  //       }
+  //     }
+  //     else if (direction == 'down'){
+  //       if (item=='right'){
+  //         direction = 'left';
+  //       }
+  //       else{
+  //         direction = 'right';
+  //       }
+  //     }
+  //     else if (direction == 'left'){
+  //       if (item=='right'){
+  //         direction = 'up';
+  //       }
+  //       else{
+  //         direction = 'down';
+  //       }
+  //     }
+  //     else if (direction == 'up'){
+  //       if (item=='right'){
+  //         direction = 'right';
+  //       }
+  //       else{
+  //         direction = 'left';
+  //       }
+  //     }
+  //   }
+  //   else{
+  //     if (direction == 'right'){
+  //       xArr.push(xArr[xArr.length - 1] + (+item*100))
+  //       yArr.push(yArr[yArr.length - 1])
+  //     }
+  //     else if (direction == 'left'){
+  //       xArr.push(xArr[xArr.length - 1] - (+item*100))
+  //       yArr.push(yArr[yArr.length - 1])
+  //     }
+  //     else if (direction == 'down'){
+  //       xArr.push(xArr[xArr.length - 1])
+  //       yArr.push(yArr[yArr.length - 1] + (+item*100))
+  //     }
+  //     else if (direction == 'up'){
+  //       xArr.push(xArr[xArr.length - 1])
+  //       yArr.push(yArr[yArr.length - 1] - (+item*100))
+  //     }
+  //   }
+  // }
+
+  // props.arr.forEach((item)=>{
+  //   MoveRobot(item)
+  // })
+  // const [xArr,setXArr] = useState<(string|number)[]>([0]);
+  // const [yArr,setYArr] = useState<(string|number)[]>([0]);
+  // const [frames, setFrames] = useState<Frame>({
+  //   x: [0],
+  //   y: [0]
+  // })
+
+  const [test,setTest] = useState<(number)>(0);
+  const [xArr,setXArr] = useState<(string|number)[]>([0]);
+  const [yArr,setYArr] = useState<(string|number)[]>([0]);
+
+
+  useEffect(() => {
+    console.log('Keyframe updated!');
+    //console.log(`(${props.keyframes[0]},${props.keyframes[1]})`)
+    if(props.keyframes) {
+      setXArr(props.keyframes[0]);
+      setYArr(props.keyframes[1]);
+    }
+
+    // console.log(xArr)
+    // console.log(yArr)
+    // setFrames({
+    //   x: props.keyframes[0],
+    //   y: props.keyframes[1]
+    // })
+    // console.log(props.keyframes[1])
+    setTest(test+1);
+  }, [props.keyframes]);
+
+  if(JSON.stringify(xArr) === JSON.stringify([0]) && JSON.stringify(yArr) === JSON.stringify([0])) {
+    return(
+      <img
+        className = "robot"
+        src = {robotRight}
+        alt = "robot">
+      </img>
+
+    );
+  }
+  else {
+    console.log(xArr, yArr);
+    return(
+      <motion.img
+        animate = {{
+          x: xArr,
+          y: yArr,
+          // x: [0, 0],
+          // y: [0, 100]
+        }}
+        key={test}
+        className = "robot"
+        src = {robotRight}
+        alt = "robot">
+      </motion.img>
+
+    );
+  }
+
 }
