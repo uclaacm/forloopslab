@@ -7,6 +7,7 @@ import {Boxes} from '../shared/Boxes';
 import { Maze } from '../shared/maze';
 import CodeMirror from '@uiw/react-codemirror';
 import { python } from '@codemirror/lang-python';
+import Modal from 'react-modal';
 
 import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
@@ -35,6 +36,27 @@ function PythonType(props: {
   const [code, setCode] = useState('');
   const initMovement:(string | number)[] = [];
   const [movement, setMovement] = useState(initMovement);
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  const modalStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
+
+  const openModal = () => {
+    setIsOpen(true);
+  }
+
+  const closeModal = () => {
+    setIsOpen(false);
+  }
 
   const onChange = (value:string) => {
     setCode(value);
@@ -96,6 +118,9 @@ function PythonType(props: {
       }*/
     }
     console.log(isValid);
+    if (!isValid){
+      openModal();
+    }
   };
 
   useEffect(() => { console.log(movement); }, [movement]);
@@ -106,6 +131,16 @@ function PythonType(props: {
 
   return (
     <div className="frame">
+      <Modal 
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={modalStyles}
+      >
+        <h2>Error</h2>
+        <p>Hmm, looks like the robot can't understand your code! 
+          Take another look at the example and try again.</p>
+        <button onClick={closeModal}>Close</button>
+      </Modal>
       <div id="sidebar">
         <div id="level-title">Python Type</div>
         <div id="instructions">Give the robot instructions to navigate the maze. Make sure you don&apos;t run into any obstacles!.</div>
