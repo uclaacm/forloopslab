@@ -52,11 +52,11 @@ function PythonType(props: {
 
   const openModal = () => {
     setIsOpen(true);
-  }
+  };
 
   const closeModal = () => {
     setIsOpen(false);
-  }
+  };
 
   const onChange = (value:string) => {
     setCode(value);
@@ -131,13 +131,13 @@ function PythonType(props: {
 
   return (
     <div className="frame">
-      <Modal 
+      <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         style={modalStyles}
       >
         <h2>Error</h2>
-        <p>Hmm, looks like the robot can't understand your code! 
+        <p>Hmm, looks like the robot can&apos;t understand your code!
           Take another look at the example and try again.</p>
         <button onClick={closeModal}>Close</button>
       </Modal>
