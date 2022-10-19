@@ -69,10 +69,10 @@ function PythonType(props: {
     //console.log(lines);
 
     const forRegex = /^\s*for\s+\w+\s+in\s+range\s*\(\s*\d+\s*\)\s*:\s*$/g;
-    const moveForwardRegex = /^\s*moveForward\(\)\s*/g;
+    const moveForwardRegex = /^\s*moveForward\(\)\s*$/g;
     const numRegex = /\d+/g;
-    const turnLeftRegex = /^\s*turnLeft\(\)\s*/g;
-    const turnRightRegex = /^\s*turnRight\(\)\s*/g;
+    const turnLeftRegex = /^\s*turnLeft\(\)\s*$/g;
+    const turnRightRegex = /^\s*turnRight\(\)\s*$/g;
 
     let isValid = true;
 
