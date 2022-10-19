@@ -10,11 +10,10 @@ import '../../styles/generalDropdown.scss';
 import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
 import '../../styles/pythonfill.scss';
-import {Boxes} from '../shared/Boxes';
 
 import { Maze } from '../shared/maze';
 
-const boxes = Boxes(4,6);
+// const boxes = Boxes(4,6);
 
 function SampleSyntax(){
   return(
@@ -101,7 +100,7 @@ function PythonFill(props: {
   const current = location.pathname;
   const currPage = props.pages.indexOf(current);
 
-  const arrayOfPseudoCode = ['3','left', '2', 'right', '1'];
+  const arrayOfPseudoCode = ['2','right', '1', 'left', '3', 'right', '2'];
   const InitialFillValues = ['','','','',''];
   const [fillValues, setFillValues] = useState(InitialFillValues);
   const fillOnChange = (value:string, index:number) => {
@@ -165,7 +164,7 @@ function PythonFill(props: {
           </div>
         </div>
         <div id="content">
-          <Maze rows={4} cols = {6} boxCoords={boxes}/>
+          <Maze rows={4} cols = {6} boxCoords={[[0,3],[1,1],[2,0],[2,3],[2,4],[3,4]]}/>
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>
