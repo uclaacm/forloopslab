@@ -83,7 +83,7 @@ function PseudoChoice(props: {
           <div id="title">LoopBots</div>
           <div className="level-select">
             {currPage != 0 && <Link to={props.pages[currPage-1]} className="level-select-button left">&#9664;</Link>}
-            Level {currPage+1} of 6
+            Level {currPage+1} of 5
             {currPage != props.pages.length - 1 && <Link to={props.pages[currPage+1]} className="level-select-button right">&#9654;</Link>}
           </div>
         </div>

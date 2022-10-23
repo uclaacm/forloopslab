@@ -71,6 +71,12 @@ function Repetitive(props: {
     }
   };
 
+  const reset = () => {
+    console.log('reset');
+    setCodes(initCodes);
+    setInstructions([]);
+  };
+
   const calculateKeyframes = (codedInstructionsProps: (string | number)[]) => {
     const xArr = [0];
     const yArr = [0];
@@ -157,7 +163,7 @@ function Repetitive(props: {
           <div id="title">LoopBots</div>
           <div className="level-select">
             {currPage != 0 && <Link to={props.pages[currPage-1]} className="level-select-button left">&#9664;</Link>}
-            Level {currPage+1} of 6
+            Level {currPage+1} of 5
             {currPage != props.pages.length - 1 && <Link to={props.pages[currPage+1]} className="level-select-button right">&#9654;</Link>}
           </div>
         </div>
@@ -178,7 +184,7 @@ function Repetitive(props: {
             <button id="run" className='control-btn' onClick={handleRunClick}>
               <FontAwesomeIcon icon={faPlay} />
             </button>
-            <button id="reset" className='control-btn'>
+            <button id="reset" className='control-btn' onClick={reset}>
               <FontAwesomeIcon icon={faRotateLeft} />
             </button>
           </div>
