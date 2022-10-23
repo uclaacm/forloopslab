@@ -68,11 +68,7 @@ function Repetitive(props: {
       }
     }
   };
-  const ResetBoard = () => {
-    setPosition(0,0, 'right')
-    setInstructions([])
-    setCodes(initCodes)
-  }
+  
   console.log(instructions)
   console.log(codedInstructions)
   return (
