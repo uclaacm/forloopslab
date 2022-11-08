@@ -1,6 +1,6 @@
 import { faRotateLeft, faPlay} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Dropdown from 'react-dropdown';
 import { Link, useLocation } from 'react-router-dom';
@@ -11,7 +11,7 @@ import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
 import '../../styles/pythonfill.scss';
 import {Boxes} from '../shared/Boxes';
-
+import { Robot } from '../shared/Robot';
 import { Maze } from '../shared/maze';
 
 const boxes = Boxes(4,6);
@@ -107,6 +107,88 @@ function PythonFill(props: {
   const fillOnChange = (value:string, index:number) => {
     setFillValues({...fillValues, [index]: value});
   };
+
+  const initCodes:(string | number)[] = [];
+  const [codedInstructions, setCodes] = useState(initCodes);
+
+  const handleRunClick = () => {
+    setCodes(initCodes);
+    for (let i = 0; i < 5; i++) {
+      if(fillValues[i] == 'turnLeft()') {
+        setCodes(codes => codes.concat('left'));
+      }
+      else if (fillValues[i] == 'turnRight()'){
+        setCodes(codes => codes.concat('right'));
+      }
+      else {
+        setCodes(codes => codes.concat(parseInt(fillValues[i])));
+      }
+    }
+  };
+
+  useEffect(() => { console.log(codedInstructions); }, [codedInstructions]);
+
+  const calculateKeyframes = (codedInstructionsProps: (string | number)[]) => {
+    const xArr = [0];
+    const yArr = [0];
+    let direction = 'right';
+    codedInstructionsProps.forEach((item) => {
+      if (item == 'right' || item == 'left'){
+        if (direction == 'right'){
+          if (item=='right'){
+            direction = 'down';
+          }
+          else{
+            direction = 'up';
+          }
+        }
+        else if (direction == 'down'){
+          if (item=='right'){
+            direction = 'left';
+          }
+          else{
+            direction = 'right';
+          }
+        }
+        else if (direction == 'left'){
+          if (item=='right'){
+            direction = 'up';
+          }
+          else{
+            direction = 'down';
+          }
+        }
+        else if (direction == 'up'){
+          if (item=='right'){
+            direction = 'right';
+          }
+          else{
+            direction = 'left';
+          }
+        }
+      }
+      else{
+        if (direction == 'right'){
+          xArr.push(xArr[xArr.length - 1] + (+item*100));
+          yArr.push(yArr[yArr.length - 1]);
+        }
+        else if (direction == 'left'){
+          xArr.push(xArr[xArr.length - 1] - (+item*100));
+          yArr.push(yArr[yArr.length - 1]);
+        }
+        else if (direction == 'down'){
+          xArr.push(xArr[xArr.length - 1]);
+          yArr.push(yArr[yArr.length - 1] + (+item*100));
+        }
+        else if (direction == 'up'){
+          xArr.push(xArr[xArr.length - 1]);
+          yArr.push(yArr[yArr.length - 1] - (+item*100));
+        }
+      }
+    });
+    return [xArr, yArr];
+  };
+
   return (
     <div className="frame wideSplit">
       <div id="sidebar">
@@ -145,11 +227,12 @@ function PythonFill(props: {
         </div>
         <div id="content">
           <Maze rows={4} cols = {6} boxCoords={boxes}/>
+          <Robot keyframes={calculateKeyframes(codedInstructions)}></Robot>
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>
           <div id="buttons">
-            <button id="run" className='control-btn'>
+            <button id="run" className='control-btn' onClick={handleRunClick}>
               <FontAwesomeIcon icon={faPlay} />
             </button>
             <button id="reset" className='control-btn'>
