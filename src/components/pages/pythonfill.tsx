@@ -11,9 +11,9 @@ import "../../styles/generalDropdown.scss";
 import "../../styles/app.scss";
 import "../../styles/levelSelect.scss";
 import "../../styles/pythonfill.scss";
-import { Boxes } from "../shared/Boxes";
-import { Robot } from "../shared/Robot";
+//import { Boxes } from "../shared/Boxes";
 import { Maze } from "../shared/maze";
+import { Robot } from "../shared/Robot";
 
 //const boxes = Boxes(4, 6);
 
