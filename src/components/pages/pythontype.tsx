@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import "../../styles/pythontype.scss";
-import { Boxes } from "../shared/Boxes";
+//import { Boxes } from "../shared/Boxes";
 import { Maze } from "../shared/maze";
 // import { Robot } from '../shared/Robot';
 import "../../styles/app.scss";
