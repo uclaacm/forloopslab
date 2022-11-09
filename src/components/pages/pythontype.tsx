@@ -1,13 +1,13 @@
 import { faRotateLeft, faPlay} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState, useEffect } from 'react';
+import Modal from 'react-modal';
 import { Link, useLocation } from 'react-router-dom';
 import '../../styles/pythontype.scss';
 import {Boxes} from '../shared/Boxes';
 import { Maze } from '../shared/maze';
 import CodeMirror from '@uiw/react-codemirror';
 import { python } from '@codemirror/lang-python';
-import Modal from 'react-modal';
 
 import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
@@ -39,7 +39,7 @@ function PythonType(props: {
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
-  const modalStyles = {
+  /*const modalStyles = {
     content: {
       top: '50%',
       left: '50%',
@@ -47,8 +47,12 @@ function PythonType(props: {
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
+      borderRadius: '10px',
+      borderColor: 'white',
+      padding: '20px',
+      font: '$main-font',
     },
-  };
+  };*/
 
   const openModal = () => {
     setIsOpen(true);
@@ -134,12 +138,12 @@ function PythonType(props: {
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        style={modalStyles}
+        className="modal"
       >
-        <h2>Error</h2>
+        <h2 className="error-heading">Error</h2>
         <p>Hmm, looks like the robot can&apos;t understand your code!
           Take another look at the example and try again.</p>
-        <button onClick={closeModal}>Close</button>
+        <button onClick={closeModal} className='close-button'>x</button>
       </Modal>
       <div id="sidebar">
         <div id="level-title">Python Type</div>

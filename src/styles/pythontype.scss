@@ -20,6 +20,37 @@
   width: 100%;
 }
 
+.modal {
+  background-color: white;
+  border-color: white;
+  border-radius: 10px;
+  bottom: auto;
+  font-family: $main-font;
+  left: 50%;
+  padding: 2vw;
+  position: relative;
+  right: auto;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+}
+
+.error-heading {
+  color: #ff8a00;
+}
+
+.close-button {
+  background-color: transparent;
+  border-color: transparent;
+  color: grey;
+  font-family: $main-font;
+  font-size: 30px;
+  position: absolute;
+  right: 15px;
+  top: 5px;
+}
+
 .sampleSyntax {
   color: #fff;
   font-family: $code-font;
