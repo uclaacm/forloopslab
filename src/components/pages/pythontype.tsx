@@ -130,8 +130,7 @@ function PythonType(props: {
 
   useEffect(() => { console.log(movement); }, [movement]);
 
-
-  const boxes = Boxes(4,5);
+  // const boxes = Boxes(4,5);
   // const codeContent = ['for steps in range(3):', ' moveForward()', 'turnLeft()'];
 
   return (
@@ -174,7 +173,7 @@ function PythonType(props: {
           </div>
         </div>
         <div id="content">
-          <Maze rows={4} cols={6} boxCoords={boxes}/>
+          <Maze rows={4} cols={6} boxCoords={[[1,0],[1,1],[0,3],[1,3],[2,3],[3,1],[2,5]]}/>
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>
