@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { Link, useLocation } from 'react-router-dom';
 import '../../styles/pythontype.scss';
+import close from '../../assets/closeicon.svg';
 import {Boxes} from '../shared/Boxes';
 import { Maze } from '../shared/maze';
 import CodeMirror from '@uiw/react-codemirror';
@@ -143,7 +144,8 @@ function PythonType(props: {
         <h2 className="error-heading">Error</h2>
         <p>Hmm, looks like the robot can&apos;t understand your code!
           Take another look at the example and try again.</p>
-        <button onClick={closeModal} className='close-button'>x</button>
+        {/*<button onClick={closeModal} className='close-button'>x</button>*/}
+        <img src={close} onClick={closeModal} className='close-button' width='15px' height='15px'></img>
       </Modal>
       <div id="sidebar">
         <div id="level-title">Python Type</div>
