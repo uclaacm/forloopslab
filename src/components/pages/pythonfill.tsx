@@ -179,7 +179,6 @@ function PythonFill(props: { pages: string[] }): JSX.Element {
     });
     return [xArr, yArr];
   };
-  
   return (
     <div className="frame wideSplit">
       <div id="sidebar">
