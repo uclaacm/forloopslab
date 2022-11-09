@@ -5,7 +5,6 @@ import Modal from 'react-modal';
 import { Link, useLocation } from 'react-router-dom';
 import '../../styles/pythontype.scss';
 import close from '../../assets/closeicon.svg';
-import {Boxes} from '../shared/Boxes';
 import { Maze } from '../shared/maze';
 import CodeMirror from '@uiw/react-codemirror';
 import { python } from '@codemirror/lang-python';
