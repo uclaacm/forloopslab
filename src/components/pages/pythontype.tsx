@@ -1,6 +1,7 @@
 /*eslint-disable quotes*/
 import { faRotateLeft, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import "../../styles/pythontype.scss";
 import { Boxes } from "../shared/Boxes";
@@ -8,6 +9,8 @@ import { Maze } from "../shared/maze";
 // import { Robot } from '../shared/Robot';
 import "../../styles/app.scss";
 import "../../styles/levelSelect.scss";
+import CodeMirror from '@uiw/react-codemirror';
+import { python } from '@codemirror/lang-python';
 
 function SampleSyntax() {
   return (
@@ -29,7 +32,36 @@ function PythonType(props: { pages: string[] }): JSX.Element {
   const current = location.pathname;
   const currPage = props.pages.indexOf(current);
 
-  const boxes = Boxes(4, 5);
+  const [code, setCode] = useState('');
+  const initMovement:(string | number)[] = [];
+  const [movement, setMovement] = useState(initMovement);
+
+  const onChange = (value:string) => {
+    setCode(value);
+  };
+
+  const handleRunClick = () => {
+    setMovement(initMovement);
+    const lines = code.split(/\r?\n/);
+    //console.log(lines);
+    for (let i = 0; i < lines.length; i++) {
+      const cur = lines[i];
+      if (cur.substring(0,3) == 'for') {
+        // for steps in range(3)
+        const numSteps = parseInt(cur.substring(19, cur.length - 2));
+        setMovement(moves => moves.concat(numSteps));
+      }
+      else if (cur == 'turnLeft()') {
+        setMovement(moves => moves.concat('left'));
+      }
+      else if (cur == 'turnRight()') {
+        setMovement(moves => moves.concat('right'));
+      }
+    }
+  };
+
+  useEffect(() => { console.log(movement); }, [movement]);
+
   // const codeContent = ['for steps in range(3):', ' moveForward()', 'turnLeft()'];
 
   // const calculateKeyframes = (codedInstructionsProps: (string | number)[]) => {
@@ -107,6 +139,13 @@ function PythonType(props: { pages: string[] }): JSX.Element {
           </div>
           <div>Your code here: </div>
           <textarea id="code-input" spellCheck="false"></textarea>
+          <CodeMirror
+            value={code}
+            height="200px"
+            theme="dark"
+            extensions={[python()]}
+            onChange={onChange}
+          />
         </div>
       </div>
       <div id="main">
@@ -133,13 +172,13 @@ function PythonType(props: { pages: string[] }): JSX.Element {
           </div>
         </div>
         <div id="content">
-          <Maze rows={4} cols={6} boxCoords={boxes} />
+          <Maze rows={4} cols={6} boxCoords={[[1,0],[1,1],[0,3],[1,3],[2,3],[3,1],[2,5]]}/>
           {/* <Robot keyframes={calculateKeyframes(codedInstructions)}></Robot> */}
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>
           <div id="buttons">
-            <button id="run" className="control-btn">
+            <button id="run" className='control-btn' onClick={handleRunClick}>
               <FontAwesomeIcon icon={faPlay} />
             </button>
             <button id="reset" className="control-btn">

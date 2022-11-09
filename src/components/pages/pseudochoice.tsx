@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import {Boxes} from '../shared/Boxes';
 import { Maze } from '../shared/maze';
 import { Robot } from '../shared/Robot';
 
@@ -8,7 +7,7 @@ import '../../styles/app.scss';
 import '../../styles/pseudochoice.scss';
 import '../../styles/levelSelect.scss';
 
-const boxes = Boxes(4,6);
+// const boxes = Boxes(4,6);
 
 interface MultipleChoiceProps {
   choiceNum: number;
@@ -60,6 +59,7 @@ function PseudoChoice(props: {
   const init:(string|number)[] = [];
   const [instructions, setInstructions] = useState(init);
 
+  //correct answer is choice 2
   const handleChoiceClick = (arr:(string|number)[]) => {
     setInstructions(arr);
   };
@@ -132,10 +132,9 @@ function PseudoChoice(props: {
         <div id="level-title">Pseudo Choice</div>
         <div id="instructions">Give the robot instructions to navigate the maze. Make sure you don&apos;t run into any obstacles!</div>
         <div id="contentPC">
-          <MultipleChoice choiceNum = {1} arr = {[3, 'right', 4, 'left', 3, 'right', 2, 'right', 0, 'left']} onChoice = {handleChoiceClick}/>
-          <MultipleChoice choiceNum = {2} arr = {[3, 'right', 4, 'left', 3, 'right', 2, 'right', 0, 'left']} onChoice = {handleChoiceClick}/>
-          <MultipleChoice choiceNum = {3} arr = {[3, 'right', 4, 'left', 3, 'right', 2, 'right', 0, 'left']} onChoice = {handleChoiceClick}/>
-
+          <MultipleChoice choiceNum = {1} arr = {[3, 'right', 4, 'left', 3, 'right', 2, 'right', 0]} onChoice = {handleChoiceClick}/>
+          <MultipleChoice choiceNum = {2} arr = {[1, 'right', 1, 'left', 2, 'right',2, 'left', 2]} onChoice = {handleChoiceClick}/>
+          <MultipleChoice choiceNum = {3} arr = {[1, 'right', 1, 'left', 3, 'right', 2, 'right', 1]} onChoice = {handleChoiceClick}/>
         </div>
       </div>
       <div id="main">
@@ -149,7 +148,7 @@ function PseudoChoice(props: {
           </div>
         </div>
         <div id="content">
-          <Maze rows={4} cols={6} boxCoords={boxes}/>
+          <Maze rows={4} cols={6} boxCoords={[[0,2],[1,0],[2,1],[2,2],[1,4],[2,4 ]]}/>
           <Robot keyframes={calculateKeyframes(instructions)}></Robot>
         </div>
         <div className="main-section">
