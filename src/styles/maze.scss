@@ -9,10 +9,12 @@
 //     grid-template-columns: repeat(3, auto);
 // }
 .maze {
-  align-content: center;
+  align-content: stretch;
   display: grid;
-  justify-content: center;
-  margin: -10px auto;
+  // margin: -10px auto;
+  height: 100%;
+  justify-content: stretch;
+  width: 100%;
 }
 
 .maze-container > div {
@@ -25,11 +27,8 @@
 }
 
 .maze-container > div:nth-child(2),
- 
 .maze-container > div:nth-child(4),
- 
 .maze-container > div:nth-child(6),
- 
 .maze-container > div:nth-child(7),
 .maze-container > div:nth-child(9),
 .maze-container > div:nth-child(11),
