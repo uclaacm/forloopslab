@@ -4,7 +4,6 @@ import {
   BrowserRouter as Router, Route, Routes,
 } from 'react-router-dom';
 
-import Bonus from './components/pages/bonus';
 import PseudoChoice from './components/pages/pseudochoice';
 import PseudoFill from './components/pages/pseudofill';
 import PythonFill from './components/pages/pythonfill';
@@ -14,7 +13,7 @@ import Repetitive from './components/pages/repetitive';
 
 function App(): JSX.Element {
 
-  const pages = ['/',  '/pseudofill', '/pseudochoice', '/pythonfill', '/pythontype', '/bonus'];
+  const pages = ['/',  '/pseudofill', '/pseudochoice', '/pythonfill', '/pythontype'];
 
   return (
     <Router>
@@ -25,7 +24,6 @@ function App(): JSX.Element {
           <Route path="/pseudochoice" element = {<PseudoChoice pages={pages}/>}/>
           <Route path="/pythonfill" element = {<PythonFill pages={pages}/>}/>
           <Route path="/pythontype" element = {<PythonType pages={pages}/>}/>
-          <Route path="/bonus" element = {<Bonus pages={pages}/>}/>
         </Routes>
       </div>
     </Router>
