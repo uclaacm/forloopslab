@@ -1,19 +1,17 @@
 /*eslint-disable quotes*/
 import { faRotateLeft, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CodeMirror from '@uiw/react-codemirror';
 import { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { Link, useLocation } from 'react-router-dom';
 import '../../styles/pythontype.scss';
 import close from '../../assets/closeicon.svg';
-import { Link, useLocation } from "react-router-dom";
-import "../../styles/pythontype.scss";
 //import { Boxes } from "../shared/Boxes";
 import { Maze } from "../shared/maze";
 // import { Robot } from '../shared/Robot';
 import "../../styles/app.scss";
 import "../../styles/levelSelect.scss";
-import CodeMirror from '@uiw/react-codemirror';
 import { python } from '@codemirror/lang-python';
 
 function SampleSyntax() {
