@@ -12,10 +12,10 @@ export function Maze(props:MazeProps):JSX.Element {
   for (let i = 0; i < props.rows; i++) {
     for (let j = 0; j < props.cols; j++) {
       if (!squares[i]) {
-        squares[i] = [<div key={`${i}-${j}`}></div>];
+        squares[i] = [<div className = "box" key={`${i}-${j}`}><img className="hidden" src={boxImg} alt="cardboard box"></img></div>];
       }
       else {
-        squares[i].push(<div key={`${i}-${j}`}></div>);
+        squares[i].push(<div className = "box" key={`${i}-${j}`}><img src={boxImg} className="hidden" alt="cardboard box"></img></div>);
       }
     }
   }

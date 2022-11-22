@@ -31,18 +31,16 @@ function Turn(props: {direction:string}){
 }
 function MultipleChoice(props:MultipleChoiceProps):JSX.Element{
   return(
-    <div>
-      <button onClick = {() => props.onChoice(props.arr)} className="selectBtn">
-        {props.arr.map((element:(string|number), idx) =>{
+    <button onClick = {() => props.onChoice(props.arr)} className="selectBtn">
+      {props.arr.map((element:(string|number), idx) =>{
         //turn instructions
-          if(element === 'left' || element === 'right'){
-            return <Turn key = {`${props.choiceNum}_${idx}`} direction = {element}/>;
-          }
-          //move instructions
-          return <MoveForward key = {`${props.choiceNum}_${idx}`} steps = {element}/>;
-        })}
-      </button>
-    </div>
+        if(element === 'left' || element === 'right'){
+          return <Turn key = {`${props.choiceNum}_${idx}`} direction = {element}/>;
+        }
+        //move instructions
+        return <MoveForward key = {`${props.choiceNum}_${idx}`} steps = {element}/>;
+      })}
+    </button>
   );
 }
 
