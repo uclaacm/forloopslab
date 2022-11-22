@@ -103,8 +103,8 @@ function PythonFill(props: { pages: string[] }): JSX.Element {
   const current = location.pathname;
   const currPage = props.pages.indexOf(current);
 
-  const arrayOfPseudoCode = ['2','right', '1', 'left', '3', 'right', '2'];
-  const InitialFillValues = ['','','','',''];
+  const arrayOfPseudoCode = ["2", "right", "1", "left", "3", "right", "2"];
+  const InitialFillValues = ["", "", "", "", ""];
   const [fillValues, setFillValues] = useState(InitialFillValues);
   const fillOnChange = (value: string, index: number) => {
     setFillValues({ ...fillValues, [index]: value });
@@ -243,9 +243,22 @@ function PythonFill(props: { pages: string[] }): JSX.Element {
             )}
           </div>
         </div>
-        <div id="content">
-          <Maze rows={4} cols = {6} boxCoords={[[0,3],[1,1],[2,0],[2,3],[2,4],[3,4]]}/>
-          <Robot keyframes={calculateKeyframes(codedInstructions)}></Robot>
+        <div className="main-section">
+          <div className="maze">
+            <Maze
+              rows={4}
+              cols={6}
+              boxCoords={[
+                [0, 3],
+                [1, 1],
+                [2, 0],
+                [2, 3],
+                [2, 4],
+                [3, 4],
+              ]}
+            />
+            <Robot keyframes={calculateKeyframes(codedInstructions)}></Robot>
+          </div>
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>

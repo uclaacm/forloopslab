@@ -6,7 +6,6 @@
   box-sizing: border-box;
   margin: 1vw 0;
   padding: 1vw;
-
 }
 
 #code-input {
@@ -52,4 +51,12 @@
   font-family: $code-font;
   font-size: $code-font-size;
   padding: 15px;
+}
+
+.maze {
+  align-content: center;
+  display: grid;
+  justify-content: center;
+  margin: -10px auto;
+  position: relative;
 }
