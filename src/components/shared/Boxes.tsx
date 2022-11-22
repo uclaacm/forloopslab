@@ -42,7 +42,7 @@ export function Boxes(rows:number, cols:number): JSX.Element[][]{
     const arr = Array(rows).fill().map(()=> Array(cols).fill().map(()=>'.'));
     arr[0][0] = 'S';
     arr[rows-1][cols-1] = 'E';
-    for (let i=0; i < cols; i++){
+    for (let i=0; i < cols+2; i++){
       RandomPosition(arr);
     }
 

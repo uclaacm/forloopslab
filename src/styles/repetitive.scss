@@ -48,3 +48,11 @@
 .code-instruction {
   margin: 0.5vw;
 }
+
+.maze {
+  align-content: center;
+  display: grid;
+  justify-content: center;
+  margin: -10px auto;
+  position: relative;
+}
