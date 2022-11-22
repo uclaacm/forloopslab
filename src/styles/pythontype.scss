@@ -19,6 +19,33 @@
   width: 100%;
 }
 
+.modal {
+  background-color: white;
+  border-color: white;
+  border-radius: 10px;
+  bottom: auto;
+  font-family: $main-font;
+  font-size: 18px;
+  left: 50%;
+  padding: 2vw;
+  position: relative;
+  right: auto;
+  text-align: center;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+}
+
+.error-heading {
+  color: #ff5630;
+}
+
+.close-button {
+  left: 70px;
+  position: absolute;
+  top: 15px;
+}
+
 .sampleSyntax {
   color: #fff;
   font-family: $code-font;
