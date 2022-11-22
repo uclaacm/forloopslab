@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Maze } from '../shared/maze';
+import { Robot } from '../shared/Robot';
 
 import '../../styles/app.scss';
 import '../../styles/pseudochoice.scss';
@@ -65,6 +66,66 @@ function PseudoChoice(props: {
 
   useEffect(() => { console.log(instructions); }, [instructions]);
 
+  const calculateKeyframes = (codedInstructionsProps: (string | number)[]) => {
+    const xArr = [0];
+    const yArr = [0];
+    let direction = 'right';
+    codedInstructionsProps.forEach((item) => {
+      if (item == 'right' || item == 'left'){
+        if (direction == 'right'){
+          if (item=='right'){
+            direction = 'down';
+          }
+          else{
+            direction = 'up';
+          }
+        }
+        else if (direction == 'down'){
+          if (item=='right'){
+            direction = 'left';
+          }
+          else{
+            direction = 'right';
+          }
+        }
+        else if (direction == 'left'){
+          if (item=='right'){
+            direction = 'up';
+          }
+          else{
+            direction = 'down';
+          }
+        }
+        else if (direction == 'up'){
+          if (item=='right'){
+            direction = 'right';
+          }
+          else{
+            direction = 'left';
+          }
+        }
+      }
+      else{
+        if (direction == 'right'){
+          xArr.push(xArr[xArr.length - 1] + (+item*100));
+          yArr.push(yArr[yArr.length - 1]);
+        }
+        else if (direction == 'left'){
+          xArr.push(xArr[xArr.length - 1] - (+item*100));
+          yArr.push(yArr[yArr.length - 1]);
+        }
+        else if (direction == 'down'){
+          xArr.push(xArr[xArr.length - 1]);
+          yArr.push(yArr[yArr.length - 1] + (+item*100));
+        }
+        else if (direction == 'up'){
+          xArr.push(xArr[xArr.length - 1]);
+          yArr.push(yArr[yArr.length - 1] - (+item*100));
+        }
+      }
+    });
+    return [xArr, yArr];
+  };
   return (
     <div className="frame wideSplit">
       <div id="sidebar">
@@ -82,12 +143,13 @@ function PseudoChoice(props: {
           <div id="title">LoopBots</div>
           <div className="level-select">
             {currPage != 0 && <Link to={props.pages[currPage-1]} className="level-select-button left">&#9664;</Link>}
-            Level {currPage+1} of 6
+            Level {currPage+1} of 5
             {currPage != props.pages.length - 1 && <Link to={props.pages[currPage+1]} className="level-select-button right">&#9654;</Link>}
           </div>
         </div>
         <div id="content">
           <Maze rows={4} cols={6} boxCoords={[[0,2],[1,0],[2,1],[2,2],[1,4],[2,4 ]]}/>
+          <Robot keyframes={calculateKeyframes(instructions)}></Robot>
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>

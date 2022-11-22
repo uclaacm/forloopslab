@@ -4,13 +4,16 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import {Boxes} from '../shared/Boxes';
-import { Maze } from '../shared/maze';
+import {Maze} from '../shared/maze';
+import {Robot} from '../shared/Robot';
+// import {Robot,SetMove, SetDirection, SetPosition} from '../shared/Robot';
 
 import '../../styles/app.scss';
 import '../../styles/levelSelect.scss';
 import '../../styles/repetitive.scss';
 
 const boxes = Boxes(4,6);
+
 function Repetitive(props: {
   pages: string[],
 }): JSX.Element {
@@ -21,9 +24,9 @@ function Repetitive(props: {
 
   const[instructions, setInstructions] = useState<{id: number, text: string}[]>([]);
 
-  // const[instructions, setInstructions] = React.useState([]);
   const initCodes:(string | number)[] = [];
   const [codedInstructions, setCodes] = useState(initCodes);
+
 
   const handleClick = (type:string) => {
     const newInstruction : {id: number, text: string} = {
@@ -48,7 +51,6 @@ function Repetitive(props: {
     </div>;
   });
 
-
   const handleRunClick = () => {
     setCodes(initCodes);
     for (let i = 0; i < instructions.length; i++) {
@@ -69,8 +71,73 @@ function Repetitive(props: {
     }
   };
 
-  // testing purposes
-  // React.useEffect(() => { console.log(codedInstructions); }, [codedInstructions]);
+  const reset = () => {
+    console.log('reset');
+    setCodes(initCodes);
+    setInstructions([]);
+  };
+
+  const calculateKeyframes = (codedInstructionsProps: (string | number)[]) => {
+    const xArr = [0];
+    const yArr = [0];
+    let direction = 'right';
+    codedInstructionsProps.forEach((item) => {
+      if (item == 'right' || item == 'left'){
+        if (direction == 'right'){
+          if (item=='right'){
+            direction = 'down';
+          }
+          else{
+            direction = 'up';
+          }
+        }
+        else if (direction == 'down'){
+          if (item=='right'){
+            direction = 'left';
+          }
+          else{
+            direction = 'right';
+          }
+        }
+        else if (direction == 'left'){
+          if (item=='right'){
+            direction = 'up';
+          }
+          else{
+            direction = 'down';
+          }
+        }
+        else if (direction == 'up'){
+          if (item=='right'){
+            direction = 'right';
+          }
+          else{
+            direction = 'left';
+          }
+        }
+      }
+      else{
+        if (direction == 'right'){
+          xArr.push(xArr[xArr.length - 1] + (+item*100));
+          yArr.push(yArr[yArr.length - 1]);
+        }
+        else if (direction == 'left'){
+          xArr.push(xArr[xArr.length - 1] - (+item*100));
+          yArr.push(yArr[yArr.length - 1]);
+        }
+        else if (direction == 'down'){
+          xArr.push(xArr[xArr.length - 1]);
+          yArr.push(yArr[yArr.length - 1] + (+item*100));
+        }
+        else if (direction == 'up'){
+          xArr.push(xArr[xArr.length - 1]);
+          yArr.push(yArr[yArr.length - 1] - (+item*100));
+        }
+      }
+    });
+    return [xArr, yArr];
+  };
+
   return (
     <div className="frame">
       <div id="sidebar">
@@ -96,17 +163,20 @@ function Repetitive(props: {
           <div id="title">LoopBots</div>
           <div className="level-select">
             {currPage != 0 && <Link to={props.pages[currPage-1]} className="level-select-button left">&#9664;</Link>}
-            Level {currPage+1} of 6
+            Level {currPage+1} of 5
             {currPage != props.pages.length - 1 && <Link to={props.pages[currPage+1]} className="level-select-button right">&#9654;</Link>}
           </div>
         </div>
         <div className="main-section">
-          {codedInstructions.map((item,idx) => {
-            return (
-              <div key={idx}>{item}</div>
-            );
-          })}
-          <Maze rows={4} cols={6} boxCoords={boxes}/>
+          <div className = 'maze'>
+            <Maze rows={4} cols={6} boxCoords={boxes}/>
+            {/* {codedInstructions.map((item)=>{
+              return <Robot item={item}></Robot>
+            })} */}
+            <Robot keyframes={calculateKeyframes(codedInstructions)}></Robot>
+
+          </div>
+
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>
@@ -114,7 +184,7 @@ function Repetitive(props: {
             <button id="run" className='control-btn' onClick={handleRunClick}>
               <FontAwesomeIcon icon={faPlay} />
             </button>
-            <button id="reset" className='control-btn'>
+            <button id="reset" className='control-btn' onClick={reset}>
               <FontAwesomeIcon icon={faRotateLeft} />
             </button>
           </div>
