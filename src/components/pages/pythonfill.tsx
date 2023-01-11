@@ -104,7 +104,7 @@ function PythonFill(props: { pages: string[] }): JSX.Element {
   const currPage = props.pages.indexOf(current);
 
   const arrayOfPseudoCode = ['2','right', '1', 'left', '3', 'right', '2'];
-  const InitialFillValues = ['','','','',''];
+  const InitialFillValues = ['','','','','','',''];
   const [fillValues, setFillValues] = useState(InitialFillValues);
   const fillOnChange = (value: string, index: number) => {
     setFillValues({ ...fillValues, [index]: value });
@@ -115,7 +115,8 @@ function PythonFill(props: { pages: string[] }): JSX.Element {
 
   const handleRunClick = () => {
     setCodes(initCodes);
-    for (let i = 0; i < 5; i++) {
+    //console.log(fillValues);
+    for (let i = 0; i < 7; i++) {
       if (fillValues[i] == "turnLeft()") {
         setCodes((codes) => codes.concat("left"));
       } else if (fillValues[i] == "turnRight()") {
@@ -126,9 +127,19 @@ function PythonFill(props: { pages: string[] }): JSX.Element {
     }
   };
 
+  const ResetBoard = () => {
+    // setPosition(0,0, 'right')
+    setFillValues(InitialFillValues);
+    setCodes(initCodes);
+  };
+
   useEffect(() => {
     console.log(codedInstructions);
   }, [codedInstructions]);
+
+  /*useEffect(() => {
+    console.log(fillValues)
+  }, [fillValues]);*/
 
   const calculateKeyframes = (codedInstructionsProps: (string | number)[]) => {
     const xArr = [0];
@@ -198,13 +209,13 @@ function PythonFill(props: { pages: string[] }): JSX.Element {
           <div id="bottom-content">
             <PseudoCode arr={arrayOfPseudoCode} />
             <div className="codeCard">
-              {arrayOfPseudoCode.map((element: string) => {
+              {arrayOfPseudoCode.map((element: string, idx:number) => {
                 if (element === "left" || element === "right") {
                   return (
                     <TurnFill
                       key={arrayOfPseudoCode.indexOf(element)}
                       onChange={fillOnChange}
-                      index={arrayOfPseudoCode.indexOf(element)}
+                      index={idx}
                     />
                   );
                 }
@@ -212,7 +223,7 @@ function PythonFill(props: { pages: string[] }): JSX.Element {
                   <MoveFill
                     key={arrayOfPseudoCode.indexOf(element)}
                     onChange={fillOnChange}
-                    index={arrayOfPseudoCode.indexOf(element)}
+                    index={idx}
                   />
                 );
               })}
@@ -253,7 +264,7 @@ function PythonFill(props: { pages: string[] }): JSX.Element {
             <button id="run" className="control-btn" onClick={handleRunClick}>
               <FontAwesomeIcon icon={faPlay} />
             </button>
-            <button id="reset" className="control-btn">
+            <button id="reset" className="control-btn" onClick={ResetBoard}>
               <FontAwesomeIcon icon={faRotateLeft} />
             </button>
           </div>
