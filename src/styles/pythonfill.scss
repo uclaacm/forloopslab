@@ -5,7 +5,6 @@
   border-radius: 10px;
   box-sizing: border-box;
   margin: 1vw 0;
-  padding: 1vw;
 }
 
 #code-input {
@@ -17,7 +16,6 @@
 
 .plain {
   line-height: 110%;
-
 }
 
 .line {
@@ -41,6 +39,7 @@
 .codeCard {
   background-color: white;
   border-radius: 10px;
+  overflow-y: scroll;
   padding: 1vw;
 }
 
@@ -65,4 +64,12 @@
   padding: 0.25vw;
   text-align: center;
   width: 30px;
+}
+
+.maze {
+  align-content: center;
+  display: grid;
+  justify-content: center;
+  margin: -10px auto;
+  position: relative;
 }

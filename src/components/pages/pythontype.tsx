@@ -1,4 +1,5 @@
 /*eslint-disable quotes*/
+import { python } from "@codemirror/lang-python";
 import { faRotateLeft, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CodeMirror from '@uiw/react-codemirror';
@@ -9,10 +10,9 @@ import '../../styles/pythontype.scss';
 import close from '../../assets/closeicon.svg';
 //import { Boxes } from "../shared/Boxes";
 import { Maze } from "../shared/maze";
-// import { Robot } from '../shared/Robot';
+import { Robot } from "../shared/Robot";
 import "../../styles/app.scss";
 import "../../styles/levelSelect.scss";
-import { python } from '@codemirror/lang-python';
 
 function SampleSyntax() {
   return (
@@ -34,8 +34,8 @@ function PythonType(props: { pages: string[] }): JSX.Element {
   const current = location.pathname;
   const currPage = props.pages.indexOf(current);
 
-  const [code, setCode] = useState('');
-  const initMovement:(string | number)[] = [];
+  const [code, setCode] = useState("");
+  const initMovement: (string | number)[] = [];
   const [movement, setMovement] = useState(initMovement);
 
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -128,70 +128,61 @@ function PythonType(props: { pages: string[] }): JSX.Element {
     }
   };
 
-  useEffect(() => { console.log(movement); }, [movement]);
+  useEffect(() => {
+    console.log(movement);
+  }, [movement]);
 
   // const codeContent = ['for steps in range(3):', ' moveForward()', 'turnLeft()'];
 
-  // const calculateKeyframes = (codedInstructionsProps: (string | number)[]) => {
-  //   const xArr = [0];
-  //   const yArr = [0];
-  //   let direction = 'right';
-  //   codedInstructionsProps.forEach((item) => {
-  //     if (item == 'right' || item == 'left'){
-  //       if (direction == 'right'){
-  //         if (item=='right'){
-  //           direction = 'down';
-  //         }
-  //         else{
-  //           direction = 'up';
-  //         }
-  //       }
-  //       else if (direction == 'down'){
-  //         if (item=='right'){
-  //           direction = 'left';
-  //         }
-  //         else{
-  //           direction = 'right';
-  //         }
-  //       }
-  //       else if (direction == 'left'){
-  //         if (item=='right'){
-  //           direction = 'up';
-  //         }
-  //         else{
-  //           direction = 'down';
-  //         }
-  //       }
-  //       else if (direction == 'up'){
-  //         if (item=='right'){
-  //           direction = 'right';
-  //         }
-  //         else{
-  //           direction = 'left';
-  //         }
-  //       }
-  //     }
-  //     else{
-  //       if (direction == 'right'){
-  //         xArr.push(xArr[xArr.length - 1] + (+item*100));
-  //         yArr.push(yArr[yArr.length - 1]);
-  //       }
-  //       else if (direction == 'left'){
-  //         xArr.push(xArr[xArr.length - 1] - (+item*100));
-  //         yArr.push(yArr[yArr.length - 1]);
-  //       }
-  //       else if (direction == 'down'){
-  //         xArr.push(xArr[xArr.length - 1]);
-  //         yArr.push(yArr[yArr.length - 1] + (+item*100));
-  //       }
-  //       else if (direction == 'up'){
-  //         xArr.push(xArr[xArr.length - 1]);
-  //         yArr.push(yArr[yArr.length - 1] - (+item*100));
-  //       }
-  //     }
-  //   });
-  //   return [xArr, yArr];
-  // };
+  const calculateKeyframes = (codedInstructionsProps: (string | number)[]) => {
+    const xArr = [0];
+    const yArr = [0];
+    let direction = "right";
+    codedInstructionsProps.forEach((item) => {
+      if (item == "right" || item == "left") {
+        if (direction == "right") {
+          if (item == "right") {
+            direction = "down";
+          } else {
+            direction = "up";
+          }
+        } else if (direction == "down") {
+          if (item == "right") {
+            direction = "left";
+          } else {
+            direction = "right";
+          }
+        } else if (direction == "left") {
+          if (item == "right") {
+            direction = "up";
+          } else {
+            direction = "down";
+          }
+        } else if (direction == "up") {
+          if (item == "right") {
+            direction = "right";
+          } else {
+            direction = "left";
+          }
+        }
+      } else {
+        if (direction == "right") {
+          xArr.push(xArr[xArr.length - 1] + +item * 100);
+          yArr.push(yArr[yArr.length - 1]);
+        } else if (direction == "left") {
+          xArr.push(xArr[xArr.length - 1] - +item * 100);
+          yArr.push(yArr[yArr.length - 1]);
+        } else if (direction == "down") {
+          xArr.push(xArr[xArr.length - 1]);
+          yArr.push(yArr[yArr.length - 1] + +item * 100);
+        } else if (direction == "up") {
+          xArr.push(xArr[xArr.length - 1]);
+          yArr.push(yArr[yArr.length - 1] - +item * 100);
+        }
+      }
+    });
+    return [xArr, yArr];
+  };
 
   return (
     <div className="frame">
@@ -250,14 +241,28 @@ function PythonType(props: { pages: string[] }): JSX.Element {
             )}
           </div>
         </div>
-        <div id="content">
-          <Maze rows={4} cols={6} boxCoords={[[1,0],[1,1],[0,3],[1,3],[2,3],[3,1],[2,5]]}/>
-          {/* <Robot keyframes={calculateKeyframes(codedInstructions)}></Robot> */}
+        <div className="main-section">
+          <div className="maze">
+            <Maze
+              rows={4}
+              cols={6}
+              boxCoords={[
+                [1, 0],
+                [1, 1],
+                [0, 3],
+                [1, 3],
+                [2, 3],
+                [3, 1],
+                [2, 5],
+              ]}
+            />
+            <Robot keyframes={calculateKeyframes(movement)}></Robot>
+          </div>
         </div>
         <div className="main-section">
           <div id="footer">made with ♥ by acm.teachla</div>
           <div id="buttons">
-            <button id="run" className='control-btn' onClick={handleRunClick}>
+            <button id="run" className="control-btn" onClick={handleRunClick}>
               <FontAwesomeIcon icon={faPlay} />
             </button>
             <button id="reset" className="control-btn">
