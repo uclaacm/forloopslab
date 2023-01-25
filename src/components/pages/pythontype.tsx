@@ -2,12 +2,12 @@
 import { python } from "@codemirror/lang-python";
 import { faRotateLeft, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import CodeMirror from '@uiw/react-codemirror';
-import { useState, useEffect } from 'react';
-import Modal from 'react-modal';
-import { Link, useLocation } from 'react-router-dom';
-import '../../styles/pythontype.scss';
-import close from '../../assets/closeicon.svg';
+import CodeMirror from "@uiw/react-codemirror";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
+import Modal from "react-modal";
+import { Link, useLocation } from "react-router-dom";
+import "../../styles/pythontype.scss";
+import close from "../../assets/closeicon.svg";
 //import { Boxes } from "../shared/Boxes";
 import { Maze } from "../shared/maze";
 import { Robot } from "../shared/Robot";
@@ -63,10 +63,9 @@ function PythonType(props: { pages: string[] }): JSX.Element {
     setIsOpen(false);
   };
 
-  const onChange = (value:string) => {
+  const onChange = (value: string) => {
     setCode(value);
   };
-
 
   const handleRunClick = () => {
     setMovement(initMovement);
@@ -88,25 +87,21 @@ function PythonType(props: { pages: string[] }): JSX.Element {
       if (forRegex.test(cur)) {
         const arr = cur.match(numRegex);
         let numSteps = 0;
-        if (arr){
+        if (arr) {
           numSteps = parseInt(arr[0]);
         }
-        setMovement(moves => moves.concat(numSteps));
-        if (i+1 < lines.length && moveForwardRegex.test(lines[i+1])) {
+        setMovement((moves) => moves.concat(numSteps));
+        if (i + 1 < lines.length && moveForwardRegex.test(lines[i + 1])) {
           i++;
-        }
-        else {
+        } else {
           isValid = false;
           break;
         }
-      }
-      else if (turnLeftRegex.test(cur)){
-        setMovement(moves => moves.concat('left'));
-      }
-      else if (turnRightRegex.test(cur)) {
-        setMovement(moves => moves.concat('right'));
-      }
-      else {
+      } else if (turnLeftRegex.test(cur)) {
+        setMovement((moves) => moves.concat("left"));
+      } else if (turnRightRegex.test(cur)) {
+        setMovement((moves) => moves.concat("right"));
+      } else {
         isValid = false;
         break;
       }
@@ -123,7 +118,7 @@ function PythonType(props: { pages: string[] }): JSX.Element {
       }*/
     }
     console.log(isValid);
-    if (!isValid){
+    if (!isValid) {
       openModal();
     }
   };
@@ -134,9 +129,20 @@ function PythonType(props: { pages: string[] }): JSX.Element {
 
   // const codeContent = ['for steps in range(3):', ' moveForward()', 'turnLeft()'];
 
+  const ref = useRef(null);
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+
+  useLayoutEffect(() => {
+    setWidth(ref.current.offsetWidth);
+    setHeight(ref.current.offsetHeight);
+  }, []);
+
   const calculateKeyframes = (codedInstructionsProps: (string | number)[]) => {
     const xArr = [0];
     const yArr = [0];
+    const gridWidth = width / 6;
+    const gridHeight = height / 4;
     let direction = "right";
     codedInstructionsProps.forEach((item) => {
       if (item == "right" || item == "left") {
@@ -167,17 +173,17 @@ function PythonType(props: { pages: string[] }): JSX.Element {
         }
       } else {
         if (direction == "right") {
-          xArr.push(xArr[xArr.length - 1] + +item * 100);
+          xArr.push(xArr[xArr.length - 1] + +item * gridWidth);
           yArr.push(yArr[yArr.length - 1]);
         } else if (direction == "left") {
-          xArr.push(xArr[xArr.length - 1] - +item * 100);
+          xArr.push(xArr[xArr.length - 1] - +item * gridWidth);
           yArr.push(yArr[yArr.length - 1]);
         } else if (direction == "down") {
           xArr.push(xArr[xArr.length - 1]);
-          yArr.push(yArr[yArr.length - 1] + +item * 100);
+          yArr.push(yArr[yArr.length - 1] + +item * gridHeight);
         } else if (direction == "up") {
           xArr.push(xArr[xArr.length - 1]);
-          yArr.push(yArr[yArr.length - 1] - +item * 100);
+          yArr.push(yArr[yArr.length - 1] - +item * gridHeight);
         }
       }
     });
@@ -186,16 +192,20 @@ function PythonType(props: { pages: string[] }): JSX.Element {
 
   return (
     <div className="frame">
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        className="modal"
-      >
+      <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className="modal">
         <h2 className="error-heading">Error</h2>
-        <p>Hmm, looks like the robot can&apos;t understand your code!
-          Take another look at the example and try again.</p>
+        <p>
+          Hmm, looks like the robot can&apos;t understand your code! Take
+          another look at the example and try again.
+        </p>
         {/*<button onClick={closeModal} className='close-button'>x</button>*/}
-        <img src={close} onClick={closeModal} className='close-button' width='15px' height='15px'></img>
+        <img
+          src={close}
+          onClick={closeModal}
+          className="close-button"
+          width="15px"
+          height="15px"
+        ></img>
       </Modal>
       <div id="sidebar">
         <div id="level-title">Python Type</div>
@@ -242,7 +252,7 @@ function PythonType(props: { pages: string[] }): JSX.Element {
           </div>
         </div>
         <div className="main-section">
-          <div className="maze">
+          <div className="maze" ref={ref}>
             <Maze
               rows={4}
               cols={6}
