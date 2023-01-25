@@ -1,7 +1,7 @@
 /*eslint-disable quotes*/
 import { faRotateLeft, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 
 import Dropdown from "react-dropdown";
 import { Link, useLocation } from "react-router-dom";
@@ -103,9 +103,9 @@ function PythonFill(props: { pages: string[] }): JSX.Element {
   const current = location.pathname;
   const currPage = props.pages.indexOf(current);
 
+  const arrayOfPseudoCode = ["2", "right", "1", "left", "3", "right", "2"];
+  const InitialFillValues = ["", "", "", "", "", "", ""];
 
-  const arrayOfPseudoCode = ['2','right', '1', 'left', '3', 'right', '2'];
-  const InitialFillValues = ['','','','','','',''];
   const [fillValues, setFillValues] = useState(InitialFillValues);
   const fillOnChange = (value: string, index: number) => {
     setFillValues({ ...fillValues, [index]: value });
@@ -138,13 +138,20 @@ function PythonFill(props: { pages: string[] }): JSX.Element {
     console.log(codedInstructions);
   }, [codedInstructions]);
 
-  /*useEffect(() => {
-    console.log(fillValues)
-  }, [fillValues]);*/
+  const ref = useRef(null);
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+
+  useLayoutEffect(() => {
+    setWidth(ref.current.offsetWidth);
+    setHeight(ref.current.offsetHeight);
+  }, []);
 
   const calculateKeyframes = (codedInstructionsProps: (string | number)[]) => {
     const xArr = [0];
     const yArr = [0];
+    const gridWidth = width / 6;
+    const gridHeight = height / 4;
     let direction = "right";
     codedInstructionsProps.forEach((item) => {
       if (item == "right" || item == "left") {
@@ -175,17 +182,17 @@ function PythonFill(props: { pages: string[] }): JSX.Element {
         }
       } else {
         if (direction == "right") {
-          xArr.push(xArr[xArr.length - 1] + +item * 100);
+          xArr.push(xArr[xArr.length - 1] + +item * gridWidth);
           yArr.push(yArr[yArr.length - 1]);
         } else if (direction == "left") {
-          xArr.push(xArr[xArr.length - 1] - +item * 100);
+          xArr.push(xArr[xArr.length - 1] - +item * gridWidth);
           yArr.push(yArr[yArr.length - 1]);
         } else if (direction == "down") {
           xArr.push(xArr[xArr.length - 1]);
-          yArr.push(yArr[yArr.length - 1] + +item * 100);
+          yArr.push(yArr[yArr.length - 1] + +item * gridHeight);
         } else if (direction == "up") {
           xArr.push(xArr[xArr.length - 1]);
-          yArr.push(yArr[yArr.length - 1] - +item * 100);
+          yArr.push(yArr[yArr.length - 1] - +item * gridHeight);
         }
       }
     });
@@ -256,7 +263,7 @@ function PythonFill(props: { pages: string[] }): JSX.Element {
           </div>
         </div>
         <div className="main-section">
-          <div className="maze">
+          <div className="maze" ref={ref}>
             <Maze
               rows={4}
               cols={6}

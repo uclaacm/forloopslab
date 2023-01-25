@@ -1,6 +1,6 @@
 import { faRotateLeft, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
+import { useState, useLayoutEffect, useRef } from 'react';
 import '../../styles/pseudofill.scss';
 import Dropdown from 'react-dropdown';
 import { Link, useLocation } from 'react-router-dom';
@@ -96,9 +96,20 @@ function PseudoFill(mainProps: { pages: string[] }): JSX.Element {
     setDropValues(initialDropValues);
   };
 
+  const ref = useRef(null);
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+
+  useLayoutEffect(() => {
+    setWidth(ref.current.offsetWidth);
+    setHeight(ref.current.offsetHeight);
+  }, []);
+
   const calculateKeyframes = (codedInstructionsProps: (string | number)[]) => {
     const xArr = [0];
     const yArr = [0];
+    const gridWidth = width / 6;
+    const gridHeight = height / 4;
     let direction = 'right';
     codedInstructionsProps.forEach((item) => {
       if (item == 'right' || item == 'left') {
@@ -129,17 +140,17 @@ function PseudoFill(mainProps: { pages: string[] }): JSX.Element {
         }
       } else {
         if (direction == 'right') {
-          xArr.push(xArr[xArr.length - 1] + +item * 100);
+          xArr.push(xArr[xArr.length - 1] + +item * gridWidth);
           yArr.push(yArr[yArr.length - 1]);
         } else if (direction == 'left') {
-          xArr.push(xArr[xArr.length - 1] - +item * 100);
+          xArr.push(xArr[xArr.length - 1] - +item * gridWidth);
           yArr.push(yArr[yArr.length - 1]);
         } else if (direction == 'down') {
           xArr.push(xArr[xArr.length - 1]);
-          yArr.push(yArr[yArr.length - 1] + +item * 100);
+          yArr.push(yArr[yArr.length - 1] + +item * gridHeight);
         } else if (direction == 'up') {
           xArr.push(xArr[xArr.length - 1]);
-          yArr.push(yArr[yArr.length - 1] - +item * 100);
+          yArr.push(yArr[yArr.length - 1] - +item * gridHeight);
         }
       }
     });
@@ -190,7 +201,7 @@ function PseudoFill(mainProps: { pages: string[] }): JSX.Element {
           </div>
         </div>
         <div className="main-section">
-          <div className="maze">
+          <div className="maze" ref={ref}>
             <Maze rows={4} cols={6} boxCoords={boxes} />
             <Robot keyframes={calculateKeyframes(codedInstructions)}></Robot>
           </div>
