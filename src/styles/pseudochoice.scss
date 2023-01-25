@@ -6,16 +6,19 @@
   border-radius: 0.5vw;
   font-family: $main-font;
   font-size: $main-font-size;
+  height: 90%;
   padding: 2vw 1vw;
   text-align: left;
-  width: 32%;
+  width: 30%;
 }
 
 #contentPC {
   align-items: center;
   display: flex;
-  justify-content: space-between;
-  padding: 3vw 0;
+  flex-flow: row wrap;
+  height: 90%;
+  justify-content: space-around;
+  // padding: 2vw 0;
   // height: 50%;
 }
 

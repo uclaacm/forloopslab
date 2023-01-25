@@ -1,5 +1,7 @@
 @import 'global';
 
+
+
 .frame {
   background-color: $main-background;
   display: grid;
@@ -26,7 +28,7 @@
   font-family: $main-font;
   font-size: $main-font-size;
   line-height: 115%;
-  margin: 1.5vw;
+  margin: 1.5vw 0 1.5vw 1.5vw;
   padding: 1.5vw;
   
 }
