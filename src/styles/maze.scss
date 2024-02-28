@@ -11,7 +11,7 @@
 .maze {
   align-content: stretch;
   display: grid;
-  // margin: -10px auto;
+  margin: -20px auto;
   height: 100%;
   justify-content: stretch;
   width: 100%;
@@ -19,11 +19,11 @@
 
 .maze-container > div {
   background-color: rgba(190, 190, 190, 0.894);
-  height: 15vw;
-  max-height: 180px;
-  max-width: 180px;
+  height: 12vw;
+  max-height: 150px;
+  max-width: 150px;
   position: relative;
-  width: 15vw;
+  width: 12vw;
 }
 
 .maze-container > div:nth-child(2),
@@ -42,31 +42,33 @@
 }
 
 .maze-container > div:first-of-type {
-  border-top-left-radius: 15px;
+  border-top-left-radius: 20px;
 }
 
 .maze-container > div:last-of-type {
-  border-bottom-right-radius: 15px;
+  border-bottom-right-radius: 20px;
 }
 
 .maze-container > div:nth-child(6) {
-  border-top-right-radius: 15px;
+  border-top-right-radius: 20px;
 }
 
 .maze-container > div:nth-child(19) {
-  border-bottom-left-radius: 15px;
+  border-bottom-left-radius: 20px;
 }
 
 .box {
   display: flex;
-  // align-items: center;
-  // justify-content: center;
+  align-items: center;
+  justify-content: center;
+  width: 80%; /* Adjust the percentage to scale down the width */
+  height: auto; /* Maintain the aspect ratio by setting height to auto */
 }
 
 .robot {
   display: flex;
   height: 20%;
-  padding-top: 1.5%;
+  padding-top: 2%;
   position: absolute;
   width: 16.6%;
 }

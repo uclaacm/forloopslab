@@ -1,29 +1,32 @@
+import React from 'react';
 import '../../styles/maze.scss';
 import boxImg from '../../assets/smallbox.svg';
 
 interface MazeProps {
   rows: number;
   cols: number;
-  boxCoords:JSX.Element[][];
+  boxCoords: number[][];
 }
 
-export function Maze(props:MazeProps):JSX.Element {
-  // const [move, SetMove] = React.useState(false);
-  const squares:JSX.Element[][] = [];
+export function Maze(props: MazeProps): JSX.Element {
+  const squares: JSX.Element[][] = [];
+
+  // Fill squares array with empty squares
   for (let i = 0; i < props.rows; i++) {
+    squares.push([]);
     for (let j = 0; j < props.cols; j++) {
-      if (!squares[i]) {
-        squares[i] = [<div className = "box" key={`${i}-${j}`}><img className="hidden" src={boxImg} alt="cardboard box"></img></div>];
-      }
-      else {
-        squares[i].push(<div className = "box" key={`${i}-${j}`}><img src={boxImg} className="hidden" alt="cardboard box"></img></div>);
-      }
+      squares[i].push(<div className="box" key={`${i}-${j}`} />);
     }
   }
+
+  // Add boxes to specified positions
   for (let i = 0; i < props.boxCoords.length; i++) {
-    const r = props.boxCoords[i][0];
-    const c = props.boxCoords[i][1];
-    squares[r][c] = <div className = "box"><img src={boxImg} alt="cardboard box"></img></div>;
+    const [r, c] = props.boxCoords[i];
+    squares[r][c] = (
+      <div className="box" key={`${r}-${c}`}>
+        <img src={boxImg} alt="cardboard box" />
+      </div>
+    );
   }
 
   const mazeStyle = {
@@ -33,7 +36,7 @@ export function Maze(props:MazeProps):JSX.Element {
 
   return (
     <div className="maze-container" style={mazeStyle}>
-      {squares}
+      {squares.map((row, rowIndex) => row.map((square, colIndex) => square))}
     </div>
   );
 }
