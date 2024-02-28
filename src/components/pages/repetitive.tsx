@@ -9,7 +9,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { Boxes } from '../shared/Boxes';
 import { Maze } from '../shared/maze';
-import { Robot } from '../shared/Robot';
+import Robot from '../shared/Robot';
 // import {Robot,SetMove, SetDirection, SetPosition} from '../shared/Robot';
 
 import '../../styles/app.scss';
@@ -31,13 +31,21 @@ function Repetitive(props: { pages: string[] }): JSX.Element {
   const [codedInstructions, setCodes] = useState(initCodes);
 
   const handleClick = (type: string) => {
+    // Create a new instruction based on the button clicked
     const newInstruction: { id: number; text: string } = {
       id: new Date().getTime(), //unique id that differentiates each instruction
       text: type,
     };
-
-    setInstructions(instructions.concat(newInstruction));
+  
+    // Add the new instruction to the instructions state
+    setInstructions(prevInstructions => [...prevInstructions, newInstruction]);
+  
+    // Log the current instructions array after adding the new instruction
+    console.log("Button clicked:", type);
+    console.log("Current instructions:", instructions);
   };
+  
+  
 
   const deleteInstruction = (id: number) => {
     const updatedInstructions = instructions.filter(
@@ -64,26 +72,27 @@ function Repetitive(props: { pages: string[] }): JSX.Element {
   );
 
   const handleRunClick = () => {
-    setCodes(initCodes);
+    let newCodes: (string | number)[] = [];
     for (let i = 0; i < instructions.length; i++) {
-      if (instructions[i].text == 'Move Forward') {
+      if (instructions[i].text === 'Move Forward') {
         let numSteps = 1;
         while (
           i + 1 < instructions.length &&
-          instructions[i + 1].text == 'Move Forward'
+          instructions[i + 1].text === 'Move Forward'
         ) {
           numSteps++;
           i++;
         }
-        setCodes((codes) => codes.concat(numSteps));
-      }
-      if (instructions[i].text == 'Turn Left') {
-        setCodes((codes) => codes.concat('left'));
-      } else if (instructions[i].text == 'Turn Right') {
-        setCodes((codes) => codes.concat('right'));
+        newCodes = newCodes.concat(numSteps);
+      } else if (instructions[i].text === 'Turn Left') {
+        newCodes = newCodes.concat('left');
+      } else if (instructions[i].text === 'Turn Right') {
+        newCodes = newCodes.concat('right');
       }
     }
+    setCodes(newCodes);
   };
+  
 
   const reset = () => {
     console.log('reset');
@@ -96,66 +105,69 @@ function Repetitive(props: { pages: string[] }): JSX.Element {
   const [height, setHeight] = useState(0);
 
   useLayoutEffect(() => {
-    setWidth(ref.current.offsetWidth);
-    setHeight(ref.current.offsetHeight);
+    if (ref.current) {
+      setWidth(ref.current.offsetWidth);
+      setHeight(ref.current.offsetHeight);
+    }
   }, []);
+  
 
   console.log(width);
   console.log(height);
-  const calculateKeyframes = (codedInstructionsProps: (string | number)[]) => {
-    const xArr = [0];
-    const yArr = [0];
-    // let gridWidth = Math.min(180, screen.width / 8.2);
-    const gridWidth = width / 6;
-    const gridHeight = height / 4;
-    let direction = 'right';
-    codedInstructionsProps.forEach((item) => {
-      if (item == 'right' || item == 'left') {
-        if (direction == 'right') {
-          if (item == 'right') {
-            direction = 'down';
-          } else {
-            direction = 'up';
-          }
-        } else if (direction == 'down') {
-          if (item == 'right') {
-            direction = 'left';
-          } else {
-            direction = 'right';
-          }
-        } else if (direction == 'left') {
-          if (item == 'right') {
-            direction = 'up';
-          } else {
-            direction = 'down';
-          }
-        } else if (direction == 'up') {
-          if (item == 'right') {
-            direction = 'right';
-          } else {
-            direction = 'left';
-          }
-        }
-      } else {
-        if (direction == 'right') {
-          xArr.push(xArr[xArr.length - 1] + +item * gridWidth);
-          yArr.push(yArr[yArr.length - 1]);
-        } else if (direction == 'left') {
-          xArr.push(xArr[xArr.length - 1] - +item * gridWidth);
-          yArr.push(yArr[yArr.length - 1]);
-        } else if (direction == 'down') {
-          xArr.push(xArr[xArr.length - 1]);
-          yArr.push(yArr[yArr.length - 1] + +item * gridHeight);
-        } else if (direction == 'up') {
-          xArr.push(xArr[xArr.length - 1]);
-          yArr.push(yArr[yArr.length - 1] - +item * gridHeight);
-        }
+ // Update calculateKeyframes to handle the "Move Forward" instruction
+ const calculateKeyframes = (codedInstructionsProps: { id: number; text: string }[]) => {
+  const xArr: number[] = [0];
+  const yArr: number[] = [0];
+  let direction: string = 'right'; // Initialize the direction
+  const gridWidth: number = width / 6; // Calculate grid width
+  const gridHeight: number = height / 4; // Calculate grid height
+
+  codedInstructionsProps.forEach((instruction) => {
+    const item = instruction.text;
+    if (item === 'right' || item === 'left') {
+      direction = item;
+    } else if (item === 'Move Forward') {
+      if (direction === 'right') {
+        xArr.push(xArr[xArr.length - 1] + gridWidth);
+        yArr.push(yArr[yArr.length - 1]);
+      } else if (direction === 'left') {
+        xArr.push(xArr[xArr.length - 1] - gridWidth);
+        yArr.push(yArr[yArr.length - 1]);
+      } else if (direction === 'down') {
+        xArr.push(xArr[xArr.length - 1]);
+        yArr.push(yArr[yArr.length - 1] + gridHeight);
+      } else if (direction === 'up') {
+        xArr.push(xArr[xArr.length - 1]);
+        yArr.push(yArr[yArr.length - 1] - gridHeight);
       }
-    });
-    console.log(screen.width);
-    console.log(gridWidth);
-    return [xArr, yArr];
-  };
+    } else if (item === 'Turn Left') {
+      if (direction === 'right') {
+        direction = 'up';
+      } else if (direction === 'left') {
+        direction = 'down';
+      } else if (direction === 'down') {
+        direction = 'right';
+      } else if (direction === 'up') {
+        direction = 'left';
+      }
+    } else if (item === 'Turn Right') {
+      if (direction === 'right') {
+        direction = 'down';
+      } else if (direction === 'left') {
+        direction = 'up';
+      } else if (direction === 'down') {
+        direction = 'left';
+      } else if (direction === 'up') {
+        direction = 'right';
+      }
+    }
+  });
+
+  return [xArr, yArr];
+};
+
+
+
 
   return (
     <div className="frame">

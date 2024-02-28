@@ -18,7 +18,7 @@ interface MultipleChoiceProps {
 function MoveForward(props: { steps: string | number }) {
   return (
     <div className="instruction">
-      Move forward <span className="code">{props.steps}</span> times
+      Move Forward <span className="code">{props.steps}</span> times
     </div>
   );
 }
